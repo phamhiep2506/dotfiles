@@ -1,0 +1,5 @@
+" Color Scheme
+vim molokai
+
+" hl code
+vim polyglot
