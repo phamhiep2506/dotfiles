@@ -1,3 +1,9 @@
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 syntax enable
 
 set shiftwidth=4
@@ -32,7 +38,14 @@ let mapleader = ","
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
-
+call plug#begin('~/.vim/plugged')
+  Plug 'morhetz/gruvbox'
+  Plug 'preservim/nerdtree'
+  Plug 'prettier/vim-prettier'
+  Plug 'ntpeters/vim-better-whitespace'
+  Plug 'sheerun/vim-polyglot'
+  Plug 'mattn/emmet-vim'
+call plug#end()
 " Smart way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -49,3 +62,9 @@ map <leader>ew :e %%
 map <leader>es :sp %%
 map <leader>ev :vsp %%
 map <leader>et :tabe %%
+
+" Shortcut  NerdTree Vim
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
