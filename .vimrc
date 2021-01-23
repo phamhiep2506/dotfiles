@@ -4,15 +4,17 @@ set shiftwidth=4
 set tabstop=4
 set number
 set nowrap
+set hidden
 
 set list
-set lcs=tab:\▏.,eol:⏎
+set lcs=tab:\¦.
 highlight SpecialKey ctermfg=8 guifg=DimGrey
 
 " Color
 set background=dark
 set t_Co=256
-colorscheme molokai
+let g:gruvbox_contrast_dark = 'hard'
+colorscheme gruvbox
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
@@ -37,3 +39,13 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+" Config plugin whitespace
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
+let g:strip_whitespace_confirm=0
+
+cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
+map <leader>ew :e %%
+map <leader>es :sp %%
+map <leader>ev :vsp %%
+map <leader>et :tabe %%
