@@ -1,9 +1,3 @@
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
 syntax enable
 
 set shiftwidth=4
@@ -19,8 +13,6 @@ highlight SpecialKey ctermfg=8 guifg=DimGrey
 " Color
 set background=dark
 set t_Co=256
-let g:gruvbox_contrast_dark = 'hard'
-colorscheme gruvbox
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
@@ -46,6 +38,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'sheerun/vim-polyglot'
   Plug 'mattn/emmet-vim'
 call plug#end()
+
+let g:gruvbox_contrast_dark = 'hard'
+colorscheme gruvbox
+
 " Smart way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
