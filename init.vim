@@ -37,6 +37,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'sheerun/vim-polyglot'
   Plug 'mattn/emmet-vim'
+  Plug 'tpope/vim-surround'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 let g:gruvbox_contrast_dark = 'hard'
@@ -64,3 +66,12 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
+
+" Bubble single lines
+nmap <C-Up> ddkP
+nmap <C-Down> ddp
+" Bubble multiple lines
+vmap <C-Up> xkP`[V`]
+vmap <C-Down> xp`[V`]
+
+nmap <leader>v :tabedit $MYVIMRC<CR>
