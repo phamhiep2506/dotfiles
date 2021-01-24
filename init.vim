@@ -30,6 +30,7 @@ let mapleader = ","
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
+
 call plug#begin('~/.vim/plugged')
   Plug 'morhetz/gruvbox'
   Plug 'preservim/nerdtree'
@@ -39,6 +40,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'mattn/emmet-vim'
   Plug 'tpope/vim-surround'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'mbbill/undotree'
+  Plug 'tpope/vim-fugitive'
 call plug#end()
 
 let g:gruvbox_contrast_dark = 'hard'
@@ -66,6 +69,8 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
+
+nnoremap <F5> :UndotreeToggle<CR>
 
 " Bubble single lines
 nmap <C-Up> ddkP
