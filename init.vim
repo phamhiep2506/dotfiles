@@ -26,6 +26,8 @@ set hlsearch
 " Makes search act like search in modern browsers
 set incsearch
 
+set clipboard+=unnamedplus
+
 let mapleader = ","
 
 " Disable highlight when <leader><cr> is pressed
@@ -42,6 +44,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'mbbill/undotree'
   Plug 'tpope/vim-fugitive'
+  Plug 'preservim/nerdcommenter'
+  Plug 'kien/ctrlp.vim'
 call plug#end()
 
 let g:gruvbox_contrast_dark = 'hard'
@@ -64,6 +68,9 @@ map <leader>es :sp %%
 map <leader>ev :vsp %%
 map <leader>et :tabe %%
 
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
+
 " Shortcut  NerdTree Vim
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
@@ -78,5 +85,10 @@ nmap <C-Down> ddp
 " Bubble multiple lines
 vmap <C-Up> xkP`[V`]
 vmap <C-Down> xp`[V`]
+
+noremap <Leader>y "+y
+noremap <Leader>p "+p
+
+nmap <Leader>py <Plug>(Prettier)
 
 nmap <leader>v :tabedit $MYVIMRC<CR>
