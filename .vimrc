@@ -92,9 +92,6 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-
-let g:lsp_diagnostics_enabled = 1
-
 " show diagnostic signs
 let g:deoplete#enable_at_startup = 1
 
