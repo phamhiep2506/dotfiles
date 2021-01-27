@@ -37,6 +37,7 @@ highlight SpecialKey ctermfg=8 guifg=DimGrey
 " Color
 set background=dark
 set t_Co=256
+set termguicolors
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
@@ -71,16 +72,35 @@ call plug#begin(expand('~/.config/nvim/plugged'))
   Plug 'kien/ctrlp.vim'
   Plug 'ap/vim-css-color'
   Plug 'jiangmiao/auto-pairs'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug  'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'lighttiger2505/deoplete-vim-lsp'
 call plug#end()
 
 let g:gruvbox_contrast_dark = 'hard'
+if exists('+termguicolors')
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+let g:gruvbox_invert_selection='0'
 colorscheme gruvbox
+
+
 
 " Smart way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+
+let g:deoplete#enable_at_startup = 1
+
+" UltiSnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
 
 " Config plugin whitespace
 let g:better_whitespace_enabled=1
@@ -114,3 +134,43 @@ noremap <Leader>p "+p
 nmap <Leader>py <Plug>(Prettier)
 
 nmap <leader>v :tabedit ~/dotfiles/.vimrc<CR>
+
+
+" Config LSP
+"npm install -g typescript typescript-language-server
+if executable('typescript-language-server')
+    au User lsp_setup call lsp#register_server({
+      \ 'name': 'javascript support using typescript-language-server',
+      \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+      \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
+      \ 'whitelist': ['javascript', 'javascript.jsx', 'javascriptreact']
+      \ })
+endif
+
+"npm install --global vscode-html-languageserver-bin
+if executable('html-languageserver')
+  au User lsp_setup call lsp#register_server({
+    \ 'name': 'html-languageserver',
+    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'html-languageserver --stdio']},
+    \ 'whitelist': ['html'],
+    \ })
+endif
+
+"npm install -g vscode-css-languageserver-bin
+if executable('css-languageserver')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'css-languageserver',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
+        \ 'whitelist': ['css', 'less', 'sass'],
+        \ })
+endif
+
+"npm install -g typescript typescript-language-server
+if executable('typescript-language-server')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'typescript-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+        \ 'whitelist': ['typescript', 'typescript.tsx'],
+        \ })
+endif
