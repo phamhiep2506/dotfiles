@@ -1,3 +1,26 @@
+"*****************************************************************************
+"" Vim-Plug core
+"*****************************************************************************
+let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
+if has('win32')&&!has('win64')
+  let curl_exists=expand('C:\Windows\Sysnative\curl.exe')
+else
+  let curl_exists=expand('curl')
+endif
+
+if !filereadable(vimplug_exists)
+  if !executable(curl_exists)
+    echoerr "You have to install curl or first install vim-plug yourself!"
+    execute "q!"
+  endif
+  echo "Installing Vim-Plug..."
+  echo ""
+  silent exec "!"curl_exists" -fLo " . shellescape(vimplug_exists) . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  let g:not_finish_vimplug = "yes"
+
+  autocmd VimEnter * PlugInstall
+endif
+
 syntax enable
 
 set shiftwidth=4
@@ -33,7 +56,7 @@ let mapleader = ","
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
-call plug#begin('~/.vim/plugged')
+call plug#begin(expand('~/.config/nvim/plugged'))
   Plug 'morhetz/gruvbox'
   Plug 'preservim/nerdtree'
   Plug 'prettier/vim-prettier'
@@ -41,7 +64,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'sheerun/vim-polyglot'
   Plug 'mattn/emmet-vim'
   Plug 'tpope/vim-surround'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'mbbill/undotree'
   Plug 'tpope/vim-fugitive'
   Plug 'preservim/nerdcommenter'
@@ -67,9 +89,6 @@ map <leader>ew :e %%
 map <leader>es :sp %%
 map <leader>ev :vsp %%
 map <leader>et :tabe %%
-
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview
 
 " Shortcut  NerdTree Vim
 nnoremap <leader>n :NERDTreeFocus<CR>
