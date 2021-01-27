@@ -113,4 +113,4 @@ noremap <Leader>p "+p
 
 nmap <Leader>py <Plug>(Prettier)
 
-nmap <leader>v :tabedit $MYVIMRC<CR>
+nmap <leader>v :tabedit ~/dotfile/.vimrc<CR>
