@@ -106,8 +106,8 @@ let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
 
 "navigate between errors
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nmap <silent> <leader>k <Plug>(ale_previous_wrap)
+nmap <silent> <leader>j <Plug>(ale_next_wrap)
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
