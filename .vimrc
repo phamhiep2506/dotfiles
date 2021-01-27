@@ -25,6 +25,7 @@ syntax enable
 
 set shiftwidth=4
 set tabstop=4
+set expandtab
 set number
 set nowrap
 set hidden
@@ -68,6 +69,8 @@ call plug#begin(expand('~/.config/nvim/plugged'))
   Plug 'tpope/vim-fugitive'
   Plug 'preservim/nerdcommenter'
   Plug 'kien/ctrlp.vim'
+  Plug 'ap/vim-css-color'
+  Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 let g:gruvbox_contrast_dark = 'hard'
