@@ -36,8 +36,8 @@ highlight SpecialKey ctermfg=8 guifg=DimGrey
 
 " Color
 set background=dark
-set t_Co=256
 set termguicolors
+set t_Co=256
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
@@ -73,18 +73,15 @@ call plug#begin(expand('~/.config/nvim/plugged'))
   Plug 'ap/vim-css-color'
   Plug 'jiangmiao/auto-pairs'
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug  'SirVer/ultisnips'
+  Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
   Plug 'prabirshrestha/vim-lsp'
   Plug 'lighttiger2505/deoplete-vim-lsp'
+  Plug 'preservim/tagbar'
+  Plug 'dense-analysis/ale'
 call plug#end()
 
 let g:gruvbox_contrast_dark = 'hard'
-if exists('+termguicolors')
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
-let g:gruvbox_invert_selection='0'
 colorscheme gruvbox
 
 
@@ -96,7 +93,21 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 
+let g:lsp_diagnostics_enabled = 1
+
+" show diagnostic signs
 let g:deoplete#enable_at_startup = 1
+
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+
+"navigate between errors
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -106,6 +117,10 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
 let g:strip_whitespace_confirm=0
+
+"Tagbar keymap
+nmap <F8> :TagbarToggle<CR>
+nnoremap <leader>tb :TagbarToggle<CR>
 
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
 map <leader>ew :e %%
@@ -137,6 +152,7 @@ nmap <leader>v :tabedit ~/dotfiles/.vimrc<CR>
 
 
 " Config LSP
+"
 "npm install -g typescript typescript-language-server
 if executable('typescript-language-server')
     au User lsp_setup call lsp#register_server({
@@ -173,4 +189,35 @@ if executable('typescript-language-server')
         \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
         \ 'whitelist': ['typescript', 'typescript.tsx'],
         \ })
+endif
+
+"npm -g install intelephense
+if executable('intelephense')
+  augroup LspPHPIntelephense
+    au!
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'intelephense',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'intelephense --stdio']},
+        \ 'whitelist': ['php'],
+        \ 'initialization_options': {'storagePath': '/tmp/intelephense'},
+        \ 'workspace_config': {
+        \   'intelephense': {
+        \     'files': {
+        \       'maxSize': 1000000,
+        \       'associations': ['*.php', '*.phtml'],
+        \       'exclude': [],
+        \     },
+        \     'completion': {
+        \       'insertUseDeclaration': v:true,
+        \       'fullyQualifyGlobalConstantsAndFunctions': v:false,
+        \       'triggerParameterHints': v:true,
+        \       'maxItems': 100,
+        \     },
+        \     'format': {
+        \       'enable': v:true
+        \     },
+        \   },
+        \ }
+        \})
+  augroup END
 endif
