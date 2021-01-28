@@ -115,6 +115,13 @@ let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
 let g:strip_whitespace_confirm=0
 
+let g:ale_linters = {
+  \   'css': ['csslint'],
+  \   'html': ['tidy'],
+  \   'javascript': ['eslint'],
+  \   'python': ['flake8'],
+  \}
+
 "Tagbar keymap
 nmap <F8> :TagbarToggle<CR>
 nnoremap <leader>tb :TagbarToggle<CR>
@@ -149,7 +156,9 @@ nmap <leader>v :tabedit ~/dotfiles/.vimrc<CR>
 
 
 " Config LSP
+" npm install -g csslint
 "
+"npm install eslint prettier --save-dev => Project
 "npm install -g typescript typescript-language-server
 if executable('typescript-language-server')
     au User lsp_setup call lsp#register_server({
@@ -218,3 +227,14 @@ if executable('intelephense')
         \})
   augroup END
 endif
+
+"Python
+"pip install flake8
+if executable('pyls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ 'workspace_config': {'pyls': {'plugins': {'pydocstyle': {'enabled': v:true}}}}
+        \ })
+  endif
