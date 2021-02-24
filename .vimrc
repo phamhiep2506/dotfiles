@@ -30,9 +30,9 @@ set number
 set nowrap
 set hidden
 
-set list
-set lcs=tab:\¦.
-highlight SpecialKey ctermfg=8 guifg=DimGrey
+"set list
+"set lcs=tab:\¦.
+"highlight SpecialKey ctermfg=8 guifg=DimGrey
 
 " Color
 set background=dark
@@ -79,10 +79,14 @@ call plug#begin(expand('~/.config/nvim/plugged'))
   Plug 'lighttiger2505/deoplete-vim-lsp'
   Plug 'preservim/tagbar'
   Plug 'dense-analysis/ale'
+  Plug 'Yggdroot/indentLine'
+  Plug 'dracula/vim', { 'as': 'dracula' }
+  Plug 'vim-airline/vim-airline'
 call plug#end()
 
-let g:gruvbox_contrast_dark = 'hard'
-colorscheme gruvbox
+"let g:gruvbox_contrast_dark = 'hard'
+"colorscheme gruvbox
+colorscheme dracula
 
 
 
