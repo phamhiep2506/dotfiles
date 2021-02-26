@@ -53,6 +53,7 @@ set incsearch
 
 set clipboard+=unnamedplus
 
+
 let mapleader = ","
 
 " Disable highlight when <leader><cr> is pressed
@@ -82,13 +83,17 @@ call plug#begin(expand('~/.config/nvim/plugged'))
   Plug 'Yggdroot/indentLine'
   Plug 'dracula/vim', { 'as': 'dracula' }
   Plug 'vim-airline/vim-airline'
+  Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
-"let g:gruvbox_contrast_dark = 'hard'
-"colorscheme gruvbox
-colorscheme dracula
+let g:gruvbox_contrast_dark = 'hard'
+colorscheme gruvbox
+"colorscheme dracula
 
-
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " Smart way to move between windows
 map <C-j> <C-W>j
