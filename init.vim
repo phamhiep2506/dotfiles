@@ -59,6 +59,16 @@ call plug#begin(expand('~/.config/nvim/plugged'))
     Plug 'nvim-lua/completion-nvim'
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
+    Plug 'ryanoasis/vim-devicons'
+    Plug 'nvim-lua/diagnostic-nvim'
+    Plug 'prettier/vim-prettier', {
+        \ 'do': 'yarn install',
+        \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+    Plug 'mattn/emmet-vim'
+    Plug 'kien/ctrlp.vim'
+    Plug 'ap/vim-css-color'
+    Plug 'tpope/vim-surround'
+    Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 
@@ -111,6 +121,8 @@ nnoremap <C-f> :NERDTreeFind<CR>
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
 
+
+nmap <Leader>py <Plug>(Prettier)
 
 "#################################################
 "#             LSP                               #
