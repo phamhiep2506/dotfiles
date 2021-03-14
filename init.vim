@@ -44,7 +44,7 @@ map <silent> <leader><cr> :noh<cr>
 "#################################################
 "
 call plug#begin(expand('~/.config/nvim/plugged'))
-	Plug 'morhetz/gruvbox'
+"   Plug 'morhetz/gruvbox'
     Plug 'dracula/vim', { 'as': 'dracula' }
     Plug 'preservim/nerdtree'
     Plug 'vim-airline/vim-airline'
@@ -53,21 +53,20 @@ call plug#begin(expand('~/.config/nvim/plugged'))
     Plug 'Yggdroot/indentLine'
     Plug 'tpope/vim-surround'
     Plug 'sheerun/vim-polyglot'
-    Plug 'ntpeters/vim-better-whitespace'
+"   Plug 'ntpeters/vim-better-whitespace'
     Plug 'preservim/tagbar'
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-lua/completion-nvim'
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
-    Plug 'ryanoasis/vim-devicons'
-    Plug 'nvim-lua/diagnostic-nvim'
+"   Plug 'ryanoasis/vim-devicons'
+"   Plug 'nvim-lua/diagnostic-nvim'
     Plug 'prettier/vim-prettier', {
         \ 'do': 'yarn install',
         \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
     Plug 'mattn/emmet-vim'
     Plug 'kien/ctrlp.vim'
     Plug 'ap/vim-css-color'
-    Plug 'tpope/vim-surround'
     Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
@@ -79,12 +78,6 @@ call plug#end()
 "
 "let g:gruvbox_contrast_dark = 'hard'
 colorscheme dracula
-
-" white space auto remove
-let g:better_whitespace_enabled=1
-let g:strip_whitespace_on_save=1
-let g:strip_whitespace_confirm=0
-
 
 "#################################################
 "#             Mapping                           #
@@ -108,6 +101,10 @@ vmap <C-Down> xp`[V`]
 noremap <Leader>y "+y
 noremap <Leader>p "+p
 
+map <C-L> 20zl 
+map <C-H> 20zh 
+
+
 " Edit init.vim
 nmap <leader>v :tabedit ~/.config/nvim/init.vim<CR>
 
@@ -128,32 +125,8 @@ nmap <Leader>py <Plug>(Prettier)
 "#             LSP                               #
 "#################################################
 "
-"
-
-
-
 autocmd BufEnter * lua require'completion'.on_attach()
 
-":lua << EOF
-    "local capabilities = vim.lsp.protocol.make_client_capabilities()
-    "capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-    "require'lspconfig'.html.setup {
-        "capabilities = capabilities,
-        "on_attach=require'completion'.on_attach
-    "}
-
-    "require'lspconfig'.cssls.setup{
-        "capabilities = capabilities,
-        "on_attach=require'completion'.on_attach
-    "}
-
-    "require'lspconfig'.tsserver.setup{
-        "capabilities = capabilities,
-        "on_attach=require'completion'.on_attach
-    "}
-
-"EOF
 
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
@@ -164,36 +137,83 @@ set shortmess+=c
 " possible value: 'UltiSnips', 'Neosnippet', 'vim-vsnip', 'snippets.nvim'
 let g:completion_enable_snippet = 'UltiSnips'
 
+:lua << EOF
 
+local nvim_lsp = require('lspconfig')
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-"#################################################
-"#             LSP Maping                        #
-"#################################################
-"
-"
-"nnoremap <silent> K                 <cmd>lua vim.lsp.buf.hover()<CR>
-"nnoremap <silent> [d                <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-"nnoremap <silent> ]d                <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-"nnoremap <silent> <space>rn         <cmd>lua vim.lsp.buf.rename()<CR>
-"nnoremap <silent> <space>q          <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
-"nnoremap <silent> gD                <cmd>lua vim.lsp.buf.definition()<CR>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 
-"nnoremap <silent> gD            <Cmd>lua vim.lsp.buf.declaration()<CR>
-"nnoremap <silent> gd            <Cmd>lua vim.lsp.buf.definition()<CR>
-"nnoremap <silent> K             <Cmd>lua vim.lsp.buf.hover()<CR>
-"nnoremap <silent> gi            <cmd>lua vim.lsp.buf.implementation()<CR>
-"nnoremap <silent> <C-k>         <cmd>lua vim.lsp.buf.signature_help()<CR>
-"nnoremap <silent> <space>wa     <cmd>lua vim.lsp.buf.add_workspace_folder()<CR>
-"nnoremap <silent> <space>wr     <cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>
-"nnoremap <silent> <space>wl     <cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>
-"nnoremap <silent> <space>D      <cmd>lua vim.lsp.buf.type_definition()<CR>
-"nnoremap <silent> <space>rn     <cmd>lua vim.lsp.buf.rename()<CR>
-"nnoremap <silent> gr            <cmd>lua vim.lsp.buf.references()<CR>
-"nnoremap <silent> <space>e      <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
-"nnoremap <silent> [d            <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-"nnoremap <silent> ]d            <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-"nnoremap <silent> <space>q      <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+  -- Set some keybinds conditional on server capabilities
+  if client.resolved_capabilities.document_formatting then
+    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  elseif client.resolved_capabilities.document_range_formatting then
+    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+  end
 
+  -- Set autocommands conditional on server_capabilities
+  if client.resolved_capabilities.document_highlight then
+    vim.api.nvim_exec([[
+      hi LspReferenceRead cterm=bold ctermbg=240 guibg=LightYellow
+      hi LspReferenceText cterm=bold ctermbg=240 guibg=LightYellow
+      hi LspReferenceWrite cterm=bold ctermbg=240 guibg=LightYellow
+      augroup lsp_document_highlight
+        autocmd! * <buffer>
+        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+      augroup END
+    ]], false)
+  end
+end
 
-lua require('nvim_lsp_config')
+-- Use a loop to conveniently both setup defined servers
+-- and map buffer local keybindings when the language server attaches
+--
+
+--local servers = { "pyright", "rust_analyzer", "tsserver" }
+--for _, lsp in ipairs(servers) do
+  --nvim_lsp[lsp].setup { on_attach = on_attach }
+--end
+--
+--
+--
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+nvim_lsp.html.setup {
+    capabilities = capabilities,
+    on_attach=on_attach
+}
+
+nvim_lsp.cssls.setup{
+    capabilities = capabilities,
+    on_attach=on_attach
+}
+
+nvim_lsp.tsserver.setup{
+    capabilities = capabilities,
+    on_attach=on_attach
+}
+
+EOF
