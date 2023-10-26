@@ -1,117 +1,160 @@
 #!/bin/sh
 
+RED="\033[0;31m"
+GREEN="\033[0;32m"
 YELLOW="\033[0;33m"
 NC="\033[0m"
 
-install_pkg() {
-    sudo pacman --noconfirm --needed -S $1 >/dev/null 2>&1
+log_success() {
+    printf "${GREEN}$1${NC}"
 }
 
-run_cmd() {
-    $1 >/dev/null 2>&1
+log_error() {
+    printf "${RED}$1${NC}"
 }
 
 log_warning() {
-    printf "${YELLOW}$1${NC}\n"
+    printf "${YELLOW}$1${NC}"
 }
 
-###################
-### Install DWM ###
-###################
+install_pkg() {
+    log_warning "- Install packages $1..."
+    sudo pacman --noconfirm --needed -S $1 >/dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        log_success "Ok\n"
+    else
+        log_error "Error\n"
+        exit 1
+    fi
+}
 
-log_warning "Install dwm"
+# run_cmd <command> <title>
+run_cmd() {
+    log_warning "- $2..."
+    $1 >/dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        log_success "Ok\n"
+    else
+        log_error "Error\n"
+        exit 1
+    fi
+}
 
-# Clone dwm
-run_cmd "git clone https://github.com/phamhiep2506/dwm"
+####################
+#### Install DWM ###
+####################
 
-# Install packages
+log_warning "[+] Install dwm\n"
+
 install_pkg "base-devel libx11 libxinerama libxft freetype2"
 
+# Download dwm
+rm -rf dwm
+run_cmd "git clone https://github.com/phamhiep2506/dwm" "Download dwm"
+
 # Makefile
-run_cmd "cd dwm"
-run_cmd "sudo make clean install"
-run_cmd "cd .."
+cd dwm
+sudo make clean install >/dev/null 2>&1
+cd ..
 
 # Fix screen brightness
-run_cmd "sudo usermod -a -G video $USER"
+sudo usermod -a -G video $USER
 
-########################
-### Install Slstatus ###
-########################
+#########################
+#### Install Slstatus ###
+#########################
 
-log_warning "Install slstatus"
+log_warning "[+] Install slstatus\n"
 
-# Clone slstatus
-run_cmd "git clone https://github.com/phamhiep2506/slstatus"
-
-# Install packages
 install_pkg "pamixer"
 
+# Download slstatus
+rm -rf slstatus
+run_cmd "git clone https://github.com/phamhiep2506/slstatus" "Download slstatus"
+
 # Makefile
-run_cmd "cd slstatus"
-run_cmd "sudo make clean install"
-run_cmd "cd .."
+cd slstatus
+sudo make clean install >/dev/null 2>&1
+cd ..
 
-####################
-### Install Xorg ###
-####################
+#####################
+#### Install Xorg ###
+#####################
 
-log_warning "Install xorg"
+log_warning "[+] Install xorg\n"
 
-# Install packages
 install_pkg "xorg xorg-xinit light"
 
 # Config .xinitrc
-run_cmd "cp configs/x11/.xinitrc $HOME"
+cp configs/x11/.xinitrc $HOME
 
 # Fix touchpad
-run_cmd "sudo cp configs/x11/30-touchpad.conf /etc/X11/xorg.conf.d/"
+sudo bash -c 'cat > /etc/X11/xorg.conf.d/30-touchpad.conf <<EOF
+Section "InputClass"
+    Identifier "touchpad"
+    Driver "libinput"
+    MatchIsTouchpad "on"
+    Option "Tapping" "on"
+    Option "ClickMethod" "clickfinger"
+    Option "NaturalScrolling" "true"
+EndSection
+EOF'
 
-#################################
-### Install GTK & Icons Theme ###
-#################################
+##################################
+#### Install GTK & Icons Theme ###
+##################################
 
-log_warning "Install gtk & icons gruvbox theme"
+log_warning "[+] Install theme\n"
 
-# Install packages
 install_pkg "wget tar gtk2 gtk3"
 
-# Clone Gruvbox-GTK-Theme
-run_cmd "git clone https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme"
+# Install gtk theme
+rm -rf Gruvbox-GTK-Theme
+run_cmd "git clone https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme" "Download gtk theme"
+mkdir -p $HOME/.themes
+run_cmd "cp -r Gruvbox-GTK-Theme/themes/Gruvbox-Dark-B $HOME/.themes" "Install gtk theme"
 
-# Install gruvbox theme
-run_cmd "mkdir -p $HOME/.themes"
-run_cmd "cp -r Gruvbox-GTK-Theme/themes/Gruvbox-Dark-B $HOME/.themes"
-
-# Clone gruvbox-plus-icon-pack
-run_cmd "git clone https://github.com/SylEleuth/gruvbox-plus-icon-pack"
-
-# Install gruvbox icons
-run_cmd "mkdir -p $HOME/.icons"
-run_cmd "cp -r gruvbox-plus-icon-pack/Gruvbox-Plus-Dark $HOME/.icons"
+# Install icon theme
+rm -rf gruvbox-plus-icon-pack
+run_cmd "git clone https://github.com/SylEleuth/gruvbox-plus-icon-pack" "Download icon theme"
+mkdir -p $HOME/.icons
+run_cmd "cp -r gruvbox-plus-icon-pack/Gruvbox-Plus-Dark $HOME/.icons" "Install icon theme"
 
 # Install cursor theme
-run_cmd "wget https://github.com/ful1e5/BreezeX_Cursor/releases/download/v2.0.0/BreezeX-Dark.tar.gz -O BreezeX-Dark.tar.gz"
-run_cmd "mkdir -p $HOME/.icons"
-run_cmd "tar -xf BreezeX-Dark.tar.gz -C $HOME/.icons"
-run_cmd "rm BreezeX-Dark.tar.gz"
+rm -rf BreezeX-Dark.tar.gz
+run_cmd "wget https://github.com/ful1e5/BreezeX_Cursor/releases/download/v2.0.0/BreezeX-Dark.tar.gz -O BreezeX-Dark.tar.gz" "Download cursor theme"
+mkdir -p $HOME/.icons
+run_cmd "tar -xf BreezeX-Dark.tar.gz -C $HOME/.icons" "Install cursor theme"
 
-# Config gtk
-run_cmd "cp configs/gtk/.gtkrc-2.0 $HOME"
-run_cmd "mkdir -p $HOME/.config/gtk-3.0"
-run_cmd "cp -r configs/gtk/gtk-3.0 $HOME/.config"
+# Config gtk2
+cat > $HOME/.gtkrc-2.0 <<EOF
+gtk-theme-name="Gruvbox-Dark-B"
+gtk-icon-theme-name="Gruvbox-Plus-Dark"
+gtk-cursor-theme-name="BreezeX-Dark"
+EOF
+
+# Config gtk3
+mkdir -p $HOME/.config/gtk-3.0
+cat > $HOME/.config/gtk-3.0/settings.ini <<EOF
+[Settings]
+gtk-theme-name=Gruvbox-Dark-B
+gtk-icon-theme-name=Gruvbox-Plus-Dark
+gtk-cursor-theme-name=BreezeX-Dark
+EOF
 
 # Config cursor
-run_cmd 'echo "[Icon Theme]\nInherits=BreezeX-Dark" > $HOME/.icons/default/index.theme'
+cat > $HOME/.icons/default/index.theme <<EOF
+[Icon Theme]
+Inherits=BreezeX-Dark
+EOF
 
-#################
-### Wallpaper ###
-#################
+#####################
+### Set wallpaper ###
+#####################
 
-log_warning "Install wallpaper"
+log_warning "[+] Set wallpaper\n"
 
-# Install packages
 install_pkg "feh"
 
 # Set wallpaper
-run_cmd "feh --bg-fill wallpapers/gruvbox_spac.jpg"
+feh --bg-fill wallpapers/gruvbox_spac.jpg
