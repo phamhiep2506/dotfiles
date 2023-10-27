@@ -195,6 +195,7 @@ gtk-cursor-theme-name=BreezeX-Dark
 EOF
 
 # Config cursor
+mkdir -p $HOME/.icons/default
 cat > $HOME/.icons/default/index.theme <<EOF
 [Icon Theme]
 Inherits=BreezeX-Dark
@@ -218,7 +219,7 @@ feh --bg-fill wallpapers/gruvbox_spac.jpg
 log_warning "[+] Install software\n"
 
 # Font
-install_pkg "noto-fonts noto-fonts-cjk ttf-dejavu ttf-hannom noto-fonts-emoji ttf-jetbrains-mono"
+install_pkg "noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-dejavu ttf-jetbrains-mono"
 
 # WebBrowser
 install_pkg "chromium"
