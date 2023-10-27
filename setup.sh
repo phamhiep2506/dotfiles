@@ -217,6 +217,9 @@ feh --bg-fill wallpapers/gruvbox_spac.jpg
 
 log_warning "[+] Install software\n"
 
+# Font
+install_pkg "noto-fonts noto-fonts-cjk ttf-dejavu ttf-hannom noto-fonts-emoji ttf-jetbrains-mono"
+
 # WebBrowser
 install_pkg "chromium"
 
