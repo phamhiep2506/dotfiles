@@ -210,7 +210,9 @@ log_warning "[+] Set wallpaper\n"
 install_pkg "feh"
 
 # Set wallpaper
-feh --bg-fill wallpapers/gruvbox_spac.jpg
+mkdir -p $HOME/.wallpapers
+cp wallpapers/gruvbox_spac.jpg $HOME/.wallpapers
+#feh --bg-fill wallpapers/gruvbox_spac.jpg
 
 ########################
 ### Install software ###
@@ -226,6 +228,19 @@ install_pkg "chromium"
 
 # File explorer
 install_pkg "ranger gvfs thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman"
+
+# View video & image
+install_pkg "mpv viewnior"
+
+# View pdf
+install_pkg "zathura zathura-pdf-mupdf"
+mkdir -p $HOME/.config/zathura
+cat > $HOME/.config/zathura/zathurarc <<EOF
+set selection-clipboard clipboard
+EOF
+
+# Screenshot
+install_pkg "flameshot"
 
 # Network
 install_pkg "network-manager-applet"

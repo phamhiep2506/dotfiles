@@ -1,15 +1,12 @@
 export EDITOR="nvim"
 
 # PATH
-export PATH=$PATH:$HOME/.local/bin
+# export PATH=$PATH:$HOME/.local/bin
 
-# Vim
-alias v="nvim"
-
-# Ls
+# Show color command "ls"
 alias ls="ls --color"
 
-# TTL
+# Change TTL
 alias ttl="sudo sysctl -w net.ipv4.ip_default_ttl=65"
 
 # Ibus
