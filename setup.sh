@@ -46,7 +46,7 @@ run_cmd() {
 
 log_warning "[+] Install dwm\n"
 
-install_pkg "base-devel libx11 libxinerama libxft freetype2"
+install_pkg "base-devel libx11 libxinerama libxft freetype2 dmenu"
 
 # Download dwm
 rm -rf dwm
