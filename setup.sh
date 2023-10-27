@@ -240,7 +240,7 @@ install_pkg "tmux"
 cp configs/tmux/.tmux.conf $HOME
 
 # Neovim
-install_pkg "neovim nodejs npm"
+install_pkg "neovim nodejs npm xclip"
 mkdir -p $HOME/.config/nvim
 cp configs/nvim/init.vim $HOME/.config/nvim
 
