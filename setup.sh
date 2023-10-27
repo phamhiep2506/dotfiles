@@ -54,7 +54,7 @@ run_cmd "git clone https://github.com/phamhiep2506/dwm" "Download dwm"
 
 # Makefile
 cd dwm
-sudo make clean install >/dev/null 2>&1
+run_cmd "sudo make clean install" "Build dwm"
 cd ..
 
 # Fix screen brightness
@@ -74,7 +74,7 @@ run_cmd "git clone https://github.com/phamhiep2506/slstatus" "Download slstatus"
 
 # Makefile
 cd slstatus
-sudo make clean install >/dev/null 2>&1
+run_cmd "sudo make clean install" "Build slstatus"
 cd ..
 
 #####################
@@ -98,6 +98,58 @@ Section "InputClass"
     Option "ClickMethod" "clickfinger"
     Option "NaturalScrolling" "true"
 EndSection
+EOF'
+
+#####################
+### Install Picom ###
+#####################
+
+log_warning "[+] Install picom\n"
+
+install_pkg "libgl libev pcre libx11 xcb-util-renderutil libxcb xcb-util-image libxext pixman libconfig libdbus hicolor-icon-theme"
+install_pkg "mesa meson asciidoc uthash xorgproto"
+
+rm -rf picom
+run_cmd "git clone https://github.com/dccsillag/picom -b implement-window-animations" "Download picom"
+
+# Build picom
+cd picom
+git submodule update --init --recursive
+run_cmd "meson --buildtype=release . build" "Build picom"
+run_cmd "sudo ninja -C build install" "Install picom"
+cd ..
+
+# Config picom
+mkdir -p $HOME/.config/picom
+cp configs/picom/picom.conf $HOME/.config/picom
+
+###########################
+### Install Ibus-bamboo ###
+###########################
+
+log_warning "[+] Install ibus-bamboo\n"
+
+install_pkg "ibus go gtk3 libx11 libxtst"
+
+# Download ibus-bamboo
+rm -rf ibus-bamboo
+run_cmd "git clone https://github.com/BambooEngine/ibus-bamboo" "Download ibus-bamboo"
+
+# Build ibus-bamboo
+cd ibus-bamboo
+run_cmd "sudo make install" "Build ibus-bamboo"
+cd ..
+
+# Config ibus
+sudo bash -c 'cat > /etc/environment <<EOF
+GTK_IM_MODULE=ibus
+QT_IM_MODULE=ibus
+XMODIFIERS=@im=ibus
+# Dành cho những phần mềm dựa trên qt4
+QT4_IM_MODULE=ibus
+# Dành cho những phần mềm dùng thư viện đồ họa clutter/OpenGL
+CLUTTER_IM_MODULE=ibus
+GLFW_IM_MODULE=ibus
 EOF'
 
 ##################################
@@ -158,3 +210,43 @@ install_pkg "feh"
 
 # Set wallpaper
 feh --bg-fill wallpapers/gruvbox_spac.jpg
+
+########################
+### Install software ###
+########################
+
+log_warning "[+] Install software\n"
+
+# WebBrowser
+install_pkg "chromium"
+
+# File explorer
+install_pkg "ranger gvfs thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman"
+
+# Network
+install_pkg "network-manager-applet"
+
+# Terminal
+install_pkg "alacritty"
+mkdir -p $HOME/.config/alacritty
+cp configs/alacritty/alacritty.yml $HOME/.config/alacritty
+
+# Tmux
+install_pkg "tmux"
+cp configs/tmux/.tmux.conf $HOME
+
+# Neovim
+install_pkg "neovim nodejs npm"
+mkdir -p $HOME/.config/nvim
+cp configs/nvim/init.vim $HOME/.config/nvim
+
+# zsh
+install_pkg "zsh"
+mkdir -p $HOME/.zsh/plugins
+rm -rf $HOME/.zsh/plugins/*
+run_cmd "git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions $HOME/.zsh/plugins/zsh-autosuggestions" "Download zsh-autosuggestions"
+run_cmd "git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.zsh/plugins/zsh-syntax-highlighting" "Download zsh-syntax-highlighting"
+run_cmd "git clone --depth=1 https://github.com/jeffreytse/zsh-vi-mode $HOME/.zsh/plugins/zsh-vi-mode" "Download zsh-vi-mode"
+cp configs/zsh/.zshrc $HOME
+cp configs/zsh/.zshenv $HOME
+chsh -s $(which zsh)
