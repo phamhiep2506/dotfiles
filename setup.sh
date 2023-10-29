@@ -46,16 +46,17 @@ run_cmd() {
 
 log_warning "[+] Install dwm\n"
 
-install_pkg "base-devel libx11 libxinerama libxft freetype2 dmenu"
+install_pkg "base-devel libx11 libxinerama libxft freetype2 dmenu slock"
 
 # Download dwm
-rm -rf dwm
-run_cmd "git clone https://github.com/phamhiep2506/dwm" "Download dwm"
+run_cmd "git clone --depth 1 https://github.com/phamhiep2506/dwm" "Download dwm"
 
 # Makefile
 cd dwm
 run_cmd "sudo make clean install" "Build dwm"
 cd ..
+
+rm -rf dwm
 
 # Fix screen brightness
 sudo usermod -a -G video $USER
@@ -69,13 +70,14 @@ log_warning "[+] Install slstatus\n"
 install_pkg "pamixer"
 
 # Download slstatus
-rm -rf slstatus
-run_cmd "git clone https://github.com/phamhiep2506/slstatus" "Download slstatus"
+run_cmd "git clone --depth 1 https://github.com/phamhiep2506/slstatus" "Download slstatus"
 
 # Makefile
 cd slstatus
 run_cmd "sudo make clean install" "Build slstatus"
 cd ..
+
+rm -rf slstatus
 
 #####################
 #### Install Xorg ###
@@ -109,8 +111,7 @@ log_warning "[+] Install picom\n"
 install_pkg "libgl libev pcre libx11 xcb-util-renderutil libxcb xcb-util-image libxext pixman libconfig libdbus hicolor-icon-theme"
 install_pkg "mesa meson asciidoc uthash xorgproto"
 
-rm -rf picom
-run_cmd "git clone https://github.com/dccsillag/picom -b implement-window-animations" "Download picom"
+run_cmd "git clone --depth 1 https://github.com/dccsillag/picom --branch implement-window-animations" "Download picom"
 
 # Build picom
 cd picom
@@ -118,6 +119,8 @@ git submodule update --init --recursive
 run_cmd "meson --buildtype=release . build" "Build picom"
 run_cmd "sudo ninja -C build install" "Install picom"
 cd ..
+
+rm -rf picom
 
 # Config picom
 mkdir -p $HOME/.config/picom
@@ -132,13 +135,14 @@ log_warning "[+] Install ibus-bamboo\n"
 install_pkg "ibus go gtk3 libx11 libxtst"
 
 # Download ibus-bamboo
-rm -rf ibus-bamboo
-run_cmd "git clone https://github.com/BambooEngine/ibus-bamboo" "Download ibus-bamboo"
+run_cmd "git clone --depth 1 https://github.com/BambooEngine/ibus-bamboo" "Download ibus-bamboo"
 
 # Build ibus-bamboo
 cd ibus-bamboo
 run_cmd "sudo make install" "Build ibus-bamboo"
 cd ..
+
+rm -rf ibus-bamboo
 
 # Config ibus
 sudo bash -c 'cat > /etc/environment <<EOF
@@ -161,22 +165,22 @@ log_warning "[+] Install theme\n"
 install_pkg "wget tar gtk2 gtk3"
 
 # Install gtk theme
-rm -rf Gruvbox-GTK-Theme
-run_cmd "git clone https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme" "Download gtk theme"
+run_cmd "git clone --depth 1 https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme" "Download gtk theme"
 mkdir -p $HOME/.themes
 run_cmd "cp -r Gruvbox-GTK-Theme/themes/Gruvbox-Dark-B $HOME/.themes" "Install gtk theme"
+rm -rf Gruvbox-GTK-Theme
 
 # Install icon theme
-rm -rf gruvbox-plus-icon-pack
-run_cmd "git clone https://github.com/SylEleuth/gruvbox-plus-icon-pack" "Download icon theme"
+run_cmd "git clone --depth 1 https://github.com/SylEleuth/gruvbox-plus-icon-pack" "Download icon theme"
 mkdir -p $HOME/.icons
 run_cmd "cp -r gruvbox-plus-icon-pack/Gruvbox-Plus-Dark $HOME/.icons" "Install icon theme"
+rm -rf gruvbox-plus-icon-pack
 
 # Install cursor theme
-rm -rf BreezeX-Dark.tar.gz
 run_cmd "wget https://github.com/ful1e5/BreezeX_Cursor/releases/download/v2.0.0/BreezeX-Dark.tar.gz -O BreezeX-Dark.tar.gz" "Download cursor theme"
 mkdir -p $HOME/.icons
 run_cmd "tar -xf BreezeX-Dark.tar.gz -C $HOME/.icons" "Install cursor theme"
+rm -rf BreezeX-Dark.tar.gz
 
 # Config gtk2
 cat > $HOME/.gtkrc-2.0 <<EOF
@@ -224,13 +228,14 @@ log_warning "[+] Install software\n"
 install_pkg "noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-dejavu ttf-jetbrains-mono"
 
 # WebBrowser
-install_pkg "chromium"
+# install_pkg "chromium"
+run_cmd "scripts/install-brave.sh" "Install brave browser"
 
 # File explorer
 install_pkg "ranger gvfs thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman"
 
 # View video & image
-install_pkg "mpv viewnior"
+install_pkg "mpv yt-dlp viewnior"
 
 # View pdf
 install_pkg "zathura zathura-pdf-mupdf"
@@ -263,9 +268,9 @@ cp configs/nvim/init.vim $HOME/.config/nvim
 install_pkg "zsh"
 mkdir -p $HOME/.zsh/plugins
 rm -rf $HOME/.zsh/plugins/*
-run_cmd "git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions $HOME/.zsh/plugins/zsh-autosuggestions" "Download zsh-autosuggestions"
-run_cmd "git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.zsh/plugins/zsh-syntax-highlighting" "Download zsh-syntax-highlighting"
-run_cmd "git clone --depth=1 https://github.com/jeffreytse/zsh-vi-mode $HOME/.zsh/plugins/zsh-vi-mode" "Download zsh-vi-mode"
+run_cmd "git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions $HOME/.zsh/plugins/zsh-autosuggestions" "Download zsh-autosuggestions"
+run_cmd "git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.zsh/plugins/zsh-syntax-highlighting" "Download zsh-syntax-highlighting"
+run_cmd "git clone --depth 1 https://github.com/jeffreytse/zsh-vi-mode $HOME/.zsh/plugins/zsh-vi-mode" "Download zsh-vi-mode"
 cp configs/zsh/.zshrc $HOME
 cp configs/zsh/.zshenv $HOME
 chsh -s $(which zsh)
