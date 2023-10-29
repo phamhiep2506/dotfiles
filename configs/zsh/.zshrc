@@ -3,17 +3,14 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
 
-# Enable vim mode
-export KEYTIMEOUT=1
-
-# Basic auto/tab complete
+# Tab complete
 # https://gist.github.com/LukeSmithxyz/e62f26e55ea8b0ed41a65912fbebbe52
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
 
-# Load version control information
+# Git
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr '*'
@@ -21,9 +18,8 @@ zstyle ':vcs_info:*' stagedstr ''
 precmd() { vcs_info }
 zstyle ':vcs_info:git:*' formats ' %F{magenta}%b%u%f'
 
+# Prompt
 setopt PROMPT_SUBST
-
-# PROMPT
 PROMPT='%B%F{red}┌[%f%F{blue}%n%f%F{red}@%f%F{green}%m%f%F{red}](%f%F{yellow}%2~%f${vcs_info_msg_0_}%F{red})%f
 %F{red}└$%f%b '
 

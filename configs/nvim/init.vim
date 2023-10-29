@@ -1,6 +1,6 @@
 set number
 set mouse=a
-set nowrap
+set wrap
 set noswapfile
 set nobackup
 set nowritebackup
