@@ -131,7 +131,6 @@ cp configs/picom/picom.conf $HOME/.config/picom
 ###########################
 
 log_warning "[+] Install ibus-bamboo\n"
-
 install_pkg "ibus go gtk3 libx11 libxtst"
 
 # Download ibus-bamboo
@@ -162,19 +161,7 @@ EOF'
 
 log_warning "[+] Install theme\n"
 
-install_pkg "wget tar gtk2 gtk3"
-
-# Install gtk theme
-run_cmd "git clone --depth 1 https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme" "Download gtk theme"
-mkdir -p $HOME/.themes
-run_cmd "cp -r Gruvbox-GTK-Theme/themes/Gruvbox-Dark-B $HOME/.themes" "Install gtk theme"
-rm -rf Gruvbox-GTK-Theme
-
-# Install icon theme
-run_cmd "git clone --depth 1 https://github.com/SylEleuth/gruvbox-plus-icon-pack" "Download icon theme"
-mkdir -p $HOME/.icons
-run_cmd "cp -r gruvbox-plus-icon-pack/Gruvbox-Plus-Dark $HOME/.icons" "Install icon theme"
-rm -rf gruvbox-plus-icon-pack
+install_pkg "wget tar gtk2 gtk3 arc-gtk-theme arc-icon-theme"
 
 # Install cursor theme
 run_cmd "wget https://github.com/ful1e5/BreezeX_Cursor/releases/download/v2.0.0/BreezeX-Dark.tar.gz -O BreezeX-Dark.tar.gz" "Download cursor theme"
@@ -184,8 +171,8 @@ rm -rf BreezeX-Dark.tar.gz
 
 # Config gtk2
 cat > $HOME/.gtkrc-2.0 <<EOF
-gtk-theme-name="Gruvbox-Dark-B"
-gtk-icon-theme-name="Gruvbox-Plus-Dark"
+gtk-theme-name="Arc-Dark"
+gtk-icon-theme-name="Arc"
 gtk-cursor-theme-name="BreezeX-Dark"
 EOF
 
@@ -193,8 +180,8 @@ EOF
 mkdir -p $HOME/.config/gtk-3.0
 cat > $HOME/.config/gtk-3.0/settings.ini <<EOF
 [Settings]
-gtk-theme-name=Gruvbox-Dark-B
-gtk-icon-theme-name=Gruvbox-Plus-Dark
+gtk-theme-name=Arc-Dark
+gtk-icon-theme-name=Arc
 gtk-cursor-theme-name=BreezeX-Dark
 EOF
 
