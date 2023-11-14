@@ -102,30 +102,6 @@ Section "InputClass"
 EndSection
 EOF'
 
-#####################
-### Install Picom ###
-#####################
-
-log_warning "[+] Install picom\n"
-
-install_pkg "libgl libev pcre libx11 xcb-util-renderutil libxcb xcb-util-image libxext pixman libconfig libdbus hicolor-icon-theme"
-install_pkg "mesa meson asciidoc uthash xorgproto"
-
-run_cmd "git clone --depth 1 https://github.com/dccsillag/picom --branch implement-window-animations" "Download picom"
-
-# Build picom
-cd picom
-git submodule update --init --recursive
-run_cmd "meson --buildtype=release . build" "Build picom"
-run_cmd "sudo ninja -C build install" "Install picom"
-cd ..
-
-rm -rf picom
-
-# Config picom
-mkdir -p $HOME/.config/picom
-cp configs/picom/picom.conf $HOME/.config/picom
-
 ###########################
 ### Install Ibus-bamboo ###
 ###########################
@@ -233,9 +209,6 @@ EOF
 
 # Screenshot
 install_pkg "flameshot"
-
-# Network
-install_pkg "network-manager-applet"
 
 # Terminal
 install_pkg "alacritty"
