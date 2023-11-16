@@ -210,6 +210,9 @@ EOF
 # Screenshot
 install_pkg "flameshot"
 
+# Network
+install_pkg "network-manager-applet"
+
 # Terminal
 install_pkg "alacritty"
 mkdir -p $HOME/.config/alacritty
