@@ -222,10 +222,9 @@ cp configs/alacritty/alacritty.yml $HOME/.config/alacritty
 install_pkg "tmux"
 cp configs/tmux/.tmux.conf $HOME
 
-# Neovim
-install_pkg "neovim nodejs npm xclip ripgrep"
-mkdir -p $HOME/.config/nvim
-cp configs/nvim/init.vim $HOME/.config/nvim
+# Vim
+install_pkg "gvim nodejs npm xclip ripgrep"
+cp configs/vim/.vimrc $HOME
 
 # zsh
 install_pkg "zsh"

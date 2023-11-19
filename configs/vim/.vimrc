@@ -10,9 +10,6 @@ set signcolumn=auto
 set laststatus=2
 set background=dark
 set termguicolors
-" Undo
-set undodir=$HOME/.vim/undo
-set undofile
 " Search
 set hlsearch
 set ignorecase
@@ -65,16 +62,19 @@ if empty(glob(data_dir . "/autoload/plug.vim"))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin()
-    Plug 'sainnhe/gruvbox-material'
+    Plug 'morhetz/gruvbox'
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-vinegar'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-sensible'
+    Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
     Plug 'easymotion/vim-easymotion'
     Plug 'ntpeters/vim-better-whitespace'
     Plug 'junegunn/vim-easy-align'
     Plug 'sheerun/vim-polyglot'
+    Plug 'editorconfig/editorconfig-vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -82,13 +82,10 @@ call plug#begin()
     Plug 'dense-analysis/ale'
 call plug#end()
 " Gruvbox
-let g:gruvbox_material_foreground = "original"
-let g:gruvbox_material_background = "hard"
-let g:gruvbox_material_visual = "reverse"
-let g:gruvbox_material_diagnostic_virtual_text = "colored"
-let g:gruvbox_material_transparent_background = 1
-let g:gruvbox_material_enable_bold = 1
-colorscheme gruvbox-material
+let g:gruvbox_contrast_dark = "hard"
+let g:gruvbox_sign_column = "bg0"
+let g:gruvbox_guisp_fallback = "bg"
+colorscheme gruvbox
 " Cursor line
 highlight clear CursorLine
 highlight CursorLineNR guibg=NONE guifg =#fabd2f gui=bold
@@ -97,6 +94,7 @@ let g:fzf_layout = { "window": "enew" }
 " Git gutter
 let g:gitgutter_map_keys = 0
 " Ale
+let g:ale_virtualtext_cursor = "disabled"
 let g:ale_linters_explicit = 1
 let g:ale_linters = { "cs": ["OmniSharp"] }
 " OmniSharp
