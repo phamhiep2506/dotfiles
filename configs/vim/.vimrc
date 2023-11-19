@@ -52,7 +52,7 @@ nnoremap <silent> <leader>h :nohlsearch<CR>
 nnoremap <silent> <leader>ff :Files<CR>
 nnoremap <silent> <leader>fb :Buffers<CR>
 nnoremap <silent> <leader>fg :Rg<CR>
-nnoremap <silent> <leader>fk :Maps<CR>
+nnoremap <silent> <leader>fk :Commands<CR>
 " Explore
 nnoremap <silent> <C-e> :Explore<CR>
 " Plugins
@@ -71,15 +71,13 @@ call plug#begin()
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
     Plug 'easymotion/vim-easymotion'
-    Plug 'ntpeters/vim-better-whitespace'
-    Plug 'junegunn/vim-easy-align'
     Plug 'sheerun/vim-polyglot'
     Plug 'editorconfig/editorconfig-vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    Plug 'neoclide/coc.nvim', { 'branch': 'release' }
     Plug 'OmniSharp/omnisharp-vim'
     Plug 'dense-analysis/ale'
+    Plug 'prabirshrestha/asyncomplete.vim'
 call plug#end()
 " Gruvbox
 let g:gruvbox_contrast_dark = "hard"
@@ -96,10 +94,23 @@ let g:gitgutter_map_keys = 0
 " Ale
 let g:ale_virtualtext_cursor = "disabled"
 let g:ale_linters_explicit = 1
-let g:ale_linters = { "cs": ["OmniSharp"] }
+let g:ale_fix_on_save = 1
+let g:ale_typescript_tsserver_use_global = 1
+let g:ale_echo_msg_error_str = "E"
+let g:ale_echo_msg_warning_str = "W"
+let g:ale_echo_msg_format = "[%linter%] %s [%severity%]"
+let g:ale_fixers = {
+    \ "*": ["remove_trailing_lines", "trim_whitespace"]
+    \ }
+" js,ts: npm install -g typescript
+" cpp: compile_commands.json
+let g:ale_linters = {
+    \ "javascript": ["tsserver"],
+    \ "typescript": ["tsserver"],
+    \ "cpp": ["ccls"],
+    \ "cs": ["OmniSharp"]
+    \ }
 " OmniSharp
 let g:OmniSharp_server_use_net6 = 1
-" Coc.nvim
-inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-command! CocDocumentation call CocActionAsync("doHover")
+" Asyncomplete
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ale#get_source_options())

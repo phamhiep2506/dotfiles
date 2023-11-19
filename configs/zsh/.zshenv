@@ -1,4 +1,4 @@
-export EDITOR=nvim
+export EDITOR=vim
 
 # PATH
 # export PATH=$PATH:$HOME/.local/bin
