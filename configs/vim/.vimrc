@@ -13,7 +13,7 @@ set termguicolors
 " Search
 set hlsearch
 set ignorecase
-" Split
+" Split window
 set splitbelow
 set splitright
 " Indent
@@ -28,6 +28,11 @@ nnoremap <silent> <C-h> <C-w>h
 nnoremap <silent> <C-j> <C-w>j
 nnoremap <silent> <C-k> <C-w>k
 nnoremap <silent> <C-l> <C-w>l
+" Resize
+nnoremap <silent> <C-Left> <C-w><
+nnoremap <silent> <C-Down> <C-w>-
+nnoremap <silent> <C-Up> <C-w>+
+nnoremap <silent> <C-Right> <C-w>>
 " Jump center screen
 nnoremap <silent> j jzz
 nnoremap <silent> k kzz
@@ -58,7 +63,7 @@ nnoremap <silent> <C-e> :Explore<CR>
 " Plugins
 let data_dir = has("nvim") ? stdpath("data") . "/site" : "~/.vim"
 if empty(glob(data_dir . "/autoload/plug.vim"))
-    silent execute "!curl -fLo ".data_dir."/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    silent execute "!curl -fLo ".data_dir."/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin()
@@ -68,28 +73,30 @@ call plug#begin()
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-sensible'
-    Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
     Plug 'easymotion/vim-easymotion'
     Plug 'sheerun/vim-polyglot'
     Plug 'editorconfig/editorconfig-vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    Plug 'OmniSharp/omnisharp-vim'
     Plug 'dense-analysis/ale'
+    Plug 'OmniSharp/omnisharp-vim'
     Plug 'prabirshrestha/asyncomplete.vim'
 call plug#end()
+" Undercurl
+let &t_Cs = "\e[4:3m"
+let &t_Ce = "\e[4:0m"
 " Gruvbox
 let g:gruvbox_contrast_dark = "hard"
 let g:gruvbox_sign_column = "bg0"
-let g:gruvbox_guisp_fallback = "bg"
+let g:gruvbox_guisp_fallback = "fg"
 colorscheme gruvbox
 " Cursor line
 highlight clear CursorLine
-highlight CursorLineNR guibg=NONE guifg =#fabd2f gui=bold
+highlight CursorLineNr guibg=NONE guifg =#fabd2f gui=bold
 " Fzf
 let g:fzf_layout = { "window": "enew" }
-" Git gutter
+" Git
 let g:gitgutter_map_keys = 0
 " Ale
 let g:ale_virtualtext_cursor = "disabled"
@@ -102,8 +109,6 @@ let g:ale_echo_msg_format = "[%linter%] %s [%severity%]"
 let g:ale_fixers = {
     \ "*": ["remove_trailing_lines", "trim_whitespace"]
     \ }
-" js,ts: npm install -g typescript
-" cpp: compile_commands.json
 let g:ale_linters = {
     \ "javascript": ["tsserver"],
     \ "typescript": ["tsserver"],
