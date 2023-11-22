@@ -3,6 +3,10 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
 
+# Use vi mode
+bindkey -v
+export KEYTIMEOUT=1
+
 # Tab complete
 # https://gist.github.com/LukeSmithxyz/e62f26e55ea8b0ed41a65912fbebbe52
 autoload -U compinit
@@ -24,6 +28,5 @@ PROMPT='%B%F{red}┌[%f%F{blue}%n%f%F{red}@%f%F{green}%m%f%F{red}](%f%F{yellow}%
 %F{red}└$%f%b '
 
 # Plugins
-source $HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $HOME/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOME/.zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

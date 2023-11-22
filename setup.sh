@@ -223,16 +223,11 @@ install_pkg "tmux"
 cp configs/tmux/.tmux.conf $HOME
 
 # Vim
-install_pkg "gvim nodejs npm xclip ripgrep"
+install_pkg "gvim npm xclip ripgrep"
 cp configs/vim/.vimrc $HOME
 
 # zsh
-install_pkg "zsh"
-mkdir -p $HOME/.zsh/plugins
-rm -rf $HOME/.zsh/plugins/*
-run_cmd "git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions $HOME/.zsh/plugins/zsh-autosuggestions" "Download zsh-autosuggestions"
-run_cmd "git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.zsh/plugins/zsh-syntax-highlighting" "Download zsh-syntax-highlighting"
-run_cmd "git clone --depth 1 https://github.com/jeffreytse/zsh-vi-mode $HOME/.zsh/plugins/zsh-vi-mode" "Download zsh-vi-mode"
+install_pkg "zsh zsh-autosuggestions zsh-syntax-highlighting"
 cp configs/zsh/.zshrc $HOME
 cp configs/zsh/.zshenv $HOME
 chsh -s $(which zsh)

@@ -96,6 +96,8 @@ highlight clear CursorLine
 highlight CursorLineNr guibg=NONE guifg =#fabd2f gui=bold
 " Fzf
 let g:fzf_layout = { "window": "enew" }
+let g:fzf_vim = {}
+let g:fzf_vim.preview_window = []
 " Git
 let g:gitgutter_map_keys = 0
 " Ale
@@ -110,10 +112,10 @@ let g:ale_fixers = {
     \ "*": ["remove_trailing_lines", "trim_whitespace"]
     \ }
 let g:ale_linters = {
-    \ "javascript": ["tsserver"],
-    \ "typescript": ["tsserver"],
     \ "cpp": ["ccls"],
-    \ "cs": ["OmniSharp"]
+    \ "cs": ["OmniSharp"],
+    \ "javascript": ["tsserver"],
+    \ "typescript": ["tsserver"]
     \ }
 " OmniSharp
 let g:OmniSharp_server_use_net6 = 1
