@@ -20,12 +20,12 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr '*'
 zstyle ':vcs_info:*' stagedstr ''
 precmd() { vcs_info }
-zstyle ':vcs_info:git:*' formats ' %F{magenta}%b%u%f'
+zstyle ':vcs_info:git:*' formats ' %F{blue}git:(%f%F{red}%b%u%f%F{blue})%f'
 
 # Prompt
 setopt PROMPT_SUBST
-PROMPT='%B%F{red}┌[%f%F{blue}%n%f%F{red}@%f%F{green}%m%f%F{red}](%f%F{yellow}%2~%f${vcs_info_msg_0_}%F{red})%f
-%F{red}└$%f%b '
+PROMPT='%B%(?:%F{green}➜%f:%F{red}➜%f) %F{cyan}%c%f%b'
+PROMPT+='%B${vcs_info_msg_0_}%b '
 
 # Plugins
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
