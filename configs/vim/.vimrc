@@ -21,6 +21,13 @@ set autoindent
 set expandtab
 set tabstop=4
 set shiftwidth=4
+" Gvim
+set linespace=3
+set guifont=JetBrains_Mono:h13
+set guioptions -=m " Remove menubar
+set guioptions -=T " Remove toolbar
+set guioptions -=r " Remove right scrollbar
+set guioptions -=L " Remove left scrollbar
 " Set map leader <Space>
 let mapleader = " "
 " Navigation
@@ -61,11 +68,6 @@ nnoremap <silent> <leader>fk :Commands<CR>
 " Explore
 nnoremap <silent> <C-e> :Explore<CR>
 " Plugins
-let data_dir = has("nvim") ? stdpath("data") . "/site" : "~/.vim"
-if empty(glob(data_dir . "/autoload/plug.vim"))
-    silent execute "!curl -fLo ".data_dir."/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
 call plug#begin()
     Plug 'morhetz/gruvbox'
     Plug 'tpope/vim-repeat'
@@ -112,7 +114,7 @@ let g:ale_fixers = {
     \ "*": ["remove_trailing_lines", "trim_whitespace"]
     \ }
 let g:ale_linters = {
-    \ "cpp": ["ccls"],
+    \ "cpp": ["clangd"],
     \ "cs": ["OmniSharp"],
     \ "javascript": ["tsserver"],
     \ "typescript": ["tsserver"]
