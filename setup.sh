@@ -107,7 +107,7 @@ EOF'
 ###########################
 
 log_warning "[+] Install ibus-bamboo\n"
-install_pkg "ibus go gtk3 libx11 libxtst"
+install_pkg "ibus go gtk2 gtk3 libx11 libxtst"
 
 # Download ibus-bamboo
 run_cmd "git clone --depth 1 https://github.com/BambooEngine/ibus-bamboo" "Download ibus-bamboo"
@@ -131,43 +131,6 @@ CLUTTER_IM_MODULE=ibus
 GLFW_IM_MODULE=ibus
 EOF'
 
-##################################
-#### Install GTK & Icons Theme ###
-##################################
-
-log_warning "[+] Install theme\n"
-
-install_pkg "wget tar gtk2 gtk3 arc-gtk-theme arc-icon-theme"
-
-# Install cursor theme
-run_cmd "wget https://github.com/ful1e5/BreezeX_Cursor/releases/download/v2.0.0/BreezeX-Dark.tar.gz -O BreezeX-Dark.tar.gz" "Download cursor theme"
-mkdir -p $HOME/.icons
-run_cmd "tar -xf BreezeX-Dark.tar.gz -C $HOME/.icons" "Install cursor theme"
-rm -rf BreezeX-Dark.tar.gz
-
-# Config gtk2
-cat > $HOME/.gtkrc-2.0 <<EOF
-gtk-theme-name="Arc-Dark"
-gtk-icon-theme-name="Arc"
-gtk-cursor-theme-name="BreezeX-Dark"
-EOF
-
-# Config gtk3
-mkdir -p $HOME/.config/gtk-3.0
-cat > $HOME/.config/gtk-3.0/settings.ini <<EOF
-[Settings]
-gtk-theme-name=Arc-Dark
-gtk-icon-theme-name=Arc
-gtk-cursor-theme-name=BreezeX-Dark
-EOF
-
-# Config cursor
-mkdir -p $HOME/.icons/default
-cat > $HOME/.icons/default/index.theme <<EOF
-[Icon Theme]
-Inherits=BreezeX-Dark
-EOF
-
 #####################
 ### Set wallpaper ###
 #####################
@@ -176,10 +139,9 @@ log_warning "[+] Set wallpaper\n"
 
 install_pkg "feh"
 
-# Set wallpaper
 mkdir -p $HOME/.wallpapers
 cp wallpapers/gruvbox_spac.jpg $HOME/.wallpapers
-#feh --bg-fill wallpapers/gruvbox_spac.jpg
+# feh --bg-fill wallpapers/gruvbox_spac.jpg
 
 ########################
 ### Install software ###
@@ -191,21 +153,16 @@ log_warning "[+] Install software\n"
 install_pkg "noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-dejavu ttf-jetbrains-mono"
 
 # WebBrowser
-# install_pkg "chromium"
 run_cmd "scripts/install-brave.sh" "Install brave browser"
 
 # File explorer
-install_pkg "ranger gvfs thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman"
+install_pkg "ranger"
 
-# View video & image
-install_pkg "mpv yt-dlp viewnior"
+# Video
+install_pkg "mpv"
 
-# View pdf
-install_pkg "zathura zathura-pdf-mupdf"
-mkdir -p $HOME/.config/zathura
-cat > $HOME/.config/zathura/zathurarc <<EOF
-set selection-clipboard clipboard
-EOF
+# Image
+install_pkg "viewnior"
 
 # Screenshot
 install_pkg "flameshot"
@@ -222,12 +179,7 @@ cp configs/alacritty/alacritty.yml $HOME/.config/alacritty
 install_pkg "tmux"
 cp configs/tmux/.tmux.conf $HOME
 
-# Vim
-install_pkg "gvim npm xclip ripgrep"
-cp configs/vim/.vimrc $HOME
-
-# zsh
-install_pkg "zsh zsh-autosuggestions zsh-syntax-highlighting"
-cp configs/zsh/.zshrc $HOME
-cp configs/zsh/.zshenv $HOME
-chsh -s $(which zsh)
+# Neovim
+install_pkg "neovim xclip ripgrep"
+mkdir -p $HOME/.config/nvim
+cp configs/nvim/init.lua $HOME/.config/nvim
