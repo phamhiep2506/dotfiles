@@ -1,7 +1,7 @@
 -- Settings
 vim.opt.number = true
 vim.opt.mouse = "a"
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.writebackup = false

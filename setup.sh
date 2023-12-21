@@ -21,9 +21,9 @@ install_pkg() {
     log_warning "- Install packages $1..."
     sudo pacman --noconfirm --needed -S $1 >/dev/null 2>&1
     if [ $? -eq 0 ]; then
-        log_success "Ok\n"
+        log_success "OK\n"
     else
-        log_error "Error\n"
+        log_error "ERROR\n"
         exit 1
     fi
 }
@@ -33,9 +33,9 @@ run_cmd() {
     log_warning "- $2..."
     $1 >/dev/null 2>&1
     if [ $? -eq 0 ]; then
-        log_success "Ok\n"
+        log_success "OK\n"
     else
-        log_error "Error\n"
+        log_error "ERROR\n"
         exit 1
     fi
 }
@@ -60,6 +60,24 @@ rm -rf dwm
 
 # Fix screen brightness
 sudo usermod -a -G video $USER
+
+###################
+#### Install ST ###
+###################
+
+log_warning "[+] Install st\n"
+
+install_pkg "libxft"
+
+# Download dwm
+run_cmd "git clone --depth 1 https://github.com/phamhiep2506/st" "Download st"
+
+# Makefile
+cd st
+run_cmd "sudo make clean install" "Build st"
+cd ..
+
+rm -rf st
 
 #########################
 #### Install Slstatus ###
@@ -169,11 +187,6 @@ install_pkg "flameshot"
 
 # Network
 install_pkg "network-manager-applet"
-
-# Terminal
-install_pkg "alacritty"
-mkdir -p $HOME/.config/alacritty
-cp configs/alacritty/alacritty.yml $HOME/.config/alacritty
 
 # Tmux
 install_pkg "tmux"
