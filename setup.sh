@@ -171,7 +171,7 @@ log_warning "[+] Install software\n"
 install_pkg "noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-dejavu ttf-jetbrains-mono"
 
 # WebBrowser
-run_cmd "scripts/install-brave.sh" "Install brave browser"
+run_cmd "scripts/thorium.sh" "Install thorium browser"
 
 # File explorer
 install_pkg "ranger"
