@@ -1,7 +1,7 @@
 #!/bin/sh
 
+feh --bg-fill $HOME/.wallpapers/gruvbox_spac.jpg
 nm-applet &
-~/.fehbg &
-ibus-daemon -rxR &
+fcitx5 &
 slstatus &
 dwm

@@ -110,7 +110,10 @@ require("lazy").setup({
         "nvim-telescope/telescope.nvim",
         dependencies = {
             "nvim-lua/plenary.nvim"
-        }
+        },
+        config = function()
+            require("telescope").setup()
+        end
     },
     {
         "stevearc/oil.nvim",
@@ -140,7 +143,8 @@ require("lazy").setup({
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-vsnip",
-            "hrsh7th/vim-vsnip"
+            "hrsh7th/vim-vsnip",
+            "hrsh7th/cmp-nvim-lsp-signature-help"
         },
         config = function()
             local cmp = require("cmp")
@@ -158,9 +162,9 @@ require("lazy").setup({
                 }),
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
-                    { name = "vsnip" }
-                }, {
-                    { name = "buffer" }
+                    { name = "buffer" },
+                    { name = "vsnip" },
+                    { name = "nvim_lsp_signature_help" }
                 })
             })
         end

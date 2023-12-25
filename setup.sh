@@ -58,9 +58,6 @@ cd ..
 
 rm -rf dwm
 
-# Fix screen brightness
-sudo usermod -a -G video $USER
-
 ###################
 #### Install ST ###
 ###################
@@ -120,33 +117,21 @@ Section "InputClass"
 EndSection
 EOF'
 
-###########################
-### Install Ibus-bamboo ###
-###########################
+# Fix screen brightness
+sudo usermod -a -G video $USER
 
-log_warning "[+] Install ibus-bamboo\n"
-install_pkg "ibus go gtk2 gtk3 libx11 libxtst"
+######################
+### Install Fcitx5 ###
+######################
 
-# Download ibus-bamboo
-run_cmd "git clone --depth 1 https://github.com/BambooEngine/ibus-bamboo" "Download ibus-bamboo"
+log_warning "[+] Install fcitx5\n"
+install_pkg "fcitx5 fcitx5-gtk fcitx5-qt fcitx5-configtool fcitx5-unikey"
 
-# Build ibus-bamboo
-cd ibus-bamboo
-run_cmd "sudo make install" "Build ibus-bamboo"
-cd ..
-
-rm -rf ibus-bamboo
-
-# Config ibus
+# Config fcitx5
 sudo bash -c 'cat > /etc/environment <<EOF
-GTK_IM_MODULE=ibus
-QT_IM_MODULE=ibus
-XMODIFIERS=@im=ibus
-# Dành cho những phần mềm dựa trên qt4
-QT4_IM_MODULE=ibus
-# Dành cho những phần mềm dùng thư viện đồ họa clutter/OpenGL
-CLUTTER_IM_MODULE=ibus
-GLFW_IM_MODULE=ibus
+GTK_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
 EOF'
 
 #####################
@@ -159,7 +144,6 @@ install_pkg "feh"
 
 mkdir -p $HOME/.wallpapers
 cp wallpapers/gruvbox_spac.jpg $HOME/.wallpapers
-# feh --bg-fill wallpapers/gruvbox_spac.jpg
 
 ########################
 ### Install software ###
