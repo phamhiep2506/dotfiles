@@ -144,6 +144,7 @@ install_pkg "feh"
 
 mkdir -p $HOME/.wallpapers
 cp wallpapers/gruvbox_spac.jpg $HOME/.wallpapers
+cp wallpapers/arch_anime.png $HOME/.wallpapers
 
 ########################
 ### Install software ###

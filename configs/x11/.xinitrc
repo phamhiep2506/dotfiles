@@ -1,6 +1,6 @@
 #!/bin/sh
 
-feh --bg-fill $HOME/.wallpapers/gruvbox_spac.jpg
+feh --bg-fill $HOME/.wallpapers/arch_anime.png
 nm-applet &
 fcitx5 &
 slstatus &
