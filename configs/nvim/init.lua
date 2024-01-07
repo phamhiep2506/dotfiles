@@ -173,24 +173,17 @@ require("lazy").setup({
     },
     {
         "neovim/nvim-lspconfig",
+        dependencies = {
+            "williamboman/mason.nvim",
+            "williamboman/mason-lspconfig.nvim"
+        },
         config = function()
-            local lspconfig = require("lspconfig")
-            -- c,c++
-            lspconfig.clangd.setup({})
-            -- html,css
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities.textDocument.completion.completionItem.snippetSupport = true
-            lspconfig.html.setup({
-                capabilities = capabilities
-            })
-            lspconfig.cssls.setup({
-                capabilities = capabilities
-            })
-            -- js,ts
-            lspconfig.tsserver.setup({})
-            -- omnisharp
-            lspconfig.omnisharp.setup({
-                cmd = { "dotnet", vim.env.HOME .. "/omnisharp/OmniSharp.dll" }
+            require("mason").setup()
+            require("mason-lspconfig").setup()
+            require("mason-lspconfig").setup_handlers({
+                function(server_name)
+                    require("lspconfig")[server_name].setup({})
+                end
             })
         end
     }
