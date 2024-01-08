@@ -94,6 +94,7 @@ require("lazy").setup({
     "tpope/vim-surround",
     "tpope/vim-commentary",
     "easymotion/vim-easymotion",
+    "ntpeters/vim-better-whitespace",
     {
         "sainnhe/gruvbox-material",
         config = function()
