@@ -153,7 +153,7 @@ cp wallpapers/arch_anime.png $HOME/.wallpapers
 log_warning "[+] Install software\n"
 
 # Font
-install_pkg "noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-dejavu ttf-jetbrains-mono"
+install_pkg "noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-dejavu ttf-jetbrains-mono ttf-jetbrains-mono-nerd"
 
 # File explorer
 install_pkg "ranger"

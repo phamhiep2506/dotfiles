@@ -69,7 +69,7 @@ keymap("n", "<leader>ff", "<CMD>Telescope find_files theme=ivy<CR>", opts)
 keymap("n", "<leader>fb", "<CMD>Telescope buffers theme=ivy<CR>", opts)
 keymap("n", "<leader>fg", "<CMD>Telescope live_grep theme=ivy<CR>", opts)
 -- Explore
-keymap("n", "<C-e>", "<CMD>Oil<CR>", opts)
+keymap("n", "<C-n>", "<CMD>NvimTreeToggle<CR>", opts)
 -- Lsp
 keymap("n", "<leader>e", vim.diagnostic.open_float, opts)
 keymap("n", "]d", vim.diagnostic.goto_next, opts)
@@ -117,9 +117,9 @@ require("lazy").setup({
         end
     },
     {
-        "stevearc/oil.nvim",
+        "nvim-tree/nvim-tree.lua",
         config = function()
-            require("oil").setup()
+            require("nvim-tree").setup()
         end
     },
     {
