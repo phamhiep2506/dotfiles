@@ -2,7 +2,7 @@
 
 sudo pacman --noconfirm --needed -S wget unzip
 
-VERSION="119.0.6045.214"
+VERSION="120.0.6099.235"
 
 wget -q --show-progress https://github.com/Alex313031/thorium/releases/download/M$VERSION/thorium-browser_${VERSION}_amd64.zip -O $HOME/thorium-browser_${VERSION}_amd64.zip
 
