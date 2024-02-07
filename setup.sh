@@ -1,110 +1,32 @@
 #!/bin/sh
 
-RED="\033[0;31m"
-GREEN="\033[0;32m"
-YELLOW="\033[0;33m"
-NC="\033[0m"
-
-log_success() {
-    printf "${GREEN}$1${NC}"
-}
-
-log_error() {
-    printf "${RED}$1${NC}"
-}
-
-log_warning() {
-    printf "${YELLOW}$1${NC}"
-}
-
-install_pkg() {
-    log_warning "- Install packages $1..."
-    sudo pacman --noconfirm --needed -S $1 >/dev/null 2>&1
-    if [ $? -eq 0 ]; then
-        log_success "OK\n"
-    else
-        log_error "ERROR\n"
-        exit 1
-    fi
-}
-
-# run_cmd <command> <title>
-run_cmd() {
-    log_warning "- $2..."
-    $1 >/dev/null 2>&1
-    if [ $? -eq 0 ]; then
-        log_success "OK\n"
-    else
-        log_error "ERROR\n"
-        exit 1
-    fi
-}
-
-####################
-#### Install DWM ###
-####################
-
-log_warning "[+] Install dwm\n"
-
-install_pkg "base-devel libx11 libxinerama libxft freetype2 dmenu slock"
-
-# Download dwm
-run_cmd "git clone --depth 1 https://github.com/phamhiep2506/dwm" "Download dwm"
-
-# Makefile
+# DWM
+sudo pacman --noconfirm -S base-devel libx11 libxinerama libxft freetype2 dmenu slock
+git clone --depth 1 https://github.com/phamhiep2506/dwm
 cd dwm
-run_cmd "sudo make clean install" "Build dwm"
+sudo make clean install
 cd ..
-
 rm -rf dwm
 
-###################
-#### Install ST ###
-###################
-
-log_warning "[+] Install st\n"
-
-install_pkg "libxft"
-
-# Download dwm
-run_cmd "git clone --depth 1 https://github.com/phamhiep2506/st" "Download st"
-
-# Makefile
+# ST
+sudo pacman --noconfirm -S libxft
+git clone --depth 1 https://github.com/phamhiep2506/st
 cd st
-run_cmd "sudo make clean install" "Build st"
+sudo make clean install
 cd ..
-
 rm -rf st
 
-#########################
-#### Install Slstatus ###
-#########################
-
-log_warning "[+] Install slstatus\n"
-
-install_pkg "pamixer"
-
-# Download slstatus
-run_cmd "git clone --depth 1 https://github.com/phamhiep2506/slstatus" "Download slstatus"
-
-# Makefile
+# Slstatus
+sudo pacman --noconfirm -S pamixer
+git clone --depth 1 https://github.com/phamhiep2506/slstatus
 cd slstatus
-run_cmd "sudo make clean install" "Build slstatus"
+sudo make clean install
 cd ..
-
 rm -rf slstatus
 
-#####################
-#### Install Xorg ###
-#####################
-
-log_warning "[+] Install xorg\n"
-
-install_pkg "xorg xorg-xinit light"
-
-# Config .xinitrc
+# Xorg
+sudo pacman --noconfirm -S xorg xorg-xinit light
 cp configs/x11/.xinitrc $HOME
-
 # Fix touchpad
 sudo bash -c 'cat > /etc/X11/xorg.conf.d/30-touchpad.conf <<EOF
 Section "InputClass"
@@ -116,65 +38,45 @@ Section "InputClass"
     Option "NaturalScrolling" "true"
 EndSection
 EOF'
-
 # Fix screen brightness
 sudo usermod -a -G video $USER
 
-######################
-### Install Fcitx5 ###
-######################
-
-log_warning "[+] Install fcitx5\n"
-install_pkg "fcitx5 fcitx5-gtk fcitx5-qt fcitx5-configtool fcitx5-unikey"
-
-# Config fcitx5
+# Fcitx5
+sudo pacman --noconfirm -S fcitx5 fcitx5-gtk fcitx5-qt fcitx5-configtool fcitx5-unikey
 sudo bash -c 'cat > /etc/environment <<EOF
 GTK_IM_MODULE=fcitx
 QT_IM_MODULE=fcitx
 XMODIFIERS=@im=fcitx
 EOF'
 
-#####################
-### Set wallpaper ###
-#####################
-
-log_warning "[+] Set wallpaper\n"
-
-install_pkg "feh"
-
+# Wallpaper
+sudo pacman --noconfirm -S feh
 mkdir -p $HOME/.wallpapers
 cp wallpapers/gruvbox_spac.jpg $HOME/.wallpapers
-cp wallpapers/arch_anime.png $HOME/.wallpapers
-
-########################
-### Install software ###
-########################
-
-log_warning "[+] Install software\n"
 
 # Font
-install_pkg "noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-dejavu ttf-jetbrains-mono ttf-jetbrains-mono-nerd"
+sudo pacman --noconfirm -S noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-dejavu ttf-jetbrains-mono ttf-jetbrains-mono-nerd
 
 # File explorer
-install_pkg "ranger"
+sudo pacman --noconfirm -S ranger
 
 # Video
-install_pkg "mpv"
+sudo pacman --noconfirm -S mpv
 
 # Image
-install_pkg "viewnior"
+sudo pacman --noconfirm -S viewnior
 
 # Screenshot
-install_pkg "flameshot"
+sudo pacman --noconfirm -S flameshot
 
 # Network
-install_pkg "network-manager-applet"
+sudo pacman --noconfirm -S network-manager-applet
 
 # Tmux
-install_pkg "tmux"
+sudo pacman --noconfirm -S tmux
 cp configs/tmux/.tmux.conf $HOME
 
 # Neovim
-install_pkg "neovim xclip ripgrep"
+sudo pacman --noconfirm -S neovim xclip ripgrep
 mkdir -p $HOME/.config/nvim
 cp configs/nvim/init.lua $HOME/.config/nvim
