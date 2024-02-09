@@ -69,9 +69,6 @@ sudo pacman --noconfirm -S viewnior
 # Screenshot
 sudo pacman --noconfirm -S flameshot
 
-# Network
-sudo pacman --noconfirm -S network-manager-applet
-
 # Tmux
 sudo pacman --noconfirm -S tmux
 cp configs/tmux/.tmux.conf $HOME
