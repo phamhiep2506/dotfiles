@@ -49,10 +49,11 @@ QT_IM_MODULE=fcitx
 XMODIFIERS=@im=fcitx
 EOF'
 
+# Picom
+sudo pacman --noconfirm -S picom
+
 # Wallpaper
 sudo pacman --noconfirm -S feh
-mkdir -p $HOME/.wallpapers
-cp wallpapers/gruvbox_spac.jpg $HOME/.wallpapers
 
 # Font
 sudo pacman --noconfirm -S noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-dejavu ttf-jetbrains-mono ttf-jetbrains-mono-nerd

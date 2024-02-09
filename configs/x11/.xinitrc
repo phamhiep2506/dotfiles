@@ -1,6 +1,7 @@
 #!/bin/sh
 
-feh --bg-fill $HOME/.wallpapers/gruvbox_spac.jpg
+~/.fehbg &
 fcitx5 &
 slstatus &
+picom &
 dwm

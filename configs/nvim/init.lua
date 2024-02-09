@@ -102,6 +102,7 @@ require("lazy").setup({
             vim.g.gruvbox_material_background = "hard"
             vim.g.gruvbox_material_visual = "reverse"
             vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
+            vim.g.gruvbox_material_transparent_background = 1
             vim.cmd("colorscheme gruvbox-material")
             vim.api.nvim_set_hl(0, "CursorLine", {})
             vim.api.nvim_set_hl(0, "CursorLineNR", { bg = NONE, fg = "#fabd2f", bold = true })
