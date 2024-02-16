@@ -74,7 +74,6 @@ sudo pacman --noconfirm -S flameshot
 sudo pacman --noconfirm -S tmux
 cp configs/tmux/.tmux.conf $HOME
 
-# Neovim
-sudo pacman --noconfirm -S neovim xclip ripgrep
-mkdir -p $HOME/.config/nvim
-cp configs/nvim/init.lua $HOME/.config/nvim
+# Vim
+sudo pacman --noconfirm -S gvim xclip ripgrep
+cp configs/vim/.vimrc $HOME
