@@ -8,14 +8,6 @@ sudo make clean install
 cd ..
 rm -rf dwm
 
-# ST
-sudo pacman --noconfirm -S libxft
-git clone --depth 1 https://github.com/phamhiep2506/st
-cd st
-sudo make clean install
-cd ..
-rm -rf st
-
 # Slstatus
 sudo pacman --noconfirm -S pamixer
 git clone --depth 1 https://github.com/phamhiep2506/slstatus
@@ -69,6 +61,10 @@ sudo pacman --noconfirm -S viewnior
 
 # Screenshot
 sudo pacman --noconfirm -S flameshot
+
+# Terminal
+sudo pacman --noconfirm -S alacritty
+cp -a configs/alacritty $HOME/.config
 
 # Tmux
 sudo pacman --noconfirm -S tmux

@@ -29,7 +29,7 @@ endif
 if !isdirectory($HOME.'/.vim/undo')
     call mkdir($HOME.'/.vim/undo', '', 0700)
 endif
-set undodir=$HOME/.vim/undo 
+set undodir=$HOME/.vim/undo
 " Map leader <Space>
 let mapleader=' '
 " Navigation
@@ -85,12 +85,13 @@ call plug#begin()
     Plug 'airblade/vim-gitgutter'
     Plug 'easymotion/vim-easymotion'
     Plug 'sheerun/vim-polyglot'
+    Plug 'ntpeters/vim-better-whitespace'
     Plug 'editorconfig/editorconfig-vim'
     Plug 'mattn/emmet-vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    Plug 'dense-analysis/ale'
     Plug 'OmniSharp/omnisharp-vim'
+    Plug 'dense-analysis/ale'
     Plug 'prabirshrestha/asyncomplete.vim'
 call plug#end()
 " Gruvbox
@@ -100,8 +101,10 @@ let g:gruvbox_material_visual = 'reverse'
 let g:gruvbox_material_diagnostic_virtual_text = 'colored'
 let g:gruvbox_material_transparent_background = '1'
 colorscheme gruvbox-material
-highlight CursorLine guibg=NONE ctermbg=NONE
-highlight CursorLineNR gui=bold guibg=NONE guifg=#fabd2f
+highlight CursorLine ctermbg=NONE guibg=NONE
+highlight CursorLineNR guifg=#fabd2f
+" Fzf
+let g:fzf_layout = { 'down': '40%' }
 " Ale
 let g:ale_linters_explicit = 1
 let g:ale_typescript_tsserver_use_global = 1
@@ -110,11 +113,11 @@ let g:ale_linters = {
     \ 'typescript': ['tsserver'],
     \ 'c': ['clangd'],
     \ 'cpp': ['clangd'],
-    \ 'cs': ['OmniSharp']
+    \ 'cs': ['OmniSharp'],
     \ }
+" OmniSharp
+let g:OmniSharp_server_use_net6 = 1
 " Asyncomplete
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ale#get_source_options({
     \ 'priority': 10
     \ }))
-" OmniSharp
-let g:OmniSharp_server_use_net6 = 1
