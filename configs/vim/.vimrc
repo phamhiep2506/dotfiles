@@ -91,6 +91,7 @@ call plug#begin()
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'OmniSharp/omnisharp-vim'
+    Plug 'hsanson/vim-android'
     Plug 'dense-analysis/ale'
     Plug 'prabirshrestha/asyncomplete.vim'
 call plug#end()
@@ -108,15 +109,19 @@ let g:fzf_layout = { 'down': '40%' }
 " Ale
 let g:ale_linters_explicit = 1
 let g:ale_typescript_tsserver_use_global = 1
+let g:ale_java_javalsp_executable= '/home/phamhiep/.java-language-server/dist/lang_server_linux.sh'
 let g:ale_linters = {
-    \ 'javascript': ['tsserver'],
-    \ 'typescript': ['tsserver'],
-    \ 'c': ['clangd'],
-    \ 'cpp': ['clangd'],
+    \ 'c': ['ccls'],
+    \ 'cpp': ['ccls'],
     \ 'cs': ['OmniSharp'],
+    \ 'java': ['javalsp'],
+    \ 'javascript': ['tsserver'],
+    \ 'typescript': ['tsserver']
     \ }
 " OmniSharp
 let g:OmniSharp_server_use_net6 = 1
+" Android
+let g:android_sdk_path = '/home/phamhiep/.android_sdk'
 " Asyncomplete
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ale#get_source_options({
     \ 'priority': 10
