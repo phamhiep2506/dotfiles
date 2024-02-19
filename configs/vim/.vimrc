@@ -110,19 +110,27 @@ let g:fzf_layout = { 'down': '40%' }
 let g:ale_linters_explicit = 1
 let g:ale_typescript_tsserver_use_global = 1
 let g:ale_java_javalsp_executable= '/home/phamhiep/.java-language-server/dist/lang_server_linux.sh'
+let g:ale_java_javalsp_config = {
+    \    'java': {
+    \        'externalDependencies' : [],
+    \        'classPath': [
+    \            $ANDROID_HOME.'/platforms/android-34/android.jar'
+    \        ]
+    \    }
+    \ }
 let g:ale_linters = {
-    \ 'c': ['ccls'],
-    \ 'cpp': ['ccls'],
-    \ 'cs': ['OmniSharp'],
-    \ 'java': ['javalsp'],
-    \ 'javascript': ['tsserver'],
-    \ 'typescript': ['tsserver']
+    \    'c': ['ccls'],
+    \    'cpp': ['ccls'],
+    \    'cs': ['OmniSharp'],
+    \    'java': ['javalsp'],
+    \    'javascript': ['tsserver'],
+    \    'typescript': ['tsserver']
     \ }
 " OmniSharp
 let g:OmniSharp_server_use_net6 = 1
 " Android
-let g:android_sdk_path = '/home/phamhiep/.android_sdk'
+let g:android_sdk_path = $ANDROID_HOME
 " Asyncomplete
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ale#get_source_options({
-    \ 'priority': 10
+    \    'priority': 10
     \ }))
