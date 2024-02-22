@@ -110,14 +110,6 @@ let g:fzf_layout = { 'down': '40%' }
 let g:ale_linters_explicit = 1
 let g:ale_typescript_tsserver_use_global = 1
 let g:ale_java_javalsp_executable= '/home/phamhiep/.java-language-server/dist/lang_server_linux.sh'
-let g:ale_java_javalsp_config = {
-    \    'java': {
-    \        'externalDependencies' : [],
-    \        'classPath': [
-    \            $ANDROID_HOME.'/platforms/android-34/android.jar'
-    \        ]
-    \    }
-    \ }
 let g:ale_linters = {
     \    'c': ['ccls'],
     \    'cpp': ['ccls'],
