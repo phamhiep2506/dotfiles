@@ -68,7 +68,7 @@ nmap <leader>ff <CMD>Files<CR>
 nmap <leader>fb <CMD>Buffers<CR>
 nmap <leader>fg <CMD>Rg<CR>
 " Explore
-nmap <C-n> <CMD>Explore<CR>
+nmap <C-n> <CMD>NERDTreeToggle<CR>
 " vim-plug
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
@@ -78,10 +78,10 @@ endif
 call plug#begin()
     Plug 'sainnhe/gruvbox-material'
     Plug 'tpope/vim-repeat'
-    Plug 'tpope/vim-vinegar'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-sensible'
+    Plug 'preservim/nerdtree'
     Plug 'airblade/vim-gitgutter'
     Plug 'easymotion/vim-easymotion'
     Plug 'sheerun/vim-polyglot'
@@ -104,6 +104,8 @@ let g:gruvbox_material_transparent_background = '1'
 colorscheme gruvbox-material
 highlight CursorLine ctermbg=NONE guibg=NONE
 highlight CursorLineNR guifg=#fabd2f
+" NerdTree
+let g:NERDTreeMinimalUI = 1
 " Fzf
 let g:fzf_layout = { 'down': '40%' }
 " Ale
