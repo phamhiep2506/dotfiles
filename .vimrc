@@ -81,6 +81,7 @@ call plug#begin()
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-sensible'
+    Plug 'tpope/vim-fugitive'
     Plug 'preservim/nerdtree'
     Plug 'airblade/vim-gitgutter'
     Plug 'easymotion/vim-easymotion'
