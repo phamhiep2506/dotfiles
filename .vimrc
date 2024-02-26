@@ -114,8 +114,8 @@ let g:ale_linters_explicit = 1
 let g:ale_typescript_tsserver_use_global = 1
 let g:ale_java_javalsp_executable= $HOME.'/.vim/java-language-server/dist/lang_server_linux.sh'
 let g:ale_linters = {
-    \    'c': ['ccls'],
-    \    'cpp': ['ccls'],
+    \    'c': ['clangd'],
+    \    'cpp': ['clangd'],
     \    'cs': ['OmniSharp'],
     \    'java': ['javalsp'],
     \    'javascript': ['tsserver'],
