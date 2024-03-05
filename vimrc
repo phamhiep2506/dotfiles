@@ -10,6 +10,11 @@ set clipboard=
 set signcolumn=auto
 set background=dark
 set termguicolors
+set guioptions-=m "Remove menu bar
+set guioptions-=T "Remove toolbar
+set guioptions-=r "Remove right-hand scroll bar
+set guioptions-=L "Remove left-hand scroll bar
+set guifont=JetBrains_Mono:h12
 " Search
 set hlsearch
 set ignorecase
@@ -70,11 +75,6 @@ nmap <leader>fg <CMD>Rg<CR>
 " Explore
 nmap <C-n> <CMD>NERDTreeToggle<CR>
 " vim-plug
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
 call plug#begin()
     Plug 'sainnhe/gruvbox-material'
     Plug 'tpope/vim-repeat'
@@ -101,7 +101,6 @@ let g:gruvbox_material_foreground = 'original'
 let g:gruvbox_material_background = 'hard'
 let g:gruvbox_material_visual = 'reverse'
 let g:gruvbox_material_diagnostic_virtual_text = 'colored'
-let g:gruvbox_material_transparent_background = '1'
 colorscheme gruvbox-material
 highlight CursorLine ctermbg=NONE guibg=NONE
 highlight CursorLineNR guifg=#fabd2f
@@ -112,7 +111,7 @@ let g:fzf_layout = { 'down': '40%' }
 " Ale
 let g:ale_linters_explicit = 1
 let g:ale_typescript_tsserver_use_global = 1
-let g:ale_java_javalsp_executable= $HOME.'/.vim/java-language-server/dist/lang_server_linux.sh'
+let g:ale_java_javalsp_executable= $HOME.'/.vim/java-language-server/dist/lang_server_windows.sh'
 let g:ale_linters = {
     \    'c': ['clangd'],
     \    'cpp': ['clangd'],

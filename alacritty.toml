@@ -1,10 +1,13 @@
 live_config_reload = true
 
+[shell]
+program = "C:\\Users\\Administrator\\w64devkit\\w64devkit.exe"
+
 [env]
 TERM = "xterm-256color"
 
 [window]
-opacity = 0.9
+opacity = 1.0
 
 [font]
 normal = { family = "JetBrains Mono", style = "Regular" }
@@ -44,5 +47,4 @@ bindings = [
     { key = "=", mods = "Control", action = "IncreaseFontSize" },
     { key = "-", mods = "Control", action = "DecreaseFontSize" },
     { key = "0", mods = "Control", action = "ResetFontSize" },
-    { key = "F11", action = "ToggleFullscreen" },
 ]
