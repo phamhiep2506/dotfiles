@@ -95,6 +95,7 @@ call plug#begin()
     Plug 'hsanson/vim-android'
     Plug 'dense-analysis/ale'
     Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'puremourning/vimspector'
 call plug#end()
 " Gruvbox
 let g:gruvbox_material_foreground = 'original'
