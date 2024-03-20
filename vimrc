@@ -15,6 +15,8 @@ set guioptions-=T "Remove toolbar
 set guioptions-=r "Remove right-hand scroll bar
 set guioptions-=L "Remove left-hand scroll bar
 set guifont=JetBrains_Mono:h12
+" Disable cursor blink
+set guicursor+=a:blinkon0
 " Search
 set hlsearch
 set ignorecase
@@ -105,6 +107,7 @@ let g:gruvbox_material_diagnostic_virtual_text = 'colored'
 colorscheme gruvbox-material
 highlight CursorLine ctermbg=NONE guibg=NONE
 highlight CursorLineNR guifg=#fabd2f
+highlight Cursor guifg=orange guibg=black
 " NerdTree
 let g:NERDTreeMinimalUI = 1
 " Fzf
