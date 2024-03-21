@@ -28,6 +28,8 @@ set autoindent
 set expandtab
 set tabstop=4
 set shiftwidth=4
+" Removes white space
+autocmd BufWritePre * :%s/\s\+$//e
 " Undo
 set undofile
 if !isdirectory($HOME.'/.vim')
@@ -64,7 +66,6 @@ vmap < <gv
 nmap <leader>_ <CMD>split<CR>
 nmap <leader>\| <CMD>vsplit<CR>
 " Copy & Paste
-imap <C-v> <C-r>*
 nmap <leader>p "+p
 vmap <leader>p "+p
 vmap <leader>y "+y
@@ -84,11 +85,11 @@ call plug#begin()
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-sensible'
     Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-dadbod'
     Plug 'preservim/nerdtree'
     Plug 'airblade/vim-gitgutter'
     Plug 'easymotion/vim-easymotion'
     Plug 'sheerun/vim-polyglot'
-    Plug 'ntpeters/vim-better-whitespace'
     Plug 'editorconfig/editorconfig-vim'
     Plug 'mattn/emmet-vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -106,8 +107,8 @@ let g:gruvbox_material_visual = 'reverse'
 let g:gruvbox_material_diagnostic_virtual_text = 'colored'
 colorscheme gruvbox-material
 highlight CursorLine ctermbg=NONE guibg=NONE
-highlight CursorLineNR guifg=#fabd2f
-highlight Cursor guifg=orange guibg=black
+highlight CursorLineNR guifg=Orange
+highlight Cursor guifg=Orange guibg=Black
 " NerdTree
 let g:NERDTreeMinimalUI = 1
 " Fzf
