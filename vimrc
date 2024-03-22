@@ -10,13 +10,12 @@ set clipboard=
 set signcolumn=auto
 set background=dark
 set termguicolors
-set guioptions-=m "Remove menu bar
-set guioptions-=T "Remove toolbar
-set guioptions-=r "Remove right-hand scroll bar
-set guioptions-=L "Remove left-hand scroll bar
+set guioptions-=m " Remove menu bar
+set guioptions-=T " Remove toolbar
+set guioptions-=r " Remove right-hand scroll bar
+set guioptions-=L " Remove left-hand scroll bar
 set guifont=JetBrains_Mono:h12
-" Disable cursor blink
-set guicursor+=a:blinkon0
+set guicursor+=a:blinkon0 " Disable cursor blink
 " Search
 set hlsearch
 set ignorecase
@@ -79,8 +78,6 @@ nmap <leader>fg <CMD>Rg<CR>
 nmap <C-n> <CMD>NERDTreeToggle<CR>
 " Database query
 vmap <expr> <C-q> db#op_exec()
-" Vrc
-nmap <leader>rc <CMD>call VrcQuery()<CR>
 " vim-plug
 call plug#begin()
     Plug 'sainnhe/gruvbox-material'
@@ -94,7 +91,6 @@ call plug#begin()
     Plug 'airblade/vim-gitgutter'
     Plug 'easymotion/vim-easymotion'
     Plug 'sheerun/vim-polyglot'
-    Plug 'diepm/vim-rest-console'
     Plug 'editorconfig/editorconfig-vim'
     Plug 'mattn/emmet-vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -136,9 +132,6 @@ let g:ale_linters = {
 let g:OmniSharp_server_use_net6 = 1
 " Android
 let g:android_sdk_path = $ANDROID_HOME
-" Vrc
-let g:vrc_set_default_mapping = 0
-let g:vrc_show_command = 1
 " Asyncomplete
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ale#get_source_options({
     \    'priority': 10
