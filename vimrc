@@ -77,6 +77,8 @@ nmap <leader>fb <CMD>Buffers<CR>
 nmap <leader>fg <CMD>Rg<CR>
 " Explore
 nmap <C-n> <CMD>NERDTreeToggle<CR>
+" Database query
+vmap <expr> <C-q> db#op_exec()
 " vim-plug
 call plug#begin()
     Plug 'sainnhe/gruvbox-material'
