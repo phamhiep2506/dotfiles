@@ -86,6 +86,7 @@ call plug#begin()
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-sensible'
     Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-rhubarb'
     Plug 'tpope/vim-dadbod'
     Plug 'preservim/nerdtree'
     Plug 'airblade/vim-gitgutter'
