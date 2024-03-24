@@ -100,6 +100,7 @@ call plug#begin()
     Plug 'hsanson/vim-android'
     Plug 'dense-analysis/ale'
     Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-file.vim'
     Plug 'puremourning/vimspector'
 call plug#end()
 " Gruvbox
@@ -136,4 +137,10 @@ let g:android_sdk_path = $ANDROID_HOME
 " Asyncomplete
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ale#get_source_options({
     \    'priority': 10
+    \ }))
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+    \    'name': 'file',
+    \    'allowlist': ['*'],
+    \    'priority': 10,
+    \    'completor': function('asyncomplete#sources#file#completor')
     \ }))
