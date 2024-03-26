@@ -121,6 +121,29 @@ require("lazy").setup({
     end
   },
   {
+    -- Buffer bar
+    "akinsho/bufferline.nvim",
+    config = function()
+      require("bufferline").setup({
+        options = {
+          offsets = {
+            {
+              filetype = "NvimTree",
+              text = "File Explorer",
+              text_align = "center",
+              separator = true
+            }
+          }
+        }
+      })
+      vim.keymap.set("n", "<A-,>", "<CMD>BufferLineCyclePrev<CR>")
+      vim.keymap.set("n", "<A-.>", "<CMD>BufferLineCycleNext<CR>")
+      vim.keymap.set("n", "<A-<>", "<CMD>BufferLineMovePrev<CR>")
+      vim.keymap.set("n", "<A->>", "<CMD>BufferLineMoveNext<CR>")
+      vim.keymap.set("n", "<A-c>", "<CMD>BufferLinePickClose<CR>")
+    end
+  },
+  {
     -- Search
     "nvim-telescope/telescope.nvim",
     dependencies = {
@@ -131,6 +154,7 @@ require("lazy").setup({
       vim.keymap.set("n", "<leader>ff", "<CMD>Telescope find_files<CR>")
       vim.keymap.set("n", "<leader>fg", "<CMD>Telescope live_grep<CR>")
       vim.keymap.set("n", "<leader>fb", "<CMD>Telescope buffers<CR>")
+      vim.keymap.set("n", "<leader>fc", "<CMD>Telescope commands<CR>")
     end
   },
   {
