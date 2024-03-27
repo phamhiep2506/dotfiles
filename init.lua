@@ -82,12 +82,22 @@ require("lazy").setup({
   "tpope/vim-sleuth",
   -- Commnet
   "tpope/vim-commentary",
+  -- Env
+  "tpope/vim-dotenv",
   -- Git
   "tpope/vim-fugitive",
   -- Move motion
   "easymotion/vim-easymotion",
   -- Emmet
   "mattn/emmet-vim",
+  {
+    -- Call rest api
+    "diepm/vim-rest-console",
+    config = function()
+      vim.g.vrc_set_default_mapping = 0
+      vim.keymap.set("n", "<leader>rc", "<CMD>call VrcQuery()<CR>");
+    end
+  },
   {
     -- Database
     "tpope/vim-dadbod",
@@ -162,7 +172,8 @@ require("lazy").setup({
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-vsnip",
-      "hrsh7th/vim-vsnip"
+      "hrsh7th/vim-vsnip",
+      "hrsh7th/cmp-nvim-lsp-signature-help"
     },
     config = function()
       local cmp = require("cmp")
@@ -186,7 +197,8 @@ require("lazy").setup({
           { name = "nvim_lsp" },
           { name = "buffer" },
           { name = "path" },
-          { name = "vsnip" }
+          { name = "vsnip" },
+          { name = "nvim_lsp_signature_help" }
         })
       })
     end
