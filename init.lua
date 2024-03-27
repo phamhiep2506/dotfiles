@@ -50,6 +50,8 @@ vim.keymap.set("v", "<leader>p", '"+p')
 vim.keymap.set("v", "<leader>y", '"+y')
 -- Disable highlight search
 vim.keymap.set("n", "<ESC>", "<CMD>nohlsearch<CR>")
+-- Exit normal mode terminal
+vim.keymap.set("t", "<ESC><ESC>", "<C-\\><C-n>")
 -- Removes white space
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = "*",
@@ -121,30 +123,7 @@ require("lazy").setup({
     end
   },
   {
-    -- Buffer bar
-    "akinsho/bufferline.nvim",
-    config = function()
-      require("bufferline").setup({
-        options = {
-          offsets = {
-            {
-              filetype = "NvimTree",
-              text = "File Explorer",
-              text_align = "center",
-              separator = true
-            }
-          }
-        }
-      })
-      vim.keymap.set("n", "<A-,>", "<CMD>BufferLineCyclePrev<CR>")
-      vim.keymap.set("n", "<A-.>", "<CMD>BufferLineCycleNext<CR>")
-      vim.keymap.set("n", "<A-<>", "<CMD>BufferLineMovePrev<CR>")
-      vim.keymap.set("n", "<A->>", "<CMD>BufferLineMoveNext<CR>")
-      vim.keymap.set("n", "<A-c>", "<CMD>BufferLinePickClose<CR>")
-    end
-  },
-  {
-    -- Search
+    -- Fuzzy file
     "nvim-telescope/telescope.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim"
@@ -179,12 +158,11 @@ require("lazy").setup({
     -- Complete
     "hrsh7th/nvim-cmp",
     dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-vsnip",
-      "hrsh7th/vim-vsnip",
-      "hrsh7th/cmp-nvim-lsp-signature-help"
+      "hrsh7th/vim-vsnip"
     },
     config = function()
       local cmp = require("cmp")
@@ -208,8 +186,7 @@ require("lazy").setup({
           { name = "nvim_lsp" },
           { name = "buffer" },
           { name = "path" },
-          { name = "vsnip" },
-          { name = "nvim_lsp_signature_help" }
+          { name = "vsnip" }
         })
       })
     end
@@ -255,13 +232,10 @@ require("lazy").setup({
           vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
           -- Buffer map
           local opts = { buffer = ev.buf }
-          vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
           vim.keymap.set("n", "<leader>h", vim.lsp.buf.hover, opts)
           vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
           vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-          vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
-          vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
           vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
           vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
           vim.keymap.set("n", "<leader>fm", function()
@@ -297,6 +271,8 @@ require("lazy").setup({
           end
         }
       }
+      -- Keymap
+      vim.keymap.set("n", "<leader>dui", function() require("dapui").toggle() end)
     end
   }
 })
