@@ -89,6 +89,14 @@ require("lazy").setup({
   -- Emmet
   "mattn/emmet-vim",
   {
+    -- Call rest api
+    "diepm/vim-rest-console",
+    config = function()
+      vim.g.vrc_set_default_mapping = 0
+      vim.keymap.set("n", "<leader>rc", "<CMD>call VrcQuery()<CR>");
+    end
+  },
+  {
     -- Database
     "tpope/vim-dadbod",
     config = function()
