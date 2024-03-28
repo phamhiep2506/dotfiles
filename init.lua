@@ -118,6 +118,7 @@ require("lazy").setup({
       vim.cmd("colorscheme gruvbox-material")
       vim.api.nvim_set_hl(0, "CursorLine", { fg = "none", bg = "none" })
       vim.api.nvim_set_hl(0, "CursorLineNR", { fg = "orange", bold = true })
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
       vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
     end
   },
@@ -217,12 +218,19 @@ require("lazy").setup({
       local handlers = {
         -- Auto start lsp
         function(server_name)
-          require("lspconfig")[server_name].setup({})
+          require("lspconfig")[server_name].setup({
+            handlers = {
+              ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+              ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+            }
+          })
         end,
         -- Custom lsp omnisharp
         ["omnisharp"] = function()
           require("lspconfig").omnisharp.setup({
             handlers = {
+              ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+              ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
               ["textDocument/definition"] = require("omnisharp_extended").definition_handler,
               ["textDocument/references"] = require("omnisharp_extended").references_handler,
               ["textDocument/implementation"] = require("omnisharp_extended").implementation_handler
