@@ -95,6 +95,7 @@ require("lazy").setup({
     "diepm/vim-rest-console",
     config = function()
       vim.g.vrc_set_default_mapping = 0
+      vim.g.vrc_show_command = 1
       vim.keymap.set("n", "<leader>rc", "<CMD>call VrcQuery()<CR>");
     end
   },
@@ -115,6 +116,11 @@ require("lazy").setup({
       vim.g.gruvbox_material_background  = "hard"
       vim.g.gruvbox_material_visual = "reverse"
       vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
+      vim.g.gruvbox_material_enable_bold = 1
+      vim.g.gruvbox_material_enable_italic = 1
+      vim.g.gruvbox_material_diagnostic_text_highlight = 1
+      vim.g.gruvbox_material_diagnostic_line_highlight = 1
+      vim.g.gruvbox_material_better_performance = 1
       vim.cmd("colorscheme gruvbox-material")
       vim.api.nvim_set_hl(0, "CursorLine", { fg = "none", bg = "none" })
       vim.api.nvim_set_hl(0, "CursorLineNR", { fg = "orange", bold = true })
@@ -239,6 +245,12 @@ require("lazy").setup({
         end
       }
       require("mason-lspconfig").setup_handlers(handlers)
+      -- Diagnostic border
+      vim.diagnostic.config({
+        float = {
+          border = "rounded"
+        }
+      })
       -- Keymap
       vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
       vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
@@ -278,7 +290,7 @@ require("lazy").setup({
       -- C#
       dap.adapters.coreclr = {
         type = "executable",
-        command = vim.fn.stdpath("data") .. "/mason/packages/netcoredbg/netcoredbg/netcoredbg",
+        command = vim.fn.stdpath("data") .. "/mason/packages/netcoredbg/netcoredbg",
         args = { "--interpreter=vscode" }
       }
       dap.configurations.cs = {

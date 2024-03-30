@@ -11,10 +11,10 @@ normal = { family = "JetBrains Mono", style = "Regular" }
 bold = { family = "JetBrains Mono", style = "Bold" }
 italic = { family = "JetBrains Mono", style = "Italic" }
 bold_italic = { family = "JetBrains Mono", style = "Bold Italic" }
-size = 13
+size = 12
 
 [colors.primary]
-background = "#282828"
+background = "#1d2021"
 foreground = "#ebdbb2"
 
 [colors.normal]
