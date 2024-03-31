@@ -91,15 +91,6 @@ require("lazy").setup({
   -- Emmet
   "mattn/emmet-vim",
   {
-    -- Call rest api
-    "diepm/vim-rest-console",
-    config = function()
-      vim.g.vrc_set_default_mapping = 0
-      vim.g.vrc_show_command = 1
-      vim.keymap.set("n", "<leader>rc", "<CMD>call VrcQuery()<CR>");
-    end
-  },
-  {
     -- Database
     "tpope/vim-dadbod",
     config = function()
@@ -260,8 +251,6 @@ require("lazy").setup({
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
-          -- Enable completion triggered by <c-x><c-o>
-          vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
           -- Buffer map
           local opts = { buffer = ev.buf }
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
