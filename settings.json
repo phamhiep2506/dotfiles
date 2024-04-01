@@ -1,0 +1,118 @@
+{
+    // disable welcome
+    "workbench.startupEditor": "none",
+    // colorscheme
+    "workbench.colorTheme": "Gruvbox Dark Hard",
+    // editor
+    "editor.minimap.enabled": false,
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.scrollbar.vertical": "hidden",
+    "editor.fontFamily": "JetBrains Mono",
+    "editor.fontSize": 15,
+    // window
+    "window.menuBarVisibility": "hidden",
+    "editor.renderLineHighlight": "gutter",
+    // vim
+    "vim.leader": "<space>",
+    "vim.easymotion": true,
+    "vim.useCtrlKeys": true,
+    "vim.incsearch": true,
+    "vim.hlsearch": true,
+    "vim.useSystemClipboard": false,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        // fuzzy file
+        {
+            "before": ["<leader>", "f", "f"],
+            "commands": ["workbench.action.quickOpen"]
+        },
+        {
+            "before": ["<leader>", "f", "b"],
+            "commands": [":ls"]
+        },
+        // toggle activity bar
+        {
+            "before": ["<C-a>"],
+            "commands": ["workbench.action.toggleActivityBarVisibility"]
+        },
+        // toggle side bar
+        {
+            "before": ["<C-n>"],
+            "commands": ["workbench.action.toggleSidebarVisibility"]
+        },
+        // navigation
+        {
+            "before": ["<C-h>"],
+            "after": ["<C-w>", "h"]
+        },
+        {
+            "before": ["<C-j>"],
+            "after": ["<C-w>", "j"]
+        },
+        {
+            "before": ["<C-k>"],
+            "after": ["<C-w>", "k"]
+        },
+        {
+            "before": ["<C-l>"],
+            "after": ["<C-w>", "l"]
+        },
+        // jump
+        {
+            "before": ["j"],
+            "after": ["j", "z", "z"]
+        },
+        {
+            "before": ["k"],
+            "after": ["k", "z", "z"]
+        },
+        // search
+        {
+            "before": ["<ESC>"],
+            "commands": [":nohlsearch"]
+        },
+        {
+            "before": ["n"],
+            "after": ["n", "z", "z"]
+        },
+        {
+            "before": ["N"],
+            "after": ["N", "z", "z"]
+        },
+        // paste
+        {
+            "before": ["<leader>", "p"],
+            "after": ["\"", "+", "p"]
+        },
+        // split
+        {
+            "before": ["<leader>", "_"],
+            "commands": [":split"]
+        },
+        {
+            "before": ["<leader>", "|"],
+            "commands": [":vsplit"]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        // indent
+        {
+            "before": [">"],
+            "after": [">", "g", "v"]
+        },
+        {
+            "before": ["<"],
+            "after": ["<", "g", "v"]
+        },
+        // copy & paste
+        {
+            "before": ["<leader>", "p"],
+            "after": ["\"", "+", "p"]
+        },
+        {
+            "before": ["<leader>", "y"],
+            "after": ["\"", "+", "y"]
+        }
+    ],
+    "workbench.activityBar.location": "hidden",
+    "dotnet.automaticallyCreateSolutionInWorkspace": false
+}

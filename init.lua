@@ -33,8 +33,6 @@ vim.keymap.set("n", "<C-Right>", "<C-w>>")
 -- Jump center screen
 vim.keymap.set("n", "j", "jzz")
 vim.keymap.set("n", "k", "kzz")
-vim.keymap.set("n", "J", "10jzz")
-vim.keymap.set("n", "K", "10kzz")
 -- Next & Previous highlight search
 vim.keymap.set("n", "n", "nzz")
 vim.keymap.set("n", "N", "Nzz")
@@ -156,10 +154,18 @@ require("lazy").setup({
     "nvim-treesitter/nvim-treesitter",
     config = function()
       require("nvim-treesitter.configs").setup({
+        auto_install = true,
         highlight = {
           enable = true
         }
       })
+    end
+  },
+  {
+    -- Smooth scroll
+    "karb94/neoscroll.nvim",
+    config = function()
+      require("neoscroll").setup()
     end
   },
   {
@@ -256,7 +262,8 @@ require("lazy").setup({
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
           vim.keymap.set("n", "<leader>h", vim.lsp.buf.hover, opts)
           vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-          vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+          vim.keymap.set("n", "<leader>sh", vim.lsp.buf.signature_help, opts)
+          vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
           vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
           vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
           vim.keymap.set("n", "<leader>fm", function()
