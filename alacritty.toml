@@ -4,7 +4,8 @@ live_config_reload = true
 TERM = "xterm-256color"
 
 [window]
-opacity = 1.0
+opacity = 0.85
+dynamic_padding = true
 
 [font]
 normal = { family = "JetBrains Mono", style = "Regular" }
@@ -12,6 +13,9 @@ bold = { family = "JetBrains Mono", style = "Bold" }
 italic = { family = "JetBrains Mono", style = "Italic" }
 bold_italic = { family = "JetBrains Mono", style = "Bold Italic" }
 size = 12
+
+[mouse]
+hide_when_typing = true
 
 [colors.primary]
 background = "#1d2021"
@@ -44,4 +48,5 @@ bindings = [
     { key = "=", mods = "Control", action = "IncreaseFontSize" },
     { key = "-", mods = "Control", action = "DecreaseFontSize" },
     { key = "0", mods = "Control", action = "ResetFontSize" },
+    { key = "F11", mods = "Control", action = "ToggleFullscreen" },
 ]

@@ -109,6 +109,7 @@ require("lazy").setup({
       vim.g.gruvbox_material_enable_italic = 1
       vim.g.gruvbox_material_diagnostic_text_highlight = 1
       vim.g.gruvbox_material_diagnostic_line_highlight = 1
+      vim.g.gruvbox_material_transparent_background = 1
       vim.g.gruvbox_material_better_performance = 1
       vim.cmd("colorscheme gruvbox-material")
       vim.api.nvim_set_hl(0, "CursorLine", { fg = "none", bg = "none" })
@@ -295,7 +296,7 @@ require("lazy").setup({
           name = "launch - netcoredbg",
           request = "launch",
           program = function()
-            return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/bin/Debug/", "file")
+            return vim.fn.input("Path to dll ", vim.fn.getcwd() .. "/bin/Debug/", "file")
           end
         }
       }
