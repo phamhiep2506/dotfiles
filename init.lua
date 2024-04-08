@@ -34,6 +34,8 @@ vim.keymap.set("n", "<C-Right>", "<C-w>>")
 -- Jump center screen
 vim.keymap.set("n", "j", "jzz")
 vim.keymap.set("n", "k", "kzz")
+vim.keymap.set("n", "J", "10jzz")
+vim.keymap.set("n", "K", "10kzz")
 -- Next & Previous highlight search
 vim.keymap.set("n", "n", "nzz")
 vim.keymap.set("n", "N", "Nzz")
@@ -48,7 +50,7 @@ vim.keymap.set("n", "<leader>p", '"+p')
 vim.keymap.set("v", "<leader>p", '"+p')
 vim.keymap.set("v", "<leader>y", '"+y')
 -- Disable highlight search
-vim.keymap.set("n", "<ESC>", "<CMD>nohlsearch<CR>")
+vim.keymap.set("n", "<leader><Enter>", "<CMD>nohlsearch<CR>")
 -- Exit normal mode terminal
 vim.keymap.set("t", "<ESC><ESC>", "<C-\\><C-n>")
 -- Removes white space
@@ -86,12 +88,8 @@ require("lazy").setup({
   "tpope/vim-sleuth",
   -- Commnet
   "tpope/vim-commentary",
-  -- Env
-  "tpope/vim-dotenv",
   -- Git
   "tpope/vim-fugitive",
-  -- Move motion
-  "easymotion/vim-easymotion",
   -- Emmet
   "mattn/emmet-vim",
   {
@@ -115,7 +113,7 @@ require("lazy").setup({
       vim.g.gruvbox_material_enable_italic = 1
       vim.g.gruvbox_material_diagnostic_text_highlight = 1
       vim.g.gruvbox_material_diagnostic_line_highlight = 1
-      vim.g.gruvbox_material_transparent_background = 1
+      -- vim.g.gruvbox_material_transparent_background = 1
       vim.g.gruvbox_material_better_performance = 1
       vim.cmd("colorscheme gruvbox-material")
       vim.api.nvim_set_hl(0, "CursorLine", { fg = "none", bg = "none" })
@@ -169,10 +167,16 @@ require("lazy").setup({
     end
   },
   {
-    -- Smooth scroll
-    "karb94/neoscroll.nvim",
+    -- Move motion
+    "hadronized/hop.nvim",
     config = function()
-      require("neoscroll").setup()
+      require("hop").setup()
+      -- Keymap
+      vim.keymap.set("n", "<leader><leader>f", "<CMD>HopWord<CR>")
+      vim.keymap.set("n", "<leader><leader>s", "<CMD>HopChar1<CR>")
+      vim.keymap.set("n", "<leader><leader>/", "<CMD>HopPattern<CR>")
+      vim.keymap.set("n", "<leader><leader>j", "<CMD>HopLineStartAC<CR>")
+      vim.keymap.set("n", "<leader><leader>k", "<CMD>HopLineStartBC<CR>")
     end
   },
   {
@@ -266,18 +270,33 @@ require("lazy").setup({
         callback = function(ev)
           -- Buffer map
           local opts = { buffer = ev.buf }
+          vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
           vim.keymap.set("n", "<leader>h", vim.lsp.buf.hover, opts)
           vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
           vim.keymap.set("n", "<leader>sh", vim.lsp.buf.signature_help, opts)
+          vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
           vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
           vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
           vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-          vim.keymap.set("n", "<leader>fm", function()
-            vim.lsp.buf.format { async = true }
-          end, opts)
         end
       })
+    end
+  },
+  {
+    "stevearc/conform.nvim",
+    config = function()
+      require("conform").setup({
+        formatters_by_ft = {
+          cs = { "csharpier" },
+          javascript = { "prettier" },
+          javascriptreact = { "prettier" },
+          typescript = { "prettier" },
+          typescriptreact = { "prettier" },
+        }
+      })
+      -- Keymap
+      vim.keymap.set("n", "<leader>fm", function() require("conform").format() end)
     end
   },
   {

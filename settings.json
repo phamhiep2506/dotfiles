@@ -61,6 +61,14 @@
             "before": ["k"],
             "after": ["k", "z", "z"]
         },
+        {
+            "before": ["J"],
+            "after": [9, "j", "z", "z"]
+        },
+        {
+            "before": ["K"],
+            "after": [9, "k", "z", "z"]
+        },
         // search
         {
             "before": ["<ESC>"],
