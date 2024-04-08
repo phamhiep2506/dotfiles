@@ -5,6 +5,7 @@ vim.opt.wrap = true
 vim.opt.cursorline = true
 vim.opt.clipboard = ""
 vim.opt.termguicolors = true
+vim.opt.autoread = true
 -- Search
 vim.opt.hlsearch = true
 vim.opt.ignorecase = true
@@ -54,6 +55,11 @@ vim.keymap.set("t", "<ESC><ESC>", "<C-\\><C-n>")
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = "*",
   command = "%s/\\s\\+$//e"
+})
+-- Auto reload when cursor hold
+vim.api.nvim_create_autocmd({ "CursorHold" }, {
+  pattern = "*",
+  command = "checktime"
 })
 -- Bootstrap lazy.vim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
