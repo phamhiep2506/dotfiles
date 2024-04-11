@@ -102,6 +102,15 @@ require("lazy").setup({
     end
   },
   {
+    -- Translate
+    "potamides/pantran.nvim",
+    config = function()
+      require("pantran").setup({
+        default_engine = "google"
+      })
+    end
+  },
+  {
     -- Colorscheme
     "sainnhe/gruvbox-material",
     config = function()
