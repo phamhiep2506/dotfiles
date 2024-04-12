@@ -51,17 +51,15 @@ vim.keymap.set("v", "<leader>p", '"+p')
 vim.keymap.set("v", "<leader>y", '"+y')
 -- Disable highlight search
 vim.keymap.set("n", "<leader><Enter>", "<CMD>nohlsearch<CR>")
--- Exit normal mode terminal
-vim.keymap.set("t", "<ESC><ESC>", "<C-\\><C-n>")
 -- Removes white space
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = "*",
-  command = "%s/\\s\\+$//e"
+  command = "%s/\\s\\+$//e",
 })
 -- Auto reload when cursor hold
 vim.api.nvim_create_autocmd({ "CursorHold" }, {
   pattern = "*",
-  command = "checktime"
+  command = "checktime",
 })
 -- Bootstrap lazy.vim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -72,11 +70,11 @@ if not vim.loop.fs_stat(lazypath) then
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
     "--branch=stable",
-    lazypath
+    lazypath,
   })
 end
 vim.opt.rtp:prepend(lazypath)
---Plugins
+-- Plugins
 require("lazy").setup({
   -- Repeat motion
   "tpope/vim-repeat",
@@ -99,23 +97,23 @@ require("lazy").setup({
       vim.cmd([[
         vmap <expr> <C-q> db#op_exec()
       ]])
-    end
+    end,
   },
   {
     -- Translate
     "potamides/pantran.nvim",
     config = function()
       require("pantran").setup({
-        default_engine = "google"
+        default_engine = "google",
       })
-    end
+    end,
   },
   {
     -- Colorscheme
     "sainnhe/gruvbox-material",
     config = function()
       vim.g.gruvbox_material_foreground = "original"
-      vim.g.gruvbox_material_background  = "hard"
+      vim.g.gruvbox_material_background = "hard"
       vim.g.gruvbox_material_visual = "reverse"
       vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
       vim.g.gruvbox_material_enable_bold = 1
@@ -129,24 +127,24 @@ require("lazy").setup({
       vim.api.nvim_set_hl(0, "CursorLineNR", { fg = "orange", bold = true })
       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
       vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
-    end
+    end,
   },
   {
     -- Explorer
     "nvim-tree/nvim-tree.lua",
     dependencies = {
-      "nvim-tree/nvim-web-devicons"
+      "nvim-tree/nvim-web-devicons",
     },
     config = function()
       require("nvim-tree").setup()
       vim.keymap.set("n", "<C-n>", "<CMD>NvimTreeToggle<CR>")
-    end
+    end,
   },
   {
     -- Fuzzy file
     "nvim-telescope/telescope.nvim",
     dependencies = {
-      "nvim-lua/plenary.nvim"
+      "nvim-lua/plenary.nvim",
     },
     config = function()
       require("telescope").setup()
@@ -154,14 +152,14 @@ require("lazy").setup({
       vim.keymap.set("n", "<leader>fg", "<CMD>Telescope live_grep<CR>")
       vim.keymap.set("n", "<leader>fb", "<CMD>Telescope buffers<CR>")
       vim.keymap.set("n", "<leader>fc", "<CMD>Telescope commands<CR>")
-    end
+    end,
   },
   {
     -- Git
     "lewis6991/gitsigns.nvim",
     config = function()
       require("gitsigns").setup()
-    end
+    end,
   },
   {
     -- Highlight code
@@ -170,10 +168,10 @@ require("lazy").setup({
       require("nvim-treesitter.configs").setup({
         auto_install = true,
         highlight = {
-          enable = true
-        }
+          enable = true,
+        },
       })
-    end
+    end,
   },
   {
     -- Move motion
@@ -186,7 +184,7 @@ require("lazy").setup({
       vim.keymap.set("n", "<leader><leader>/", "<CMD>HopPattern<CR>")
       vim.keymap.set("n", "<leader><leader>j", "<CMD>HopLineStartAC<CR>")
       vim.keymap.set("n", "<leader><leader>k", "<CMD>HopLineStartBC<CR>")
-    end
+    end,
   },
   {
     -- Complete
@@ -197,7 +195,7 @@ require("lazy").setup({
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-vsnip",
       "hrsh7th/vim-vsnip",
-      "hrsh7th/cmp-nvim-lsp-signature-help"
+      "hrsh7th/cmp-nvim-lsp-signature-help",
     },
     config = function()
       local cmp = require("cmp")
@@ -205,27 +203,27 @@ require("lazy").setup({
         snippet = {
           expand = function(args)
             vim.fn["vsnip#anonymous"](args.body)
-          end
+          end,
         },
         window = {
           completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered()
+          documentation = cmp.config.window.bordered(),
         },
         mapping = cmp.mapping.preset.insert({
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true })
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "buffer" },
           { name = "path" },
           { name = "vsnip" },
-          { name = "nvim_lsp_signature_help" }
-        })
+          { name = "nvim_lsp_signature_help" },
+        }),
       })
-    end
+    end,
   },
   {
     -- Lsp
@@ -233,7 +231,7 @@ require("lazy").setup({
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      "Hoffs/omnisharp-extended-lsp.nvim"
+      "Hoffs/omnisharp-extended-lsp.nvim",
     },
     config = function()
       require("mason").setup()
@@ -244,8 +242,8 @@ require("lazy").setup({
           require("lspconfig")[server_name].setup({
             handlers = {
               ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
-              ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
-            }
+              ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
+            },
           })
         end,
         -- Custom lsp omnisharp
@@ -256,17 +254,17 @@ require("lazy").setup({
               ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
               ["textDocument/definition"] = require("omnisharp_extended").definition_handler,
               ["textDocument/references"] = require("omnisharp_extended").references_handler,
-              ["textDocument/implementation"] = require("omnisharp_extended").implementation_handler
-            }
+              ["textDocument/implementation"] = require("omnisharp_extended").implementation_handler,
+            },
           })
-        end
+        end,
       }
       require("mason-lspconfig").setup_handlers(handlers)
       -- Diagnostic border
       vim.diagnostic.config({
         float = {
-          border = "rounded"
-        }
+          border = "rounded",
+        },
       })
       -- Keymap
       vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
@@ -288,32 +286,55 @@ require("lazy").setup({
           vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
           vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
           vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-        end
+        end,
       })
-    end
+    end,
   },
   {
+    -- Format
     "stevearc/conform.nvim",
     config = function()
       require("conform").setup({
         formatters_by_ft = {
+          lua = { "stylua" },
           cs = { "csharpier" },
           javascript = { "prettier" },
           javascriptreact = { "prettier" },
           typescript = { "prettier" },
           typescriptreact = { "prettier" },
-        }
+        },
       })
+      -- Custom command
+      require("conform").formatters.lua = {
+        command = vim.fn.stdpath("data") .. "/mason/bin/stylua",
+      }
+      require("conform").formatters.cs = {
+        command = vim.fn.stdpath("data") .. "/mason/bin/dotnet-csharpier",
+      }
+      require("conform").formatters.javascript = {
+        command = vim.fn.stdpath("data") .. "/mason/bin/prettier",
+      }
+      require("conform").formatters.javascriptreact = {
+        command = vim.fn.stdpath("data") .. "/mason/bin/prettier",
+      }
+      require("conform").formatters.typescript = {
+        command = vim.fn.stdpath("data") .. "/mason/bin/prettier",
+      }
+      require("conform").formatters.typescriptreact = {
+        command = vim.fn.stdpath("data") .. "/mason/bin/prettier",
+      }
       -- Keymap
-      vim.keymap.set("n", "<leader>fm", function() require("conform").format() end)
-    end
+      vim.keymap.set("n", "<leader>fm", function()
+        require("conform").format()
+      end)
+    end,
   },
   {
     -- Debug
     "mfussenegger/nvim-dap",
     dependencies = {
       "rcarriga/nvim-dap-ui",
-      "nvim-neotest/nvim-nio"
+      "nvim-neotest/nvim-nio",
     },
     config = function()
       require("dapui").setup()
@@ -321,8 +342,8 @@ require("lazy").setup({
       -- C#
       dap.adapters.coreclr = {
         type = "executable",
-        command = vim.fn.stdpath("data") .. "/mason/packages/netcoredbg/netcoredbg",
-        args = { "--interpreter=vscode" }
+        command = vim.fn.stdpath("data") .. "/mason/bin/netcoredbg",
+        args = { "--interpreter=vscode" },
       }
       dap.configurations.cs = {
         {
@@ -331,11 +352,13 @@ require("lazy").setup({
           request = "launch",
           program = function()
             return vim.fn.input("Path to dll ", vim.fn.getcwd() .. "/bin/Debug/", "file")
-          end
-        }
+          end,
+        },
       }
       -- Keymap
-      vim.keymap.set("n", "<leader>dui", function() require("dapui").toggle() end)
-    end
-  }
+      vim.keymap.set("n", "<leader>dui", function()
+        require("dapui").toggle()
+      end)
+    end,
+  },
 })
