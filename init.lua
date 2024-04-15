@@ -90,6 +90,10 @@ require("lazy").setup({
   "tpope/vim-fugitive",
   -- Emmet
   "mattn/emmet-vim",
+  -- Auto highlight word cursor
+  "RRethy/vim-illuminate",
+  -- Delete buffers without messing layout
+  "moll/vim-bbye",
   {
     -- Database
     "tpope/vim-dadbod",
@@ -120,7 +124,7 @@ require("lazy").setup({
       vim.g.gruvbox_material_enable_italic = 1
       vim.g.gruvbox_material_diagnostic_text_highlight = 1
       vim.g.gruvbox_material_diagnostic_line_highlight = 1
-      -- vim.g.gruvbox_material_transparent_background = 1
+      vim.g.gruvbox_material_transparent_background = 1
       vim.g.gruvbox_material_better_performance = 1
       vim.cmd("colorscheme gruvbox-material")
       vim.api.nvim_set_hl(0, "CursorLine", { fg = "none", bg = "none" })
@@ -138,6 +142,52 @@ require("lazy").setup({
     config = function()
       require("nvim-tree").setup()
       vim.keymap.set("n", "<C-n>", "<CMD>NvimTreeToggle<CR>")
+    end,
+  },
+  {
+    -- Buffer line
+    "akinsho/bufferline.nvim",
+    config = function()
+      require("bufferline").setup({
+        options = {
+          diagnostics = "nvim_lsp",
+          offsets = {
+            {
+              filetype = "NvimTree",
+              text = "File Explorer",
+              text_align = "center",
+              separator = true,
+            },
+          },
+        },
+      })
+      -- Keymap
+      vim.keymap.set("n", "<A-.>", "<CMD>BufferLineCycleNext<CR>")
+      vim.keymap.set("n", "<A-,>", "<CMD>BufferLineCyclePrev<CR>")
+      vim.keymap.set("n", "<A->>", "<CMD>BufferLineMoveNext<CR>")
+      vim.keymap.set("n", "<A-<>", "<CMD>BufferLineMovePrev<CR>")
+      vim.keymap.set("n", "<A-c>", "<CMD>Bdelete<CR>")
+    end,
+  },
+  {
+    -- Status line
+    "nvim-lualine/lualine.nvim",
+    config = function()
+      require("lualine").setup({
+        options = {
+          component_separators = "",
+          section_separators = "",
+        },
+      })
+    end,
+  },
+  {
+    -- Indent
+    "echasnovski/mini.indentscope",
+    config = function()
+      require("mini.indentscope").setup({
+        symbol = "│",
+      })
     end,
   },
   {
@@ -187,6 +237,16 @@ require("lazy").setup({
     end,
   },
   {
+    -- Terminal
+    "akinsho/toggleterm.nvim",
+    config = function()
+      require("toggleterm").setup()
+      -- Keymap
+      vim.keymap.set("n", "<C-\\>", "<CMD>ToggleTerm direction=float<CR>")
+      vim.keymap.set("t", "<C-\\>", "<CMD>ToggleTerm direction=float<CR>")
+    end,
+  },
+  {
     -- Complete
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -196,9 +256,11 @@ require("lazy").setup({
       "hrsh7th/cmp-vsnip",
       "hrsh7th/vim-vsnip",
       "hrsh7th/cmp-nvim-lsp-signature-help",
+      "onsails/lspkind.nvim",
     },
     config = function()
       local cmp = require("cmp")
+      local lspkind = require("lspkind")
       cmp.setup({
         snippet = {
           expand = function(args)
@@ -222,6 +284,9 @@ require("lazy").setup({
           { name = "vsnip" },
           { name = "nvim_lsp_signature_help" },
         }),
+        formatting = {
+          format = lspkind.cmp_format(),
+        },
       })
     end,
   },
@@ -302,6 +367,7 @@ require("lazy").setup({
           javascriptreact = { "prettier" },
           typescript = { "prettier" },
           typescriptreact = { "prettier" },
+          python = { "black" },
         },
       })
       -- Custom command
@@ -322,6 +388,9 @@ require("lazy").setup({
       }
       require("conform").formatters.typescriptreact = {
         command = vim.fn.stdpath("data") .. "/mason/bin/prettier",
+      }
+      require("conform").formatters.python = {
+        command = vim.fn.stdpath("data") .. "/mason/bin/black",
       }
       -- Keymap
       vim.keymap.set("n", "<leader>fm", function()
