@@ -1,0 +1,48 @@
+// Place your key bindings in this file to override the defaults
+[
+    // Toggle vim
+    {
+        "key": "ctrl+shift+v",
+        "command": "toggleVim",
+        "when": "editorTextFocus"
+    },
+    // Next & previous quick open
+    {
+        "key": "ctrl+n",
+        "command": "workbench.action.quickOpenSelectNext",
+        "when": "inQuickOpen"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.quickOpenSelectPrevious",
+        "when": "inQuickOpen"
+    },
+    // Next & previous tab
+    {
+        "key": "alt+.",
+        "command": "workbench.action.nextEditor",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+,",
+        "command": "workbench.action.previousEditor",
+        "when": "editorTextFocus"
+    },
+    // Next & previous move tab
+    {
+        "key": "alt+shift+.",
+        "command": "workbench.action.moveEditorRightInGroup",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+shift+,",
+        "command": "workbench.action.moveEditorLeftInGroup",
+        "when": "editorTextFocus"
+    },
+    // Close tab
+    {
+        "key": "alt+c",
+        "command": "workbench.action.closeActiveEditor",
+        "when": "editorTextFocus"
+    }
+]
