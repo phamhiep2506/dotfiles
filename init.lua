@@ -34,8 +34,8 @@ vim.keymap.set("n", "<A-l>", "<C-w>>")
 -- Jump center screen
 vim.keymap.set("n", "j", "jzz")
 vim.keymap.set("n", "k", "kzz")
-vim.keymap.set("n", "J", "10jzz")
-vim.keymap.set("n", "K", "10kzz")
+vim.keymap.set("n", "J", "5jzz")
+vim.keymap.set("n", "K", "5kzz")
 -- Next & Previous highlight search
 vim.keymap.set("n", "n", "nzz")
 vim.keymap.set("n", "N", "Nzz")
@@ -51,6 +51,8 @@ vim.keymap.set("v", "<leader>p", '"+p')
 vim.keymap.set("v", "<leader>y", '"+y')
 -- Disable highlight search
 vim.keymap.set("n", "<leader><Enter>", "<CMD>nohlsearch<CR>")
+-- Save file
+vim.keymap.set("n", "<C-s>", "<CMD>update<CR>")
 -- Removes white space
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = "*",

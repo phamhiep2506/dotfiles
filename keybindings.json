@@ -6,6 +6,38 @@
         "command": "toggleVim",
         "when": "editorTextFocus"
     },
+    // Navigation
+    {
+        "key": "ctrl+h",
+        "command": "workbench.action.navigateLeft"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "workbench.action.navigateDown"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "workbench.action.navigateUp"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "workbench.action.navigateRight"
+    },
+    // Toggle activity bar
+    {
+        "key": "ctrl+a",
+        "command": "workbench.action.toggleActivityBarVisibility"
+    },
+    // Toggle side bar
+    {
+        "key": "ctrl+e",
+        "command": "workbench.action.toggleSidebarVisibility",
+    },
+    // Toggle terminal
+    {
+        "key": "ctrl+\\",
+        "command": "workbench.action.terminal.toggleTerminal"
+    },
     // Next & previous quick open
     {
         "key": "ctrl+n",

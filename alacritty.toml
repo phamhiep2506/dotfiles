@@ -49,5 +49,6 @@ bindings = [
     { key = "=", mods = "Control", action = "IncreaseFontSize" },
     { key = "-", mods = "Control", action = "DecreaseFontSize" },
     { key = "0", mods = "Control", action = "ResetFontSize" },
-    { key = "F11", mods = "Control", action = "ToggleFullscreen" },
+    { key = "f", mods = "Control|Shift", action = "ToggleFullscreen" },
+    { key = "m", mods = "Control|Shift", action = "ToggleMaximized" },
 ]

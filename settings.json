@@ -25,32 +25,9 @@
             "before": ["<leader>", "f", "f"],
             "commands": ["workbench.action.quickOpen"]
         },
-        // toggle activity bar
         {
-            "before": ["<C-a>"],
-            "commands": ["workbench.action.toggleActivityBarVisibility"]
-        },
-        // toggle side bar
-        {
-            "before": ["<C-n>"],
-            "commands": ["workbench.action.toggleSidebarVisibility"]
-        },
-        // navigation
-        {
-            "before": ["<C-h>"],
-            "after": ["<C-w>", "h"]
-        },
-        {
-            "before": ["<C-j>"],
-            "after": ["<C-w>", "j"]
-        },
-        {
-            "before": ["<C-k>"],
-            "after": ["<C-w>", "k"]
-        },
-        {
-            "before": ["<C-l>"],
-            "after": ["<C-w>", "l"]
+            "before": ["<leader>", "f", "b"],
+            "commands": ["workbench.action.showAllEditors"]
         },
         // jump
         {
@@ -63,15 +40,15 @@
         },
         {
             "before": ["J"],
-            "after": [9, "j", "z", "z"]
+            "after": [5, "j", "z", "z"]
         },
         {
             "before": ["K"],
-            "after": [9, "k", "z", "z"]
+            "after": [5, "k", "z", "z"]
         },
         // search
         {
-            "before": ["<ESC>"],
+            "before": ["<leader>", "Enter"],
             "commands": [":nohlsearch"]
         },
         {
