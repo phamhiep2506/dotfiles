@@ -5,6 +5,7 @@ vim.opt.wrap = true
 vim.opt.cursorline = true
 vim.opt.clipboard = ""
 vim.opt.termguicolors = true
+vim.opt.updatetime = 300
 vim.opt.autoread = true
 -- Search
 vim.opt.hlsearch = true
@@ -58,10 +59,10 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = "*",
   command = "%s/\\s\\+$//e",
 })
--- Auto reload when cursor hold
-vim.api.nvim_create_autocmd({ "CursorHold" }, {
+-- Auto reload
+vim.api.nvim_create_autocmd({ "FocusGained", "CursorHold", "CursorMoved", "BufEnter" }, {
   pattern = "*",
-  command = "checktime",
+  command = "checktime | redraw",
 })
 -- Bootstrap lazy.vim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -82,38 +83,8 @@ require("lazy").setup({
   "tpope/vim-repeat",
   -- Edit surround
   "tpope/vim-surround",
-  -- Defaults everyone
-  "tpope/vim-sensible",
-  -- Set buffer
-  "tpope/vim-sleuth",
   -- Commnet
   "tpope/vim-commentary",
-  -- Git
-  "tpope/vim-fugitive",
-  -- Emmet
-  "mattn/emmet-vim",
-  -- Auto highlight word cursor
-  "RRethy/vim-illuminate",
-  -- Delete buffers without messing layout
-  "moll/vim-bbye",
-  {
-    -- Database
-    "tpope/vim-dadbod",
-    config = function()
-      vim.cmd([[
-        vmap <expr> <C-q> db#op_exec()
-      ]])
-    end,
-  },
-  {
-    -- Translate
-    "potamides/pantran.nvim",
-    config = function()
-      require("pantran").setup({
-        default_engine = "google",
-      })
-    end,
-  },
   {
     -- Colorscheme
     "sainnhe/gruvbox-material",
@@ -126,13 +97,10 @@ require("lazy").setup({
       vim.g.gruvbox_material_enable_italic = 1
       vim.g.gruvbox_material_diagnostic_text_highlight = 1
       vim.g.gruvbox_material_diagnostic_line_highlight = 1
-      vim.g.gruvbox_material_transparent_background = 1
       vim.g.gruvbox_material_better_performance = 1
       vim.cmd("colorscheme gruvbox-material")
       vim.api.nvim_set_hl(0, "CursorLine", { fg = "none", bg = "none" })
       vim.api.nvim_set_hl(0, "CursorLineNR", { fg = "orange", bold = true })
-      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-      vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
     end,
   },
   {
@@ -144,52 +112,6 @@ require("lazy").setup({
     config = function()
       require("nvim-tree").setup()
       vim.keymap.set("n", "<C-n>", "<CMD>NvimTreeToggle<CR>")
-    end,
-  },
-  {
-    -- Buffer line
-    "akinsho/bufferline.nvim",
-    config = function()
-      require("bufferline").setup({
-        options = {
-          diagnostics = "nvim_lsp",
-          offsets = {
-            {
-              filetype = "NvimTree",
-              text = "File Explorer",
-              text_align = "center",
-              separator = true,
-            },
-          },
-        },
-      })
-      -- Keymap
-      vim.keymap.set("n", "<A-.>", "<CMD>BufferLineCycleNext<CR>")
-      vim.keymap.set("n", "<A-,>", "<CMD>BufferLineCyclePrev<CR>")
-      vim.keymap.set("n", "<A->>", "<CMD>BufferLineMoveNext<CR>")
-      vim.keymap.set("n", "<A-<>", "<CMD>BufferLineMovePrev<CR>")
-      vim.keymap.set("n", "<A-c>", "<CMD>Bdelete<CR>")
-    end,
-  },
-  {
-    -- Status line
-    "nvim-lualine/lualine.nvim",
-    config = function()
-      require("lualine").setup({
-        options = {
-          component_separators = "",
-          section_separators = "",
-        },
-      })
-    end,
-  },
-  {
-    -- Indent
-    "echasnovski/mini.indentscope",
-    config = function()
-      require("mini.indentscope").setup({
-        symbol = "│",
-      })
     end,
   },
   {
@@ -257,21 +179,14 @@ require("lazy").setup({
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-vsnip",
       "hrsh7th/vim-vsnip",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      "onsails/lspkind.nvim",
     },
     config = function()
       local cmp = require("cmp")
-      local lspkind = require("lspkind")
       cmp.setup({
         snippet = {
           expand = function(args)
             vim.fn["vsnip#anonymous"](args.body)
           end,
-        },
-        window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
         },
         mapping = cmp.mapping.preset.insert({
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -284,11 +199,7 @@ require("lazy").setup({
           { name = "buffer" },
           { name = "path" },
           { name = "vsnip" },
-          { name = "nvim_lsp_signature_help" },
         }),
-        formatting = {
-          format = lspkind.cmp_format(),
-        },
       })
     end,
   },
@@ -306,19 +217,12 @@ require("lazy").setup({
       local handlers = {
         -- Auto start lsp
         function(server_name)
-          require("lspconfig")[server_name].setup({
-            handlers = {
-              ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
-              ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
-            },
-          })
+          require("lspconfig")[server_name].setup({})
         end,
         -- Custom lsp omnisharp
         ["omnisharp"] = function()
           require("lspconfig").omnisharp.setup({
             handlers = {
-              ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
-              ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
               ["textDocument/definition"] = require("omnisharp_extended").definition_handler,
               ["textDocument/references"] = require("omnisharp_extended").references_handler,
               ["textDocument/implementation"] = require("omnisharp_extended").implementation_handler,
@@ -327,12 +231,6 @@ require("lazy").setup({
         end,
       }
       require("mason-lspconfig").setup_handlers(handlers)
-      -- Diagnostic border
-      vim.diagnostic.config({
-        float = {
-          border = "rounded",
-        },
-      })
       -- Keymap
       vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
       vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
@@ -353,51 +251,11 @@ require("lazy").setup({
           vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
           vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
           vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+          vim.keymap.set("n", "<leader>fm", function()
+            vim.lsp.buf.format({ async = true })
+          end, opts)
         end,
       })
-    end,
-  },
-  {
-    -- Format
-    "stevearc/conform.nvim",
-    config = function()
-      require("conform").setup({
-        formatters_by_ft = {
-          lua = { "stylua" },
-          cs = { "csharpier" },
-          javascript = { "prettier" },
-          javascriptreact = { "prettier" },
-          typescript = { "prettier" },
-          typescriptreact = { "prettier" },
-          python = { "black" },
-        },
-      })
-      -- Custom command
-      require("conform").formatters.lua = {
-        command = vim.fn.stdpath("data") .. "/mason/bin/stylua",
-      }
-      require("conform").formatters.cs = {
-        command = vim.fn.stdpath("data") .. "/mason/bin/dotnet-csharpier",
-      }
-      require("conform").formatters.javascript = {
-        command = vim.fn.stdpath("data") .. "/mason/bin/prettier",
-      }
-      require("conform").formatters.javascriptreact = {
-        command = vim.fn.stdpath("data") .. "/mason/bin/prettier",
-      }
-      require("conform").formatters.typescript = {
-        command = vim.fn.stdpath("data") .. "/mason/bin/prettier",
-      }
-      require("conform").formatters.typescriptreact = {
-        command = vim.fn.stdpath("data") .. "/mason/bin/prettier",
-      }
-      require("conform").formatters.python = {
-        command = vim.fn.stdpath("data") .. "/mason/bin/black",
-      }
-      -- Keymap
-      vim.keymap.set("n", "<leader>fm", function()
-        require("conform").format()
-      end)
     end,
   },
   {
@@ -410,7 +268,6 @@ require("lazy").setup({
     config = function()
       require("dapui").setup()
       local dap = require("dap")
-      local dapui = require("dapui")
       -- C#
       dap.adapters.coreclr = {
         type = "executable",
@@ -427,21 +284,11 @@ require("lazy").setup({
           end,
         },
       }
-      -- Auto open & close dapui
-      dap.listeners.before.attach.dapui_config = function()
-        dapui.open()
-      end
-      dap.listeners.before.launch.dapui_config = function()
-        dapui.open()
-      end
-      dap.listeners.before.event_terminated.dapui_config = function()
-        dapui.close()
-      end
-      dap.listeners.before.event_exited.dapui_config = function()
-        dapui.close()
-      end
       -- Keymap
-      vim.keymap.set("n", "<leader>dv", function()
+      vim.keymap.set("n", "<leader>dui", function()
+        require("dapui").toggle()
+      end)
+      vim.keymap.set("n", "<leader>dev", function()
         require("dapui").eval()
       end)
     end,

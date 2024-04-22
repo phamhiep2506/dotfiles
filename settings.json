@@ -8,7 +8,8 @@
     "editor.scrollbar.horizontal": "hidden",
     "editor.scrollbar.vertical": "hidden",
     "editor.fontFamily": "JetBrains Mono",
-    "editor.fontSize": 15,
+    "editor.fontSize": 16,
+    "editor.lineHeight": 1.7,
     // window
     "window.menuBarVisibility": "hidden",
     "editor.renderLineHighlight": "gutter",
@@ -95,5 +96,4 @@
         }
     ],
     "workbench.activityBar.location": "hidden",
-    "dotnet.automaticallyCreateSolutionInWorkspace": false
 }
