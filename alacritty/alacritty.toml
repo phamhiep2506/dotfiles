@@ -6,7 +6,6 @@ TERM = "xterm-256color"
 [window]
 opacity = 1.0
 dynamic_padding = true
-decorations = "None"
 
 [font]
 normal = { family = "JetBrains Mono", style = "Regular" }
@@ -51,6 +50,5 @@ bindings = [
     { key = "=", mods = "Control", action = "IncreaseFontSize" },
     { key = "-", mods = "Control", action = "DecreaseFontSize" },
     { key = "0", mods = "Control", action = "ResetFontSize" },
-    { key = "f", mods = "Control|Shift", action = "ToggleFullscreen" },
-    { key = "m", mods = "Control|Shift", action = "ToggleMaximized" },
+    { key = "F11", action = "ToggleFullscreen" },
 ]

@@ -5,8 +5,6 @@ vim.opt.wrap = true
 vim.opt.cursorline = true
 vim.opt.clipboard = ""
 vim.opt.termguicolors = true
-vim.opt.updatetime = 300
-vim.opt.autoread = true
 -- Search
 vim.opt.hlsearch = true
 vim.opt.ignorecase = true
@@ -59,11 +57,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = "*",
   command = "%s/\\s\\+$//e",
 })
--- Auto reload
-vim.api.nvim_create_autocmd({ "FocusGained", "CursorHold", "CursorMoved", "BufEnter" }, {
-  pattern = "*",
-  command = "checktime | redraw",
-})
 -- Bootstrap lazy.vim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -85,6 +78,8 @@ require("lazy").setup({
   "tpope/vim-surround",
   -- Commnet
   "tpope/vim-commentary",
+  -- Format
+  "sbdchd/neoformat",
   {
     -- Colorscheme
     "sainnhe/gruvbox-material",
@@ -161,16 +156,6 @@ require("lazy").setup({
     end,
   },
   {
-    -- Terminal
-    "akinsho/toggleterm.nvim",
-    config = function()
-      require("toggleterm").setup()
-      -- Keymap
-      vim.keymap.set("n", "<C-\\>", "<CMD>ToggleTerm direction=float<CR>")
-      vim.keymap.set("t", "<C-\\>", "<CMD>ToggleTerm direction=float<CR>")
-    end,
-  },
-  {
     -- Complete
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -207,41 +192,42 @@ require("lazy").setup({
     -- Lsp
     "neovim/nvim-lspconfig",
     dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
       "Hoffs/omnisharp-extended-lsp.nvim",
     },
     config = function()
-      require("mason").setup()
-      require("mason-lspconfig").setup()
-      local handlers = {
-        -- Auto start lsp
-        function(server_name)
-          require("lspconfig")[server_name].setup({})
-        end,
-        -- Custom lsp omnisharp
-        ["omnisharp"] = function()
-          require("lspconfig").omnisharp.setup({
-            handlers = {
-              ["textDocument/definition"] = require("omnisharp_extended").definition_handler,
-              ["textDocument/references"] = require("omnisharp_extended").references_handler,
-              ["textDocument/implementation"] = require("omnisharp_extended").implementation_handler,
-            },
-          })
-        end,
-      }
-      require("mason-lspconfig").setup_handlers(handlers)
+      local lspconfig = require("lspconfig")
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
+      -- html
+      lspconfig.html.setup({
+        capabilities = capabilities,
+      })
+      -- css
+      lspconfig.cssls.setup({
+        capabilities = capabilities,
+      })
+      -- js, jsx, ts, tsx
+      lspconfig.tsserver.setup({})
+      -- c, c++
+      lspconfig.clangd.setup({})
+      -- Python
+      lspconfig.pyright.setup({})
+      -- C#
+      lspconfig.omnisharp.setup({
+        cmd = {
+          "dotnet",
+          vim.fn.stdpath("data") .. "/omnisharp/OmniSharp.dll",
+        },
+        handlers = {
+          ["textDocument/definition"] = require("omnisharp_extended").definition_handler,
+          ["textDocument/references"] = require("omnisharp_extended").references_handler,
+          ["textDocument/implementation"] = require("omnisharp_extended").implementation_handler,
+        },
+      })
       -- Keymap
-      vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
-      vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-      vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-      vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
-      -- Keymap LspAttach
       vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-        callback = function(ev)
-          -- Buffer map
-          local opts = { buffer = ev.buf }
+        callback = function(args)
+          local opts = { buffer = args.buf }
           vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
           vim.keymap.set("n", "<leader>h", vim.lsp.buf.hover, opts)
@@ -251,9 +237,10 @@ require("lazy").setup({
           vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
           vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
           vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-          vim.keymap.set("n", "<leader>fm", function()
-            vim.lsp.buf.format({ async = true })
-          end, opts)
+          vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
+          vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+          vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+          vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
         end,
       })
     end,
@@ -271,7 +258,7 @@ require("lazy").setup({
       -- C#
       dap.adapters.coreclr = {
         type = "executable",
-        command = vim.fn.stdpath("data") .. "/mason/bin/netcoredbg",
+        command = vim.fn.stdpath("data") .. "/netcoredbg/netcoredbg",
         args = { "--interpreter=vscode" },
       }
       dap.configurations.cs = {
