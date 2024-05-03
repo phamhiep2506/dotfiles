@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+sudo apt install dconf-cli -y
+
 # Workspaces
 dconf write /org/gnome/mutter/dynamic-workspaces true
 dconf write /org/gnome/desktop/wm/preferences/num-workspaces 9

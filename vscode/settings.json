@@ -1,19 +1,58 @@
+// Extensions
+// vscodevim.vim
+// jdinhlife.gruvbox
+// usernamehw.errorlens
+// EditorConfig.EditorConfig
+// ms-dotnettools.csdevkit
+// miguelsolorio.symbols
+// drcika.apc-extension
+// christian-kohler.path-intellisense
 {
-    // disable welcome
+    // Disable welcome
     "workbench.startupEditor": "none",
-    // colorscheme
+    // Colorscheme
     "workbench.colorTheme": "Gruvbox Dark Hard",
-    // editor
-    "editor.minimap.enabled": false,
-    "editor.scrollbar.horizontal": "hidden",
-    "editor.scrollbar.vertical": "hidden",
+    // Editor
     "editor.fontFamily": "JetBrains Mono",
-    "editor.fontSize": 16,
-    "editor.lineHeight": 1.7,
-    // window
-    "window.menuBarVisibility": "hidden",
+    "editor.fontSize": 15,
+    "editor.fontLigatures": true,
+    "editor.lineHeight": 1.6,
+    "editor.rulers": [80, 120],
+    "editor.minimap.enabled": false,
     "editor.renderLineHighlight": "gutter",
-    // vim
+    "editor.scrollbar.vertical": "hidden",
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.folding": false,
+    // Smooth
+    "editor.smoothScrolling": true,
+    "editor.cursorSmoothCaretAnimation": "on",
+    // File
+    "files.trimTrailingWhitespace": true,
+    // Icon
+    "workbench.iconTheme": "symbols",
+    "symbols.hidesExplorerArrows": false,
+    // Window
+    "window.menuBarVisibility": "hidden",
+    "breadcrumbs.enabled": false,
+    // Extension
+    "extensions.ignoreRecommendations": true,
+    // Explorer
+    "explorer.compactFolders": false,
+    // Apc
+    "apc.font.family": "JetBrains Mono",
+    "apc.listRow": {
+        "height": 24,
+        "fontSize": 14
+    },
+    "apc.statusBar": {
+        "position": "editor-bottom",
+    },
+    "apc.stylesheet": {
+        ".editor-actions": "display: none",
+        ".title-actions": "display: none",
+        ".scrollbar.vertical": "display: none"
+    },
+    // Vim
     "vim.leader": "<space>",
     "vim.easymotion": true,
     "vim.useCtrlKeys": true,
@@ -21,7 +60,7 @@
     "vim.hlsearch": true,
     "vim.useSystemClipboard": false,
     "vim.normalModeKeyBindingsNonRecursive": [
-        // fuzzy file
+        // Fuzzy file
         {
             "before": ["<leader>", "f", "f"],
             "commands": ["workbench.action.quickOpen"]
@@ -30,7 +69,7 @@
             "before": ["<leader>", "f", "b"],
             "commands": ["workbench.action.showAllEditors"]
         },
-        // jump
+        // Jump
         {
             "before": ["j"],
             "after": ["j", "z", "z"]
@@ -47,7 +86,7 @@
             "before": ["K"],
             "after": [5, "k", "z", "z"]
         },
-        // search
+        // Search
         {
             "before": ["<leader>", "Enter"],
             "commands": [":nohlsearch"]
@@ -60,12 +99,12 @@
             "before": ["N"],
             "after": ["N", "z", "z"]
         },
-        // paste
+        // Paste
         {
             "before": ["<leader>", "p"],
             "after": ["\"", "+", "p"]
         },
-        // split
+        // Split
         {
             "before": ["<leader>", "_"],
             "commands": [":split"]
@@ -73,10 +112,10 @@
         {
             "before": ["<leader>", "|"],
             "commands": [":vsplit"]
-        }
+        },
     ],
     "vim.visualModeKeyBindingsNonRecursive": [
-        // indent
+        // Indent
         {
             "before": [">"],
             "after": [">", "g", "v"]
@@ -85,7 +124,7 @@
             "before": ["<"],
             "after": ["<", "g", "v"]
         },
-        // copy & paste
+        // Copy & Paste
         {
             "before": ["<leader>", "p"],
             "after": ["\"", "+", "p"]
@@ -93,7 +132,7 @@
         {
             "before": ["<leader>", "y"],
             "after": ["\"", "+", "y"]
-        }
+        },
     ],
     "workbench.activityBar.location": "hidden",
 }

@@ -1,4 +1,3 @@
-// Place your key bindings in this file to override the defaults
 [
     // Toggle vim
     {
@@ -25,15 +24,14 @@
     },
     // Toggle activity bar
     {
-        "key": "ctrl+a",
+        "key": "ctrl+shift+a",
         "command": "workbench.action.toggleActivityBarVisibility",
-        "when": "editorTextFocus"
     },
     // Toggle side bar
     {
         "key": "ctrl+n",
         "command": "workbench.action.toggleSidebarVisibility",
-        "when": "vim.mode != 'Insert'"
+        "when": "editorTextFocus && vim.mode != 'Insert'"
     },
     // Toggle terminal
     {
@@ -51,5 +49,72 @@
         "key": "ctrl+p",
         "command": "workbench.action.quickOpenSelectPrevious",
         "when": "inQuickOpen"
+    },
+    // Explorer
+    {
+        "key": "a",
+        "command": "explorer.newFile",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    {
+        "key": "shift+a",
+        "command": "explorer.newFolder",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    {
+        "key": "r",
+        "command": "renameFile",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    {
+        "key": "d",
+        "command": "deleteFile",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    {
+        "key": "y",
+        "command": "filesExplorer.copy",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    {
+        "key": "x",
+        "command": "filesExplorer.cut",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    {
+        "key": "p",
+        "command": "filesExplorer.paste",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    {
+        "key": "shift+r",
+        "command": "workbench.files.action.refreshFilesExplorer",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    // Tab file
+    {
+        "key": "alt+.",
+        "command": "workbench.action.nextEditor",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+shift+.",
+        "command": "workbench.action.moveEditorRightInGroup",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+,",
+        "command": "workbench.action.previousEditor",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+shift+,",
+        "command": "workbench.action.moveEditorLeftInGroup",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+c",
+        "command": "workbench.action.closeActiveEditor",
+        "when": "editorTextFocus"
     },
 ]

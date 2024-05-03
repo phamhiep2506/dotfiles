@@ -25,11 +25,6 @@ vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
 vim.keymap.set("n", "<C-l>", "<C-w>l")
--- Resize
-vim.keymap.set("n", "<A-h>", "<C-w><")
-vim.keymap.set("n", "<A-j>", "<C-w>-")
-vim.keymap.set("n", "<A-k>", "<C-w>+")
-vim.keymap.set("n", "<A-l>", "<C-w>>")
 -- Jump center screen
 vim.keymap.set("n", "j", "jzz")
 vim.keymap.set("n", "k", "kzz")
