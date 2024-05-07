@@ -23,6 +23,7 @@
     "editor.scrollbar.vertical": "hidden",
     "editor.scrollbar.horizontal": "hidden",
     "editor.folding": false,
+    "breadcrumbs.enabled": false,
     // Smooth
     "editor.smoothScrolling": true,
     "editor.cursorSmoothCaretAnimation": "on",
@@ -32,8 +33,9 @@
     "workbench.iconTheme": "symbols",
     "symbols.hidesExplorerArrows": false,
     // Window
-    "window.menuBarVisibility": "hidden",
-    "breadcrumbs.enabled": false,
+    "window.menuBarVisibility": "toggle",
+    "window.customTitleBarVisibility": "never",
+    "workbench.activityBar.location": "bottom",
     // Extension
     "extensions.ignoreRecommendations": true,
     // Explorer
@@ -50,8 +52,19 @@
     "apc.stylesheet": {
         ".editor-actions": "display: none",
         ".title-actions": "display: none",
-        ".scrollbar.vertical": "display: none"
+        ".scrollbar.vertical": "display: none",
+        ".decorationsOverviewRuler": "display: none !important"
     },
+    // Custom color
+    "workbench.colorCustomizations": {
+        "errorLens.errorBackground": "#ffffff00",
+        "errorLens.warningBackground":"#ffffff00",
+        "errorLens.infoBackground":"#ffffff00",
+        "errorLens.hintBackground":"#ffffff00",
+    },
+    // Error lens
+    "errorLens.gutterIconsEnabled": true,
+    "errorLens.messageTemplate": "● $message",
     // Vim
     "vim.leader": "<space>",
     "vim.easymotion": true,
@@ -59,7 +72,10 @@
     "vim.incsearch": true,
     "vim.hlsearch": true,
     "vim.useSystemClipboard": false,
-    "vim.normalModeKeyBindingsNonRecursive": [
+    "extensions.experimental.affinity": {
+        "vscodevim.vim": 1
+    },
+    "vim.normalModeKeyBindings": [
         // Fuzzy file
         {
             "before": ["<leader>", "f", "f"],
@@ -114,7 +130,7 @@
             "commands": [":vsplit"]
         },
     ],
-    "vim.visualModeKeyBindingsNonRecursive": [
+    "vim.visualModeKeyBindings": [
         // Indent
         {
             "before": [">"],
@@ -134,5 +150,4 @@
             "after": ["\"", "+", "y"]
         },
     ],
-    "workbench.activityBar.location": "hidden",
 }

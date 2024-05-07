@@ -22,11 +22,6 @@
         "key": "ctrl+l",
         "command": "workbench.action.navigateRight"
     },
-    // Toggle activity bar
-    {
-        "key": "ctrl+shift+a",
-        "command": "workbench.action.toggleActivityBarVisibility",
-    },
     // Toggle side bar
     {
         "key": "ctrl+n",
