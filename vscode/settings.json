@@ -57,10 +57,14 @@
     },
     // Custom color
     "workbench.colorCustomizations": {
+        // Error lens
         "errorLens.errorBackground": "#ffffff00",
         "errorLens.warningBackground":"#ffffff00",
         "errorLens.infoBackground":"#ffffff00",
         "errorLens.hintBackground":"#ffffff00",
+        // Cursor
+        "editorCursor.foreground": "#d65d0e",
+        "editorCursor.background": "#1d2021",
     },
     // Error lens
     "errorLens.gutterIconsEnabled": true,
