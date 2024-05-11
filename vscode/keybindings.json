@@ -112,4 +112,15 @@
         "command": "workbench.action.closeActiveEditor",
         "when": "editorTextFocus"
     },
+    // Quick fix
+    {
+        "key": "ctrl+n",
+        "command": "selectNextCodeAction",
+        "when": "codeActionMenuVisible"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "selectPrevCodeAction",
+        "when": "codeActionMenuVisible"
+    },
 ]

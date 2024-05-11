@@ -19,10 +19,13 @@
     "editor.lineHeight": 1.6,
     "editor.rulers": [80, 120],
     "editor.minimap.enabled": false,
-    "editor.renderLineHighlight": "gutter",
     "editor.scrollbar.vertical": "hidden",
     "editor.scrollbar.horizontal": "hidden",
     "editor.folding": false,
+    "editor.renderLineHighlight": "none",
+    "editor.occurrencesHighlight": "off",
+    "editor.selectionHighlight": false,
+    "editor.lightbulb.enabled": "off",
     "breadcrumbs.enabled": false,
     // Smooth
     "editor.smoothScrolling": true,
@@ -34,7 +37,6 @@
     "symbols.hidesExplorerArrows": false,
     // Window
     "window.menuBarVisibility": "toggle",
-    "window.customTitleBarVisibility": "never",
     "workbench.activityBar.location": "bottom",
     // Extension
     "extensions.ignoreRecommendations": true,
@@ -42,9 +44,12 @@
     "explorer.compactFolders": false,
     // Apc
     "apc.font.family": "JetBrains Mono",
+    "apc.electron": {
+        "frame": false,
+    },
     "apc.listRow": {
         "height": 24,
-        "fontSize": 14
+        "fontSize": 14,
     },
     "apc.statusBar": {
         "position": "editor-bottom",
@@ -52,17 +57,13 @@
     "apc.stylesheet": {
         ".editor-actions": "display: none",
         ".title-actions": "display: none",
-        ".scrollbar.vertical": "display: none",
-        ".decorationsOverviewRuler": "display: none !important"
+        ".scrollbar": "display: none",
+        ".decorationsOverviewRuler": "display: none !important",
+        ".monaco-workbench": "--vscode-editorLineNumber-activeForeground: #d65d0e",
+        ".active-line-number": "font-weight: bold",
     },
     // Custom color
     "workbench.colorCustomizations": {
-        // Error lens
-        "errorLens.errorBackground": "#ffffff00",
-        "errorLens.warningBackground":"#ffffff00",
-        "errorLens.infoBackground":"#ffffff00",
-        "errorLens.hintBackground":"#ffffff00",
-        // Cursor
         "editorCursor.foreground": "#d65d0e",
         "editorCursor.background": "#1d2021",
     },
@@ -132,6 +133,31 @@
         {
             "before": ["<leader>", "|"],
             "commands": [":vsplit"]
+        },
+        // Lsp
+        {
+            "before": ["g", "d"],
+            "commands": ["editor.action.revealDefinition"]
+        },
+        {
+            "before": ["g", "i"],
+            "commands": ["editor.action.goToImplementation"]
+        },
+        {
+            "before": ["g", "r"],
+            "commands": ["editor.action.goToReferences"]
+        },
+        {
+            "before": ["<leader>", "h"],
+            "commands": ["editor.action.showHover"]
+        },
+        {
+            "before": ["<leader>", "c", "a"],
+            "commands": ["editor.action.quickFix"]
+        },
+        {
+            "before": ["<leader>", "r", "n"],
+            "commands": ["editor.action.rename"]
         },
     ],
     "vim.visualModeKeyBindings": [
