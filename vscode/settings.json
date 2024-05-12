@@ -17,7 +17,7 @@
     "editor.fontSize": 15,
     "editor.fontLigatures": true,
     "editor.lineHeight": 1.6,
-    "editor.rulers": [80, 120],
+    "editor.rulers": [80],
     "editor.minimap.enabled": false,
     "editor.scrollbar.vertical": "hidden",
     "editor.scrollbar.horizontal": "hidden",
@@ -26,12 +26,14 @@
     "editor.occurrencesHighlight": "off",
     "editor.selectionHighlight": false,
     "editor.lightbulb.enabled": "off",
+    "editor.wordWrap": "on",
     "breadcrumbs.enabled": false,
     // Smooth
     "editor.smoothScrolling": true,
     "editor.cursorSmoothCaretAnimation": "on",
     // File
     "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true,
     // Icon
     "workbench.iconTheme": "symbols",
     "symbols.hidesExplorerArrows": false,
@@ -59,12 +61,11 @@
         ".title-actions": "display: none",
         ".scrollbar": "display: none",
         ".decorationsOverviewRuler": "display: none !important",
-        ".monaco-workbench": "--vscode-editorLineNumber-activeForeground: #d65d0e",
-        ".active-line-number": "font-weight: bold",
+        ".monaco-workbench": "--vscode-editorLineNumber-activeForeground: #fabd2f",
     },
     // Custom color
     "workbench.colorCustomizations": {
-        "editorCursor.foreground": "#d65d0e",
+        "editorCursor.foreground": "#fabd2f",
         "editorCursor.background": "#1d2021",
     },
     // Error lens
@@ -77,6 +78,7 @@
     "vim.incsearch": true,
     "vim.hlsearch": true,
     "vim.useSystemClipboard": false,
+    "vim.smartRelativeLine": true,
     "extensions.experimental.affinity": {
         "vscodevim.vim": 1
     },
