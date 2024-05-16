@@ -1,12 +1,3 @@
-// Extensions
-// vscodevim.vim
-// jdinhlife.gruvbox
-// usernamehw.errorlens
-// EditorConfig.EditorConfig
-// ms-dotnettools.csdevkit
-// miguelsolorio.symbols
-// drcika.apc-extension
-// christian-kohler.path-intellisense
 {
     // Disable welcome
     "workbench.startupEditor": "none",
@@ -19,29 +10,23 @@
     "editor.lineHeight": 1.6,
     "editor.rulers": [80],
     "editor.minimap.enabled": false,
-    "editor.scrollbar.vertical": "hidden",
-    "editor.scrollbar.horizontal": "hidden",
-    "editor.folding": false,
     "editor.renderLineHighlight": "none",
     "editor.occurrencesHighlight": "off",
     "editor.selectionHighlight": false,
-    "editor.lightbulb.enabled": "off",
     "editor.wordWrap": "on",
-    "breadcrumbs.enabled": false,
     // Smooth
     "editor.smoothScrolling": true,
     "editor.cursorSmoothCaretAnimation": "on",
     // File
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
+    "files.autoSave":"afterDelay",
     // Icon
     "workbench.iconTheme": "symbols",
     "symbols.hidesExplorerArrows": false,
     // Window
     "window.menuBarVisibility": "toggle",
     "workbench.activityBar.location": "bottom",
-    // Extension
-    "extensions.ignoreRecommendations": true,
     // Explorer
     "explorer.compactFolders": false,
     // Apc
@@ -57,14 +42,18 @@
         "position": "editor-bottom",
     },
     "apc.stylesheet": {
-        ".editor-actions": "display: none",
-        ".title-actions": "display: none",
-        ".scrollbar": "display: none",
-        ".decorationsOverviewRuler": "display: none !important",
-        ".monaco-workbench": "--vscode-editorLineNumber-activeForeground: #fabd2f",
+        ".editor-actions": "display: none !important",
+        ".monaco-workbench": "--vscode-editorLineNumber-activeForeground: #fabd2f !important",
+        ".relative-current-line-number": "font-weight: bold !important",
     },
     // Custom color
     "workbench.colorCustomizations": {
+        // Error lens
+        "errorLens.errorBackground": "#ff000000",
+        "errorLens.warningBackground": "#ff000000",
+        "errorLens.infoBackground": "#ff000000",
+        "errorLens.hintBackground": "#ff000000",
+        // Cursor
         "editorCursor.foreground": "#fabd2f",
         "editorCursor.background": "#1d2021",
     },
@@ -83,10 +72,14 @@
         "vscodevim.vim": 1
     },
     "vim.normalModeKeyBindings": [
-        // Fuzzy file
+        // Find
         {
             "before": ["<leader>", "f", "f"],
             "commands": ["workbench.action.quickOpen"]
+        },
+        {
+            "before": ["<leader>", "f", "c"],
+            "commands": ["workbench.action.showCommands"]
         },
         {
             "before": ["<leader>", "f", "b"],
@@ -136,6 +129,15 @@
             "before": ["<leader>", "|"],
             "commands": [":vsplit"]
         },
+        // Jump change
+        {
+            "before": ["]", "c"],
+            "commands": ["workbench.action.editor.nextChange"],
+        },
+        {
+            "before": ["[", "c"],
+            "commands": ["workbench.action.editor.previousChange"],
+        },
         // Lsp
         {
             "before": ["g", "d"],
@@ -150,6 +152,26 @@
             "commands": ["editor.action.goToReferences"]
         },
         {
+            "before": ["g", "s"],
+            "commands": ["workbench.action.gotoSymbol"]
+        },
+        {
+            "before": ["g", "b"],
+            "commands": ["workbench.action.navigateBack"]
+        },
+        {
+            "before": ["g", "f"],
+            "commands": ["workbench.action.navigateForward"]
+        },
+        {
+            "before": ["]", "d"],
+            "commands": ["editor.action.marker.next"]
+        },
+        {
+            "before": ["[", "d"],
+            "commands": ["editor.action.marker.prev"]
+        },
+        {
             "before": ["<leader>", "h"],
             "commands": ["editor.action.showHover"]
         },
@@ -160,6 +182,48 @@
         {
             "before": ["<leader>", "r", "n"],
             "commands": ["editor.action.rename"]
+        },
+        {
+            "before": ["<leader>", "f", "m"],
+            "commands": ["editor.action.formatDocument"]
+        },
+        // Cursor next match
+        {
+            "before": ["<leader>", "c", "m"],
+            "commands": ["editor.action.addSelectionToNextFindMatch"]
+        },
+        // Debug
+        {
+            "before": ["<leader>", "d", "b"],
+            "commands": ["editor.debug.action.toggleBreakpoint"]
+        },
+        {
+            "before": ["<leader>", "d", "s"],
+            "commands": ["workbench.action.debug.start"]
+        },
+        {
+            "before": ["<leader>", "d", "r"],
+            "commands": ["workbench.action.debug.restart"]
+        },
+        {
+            "before": ["<leader>", "d", "x"],
+            "commands": ["workbench.action.debug.stop"],
+        },
+        {
+            "before": ["<leader>", "d", "i"],
+            "commands": ["workbench.action.debug.stepInto"],
+        },
+        {
+            "before": ["<leader>", "d", "o"],
+            "commands": ["workbench.action.debug.stepOver"],
+        },
+        {
+            "before": ["<leader>", "d", "O"],
+            "commands": ["workbench.action.debug.stepOut"],
+        },
+        {
+            "before": ["<leader>", "d", "h"],
+            "commands": ["editor.debug.action.showDebugHover"],
         },
     ],
     "vim.visualModeKeyBindings": [
@@ -181,5 +245,16 @@
             "before": ["<leader>", "y"],
             "after": ["\"", "+", "y"]
         },
+        // Cursor next match
+        {
+            "before": ["<leader>", "c", "m"],
+            "commands": ["editor.action.addSelectionToNextFindMatch"]
+        },
     ],
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[csharp]": {
+        "editor.defaultFormatter": "csharpier.csharpier-vscode"
+    },
 }

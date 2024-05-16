@@ -22,11 +22,16 @@
         "key": "ctrl+l",
         "command": "workbench.action.navigateRight"
     },
-    // Toggle side bar
+    // Toggle explorer
+    {
+        "key": "ctrl+n",
+        "command": "workbench.view.explorer",
+        "when": "editorTextFocus && vim.mode != 'Insert' || !editorFocus"
+    },
     {
         "key": "ctrl+n",
         "command": "workbench.action.toggleSidebarVisibility",
-        "when": "editorTextFocus && vim.mode != 'Insert'"
+        "when": "filesExplorerFocus && !inputFocus"
     },
     // Toggle terminal
     {
@@ -86,31 +91,10 @@
         "command": "workbench.files.action.refreshFilesExplorer",
         "when": "filesExplorerFocus && !inputFocus"
     },
-    // Tab file
     {
-        "key": "alt+.",
-        "command": "workbench.action.nextEditor",
-        "when": "editorTextFocus"
-    },
-    {
-        "key": "alt+shift+.",
-        "command": "workbench.action.moveEditorRightInGroup",
-        "when": "editorTextFocus"
-    },
-    {
-        "key": "alt+,",
-        "command": "workbench.action.previousEditor",
-        "when": "editorTextFocus"
-    },
-    {
-        "key": "alt+shift+,",
-        "command": "workbench.action.moveEditorLeftInGroup",
-        "when": "editorTextFocus"
-    },
-    {
-        "key": "alt+c",
-        "command": "workbench.action.closeActiveEditor",
-        "when": "editorTextFocus"
+        "key": "/",
+        "command": "list.find",
+        "when": "filesExplorerFocus && !inputFocus"
     },
     // Quick fix
     {
