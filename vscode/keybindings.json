@@ -107,4 +107,47 @@
         "command": "selectPrevCodeAction",
         "when": "codeActionMenuVisible"
     },
+    // Move tab to group
+    {
+        "key": "alt+h",
+        "command": "workbench.action.moveEditorToLeftGroup"
+    },
+    {
+        "key": "alt+j",
+        "command": "workbench.action.moveEditorToBelowGroup"
+    },
+    {
+        "key": "alt+k",
+        "command": "workbench.action.moveEditorToAboveGroup"
+    },
+    {
+        "key": "alt+l",
+        "command": "workbench.action.moveEditorToRightGroup"
+    },
+    // Switch tab
+    {
+        "key": "alt+.",
+        "command": "workbench.action.nextEditor",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+shift+.",
+        "command": "workbench.action.moveEditorRightInGroup",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+,",
+        "command": "workbench.action.previousEditor",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+shift+,",
+        "command": "workbench.action.moveEditorLeftInGroup",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+c",
+        "command": "workbench.action.closeActiveEditor",
+        "when": "editorTextFocus"
+    }
 ]
