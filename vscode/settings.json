@@ -14,13 +14,16 @@
     "editor.occurrencesHighlight": "off",
     "editor.selectionHighlight": false,
     "editor.wordWrap": "on",
+    "editor.lightbulb.enabled": "off",
+    // "breadcrumbs.enabled": false,
+    "workbench.tree.enableStickyScroll": false,
+    "editor.stickyScroll.enabled": false,
     // Smooth
     "editor.smoothScrolling": true,
     "editor.cursorSmoothCaretAnimation": "on",
     // File
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
-    "files.autoSave":"afterDelay",
     // Icon
     "workbench.iconTheme": "symbols",
     "symbols.hidesExplorerArrows": false,
@@ -42,7 +45,10 @@
         "position": "editor-bottom",
     },
     "apc.stylesheet": {
+        ".title-actions": "display: none !important",
         ".editor-actions": "display: none !important",
+        ".scrollbar": "display: none !important",
+        ".decorationsOverviewRuler": "display: none !important",
         ".monaco-workbench": "--vscode-editorLineNumber-activeForeground: #fabd2f !important",
         ".relative-current-line-number": "font-weight: bold !important",
     },
@@ -225,6 +231,11 @@
             "before": ["<leader>", "d", "h"],
             "commands": ["editor.debug.action.showDebugHover"],
         },
+        // Copy path
+        {
+            "before": ["<leader>", "c", "p"],
+            "commands": ["copyRelativeFilePath"]
+        },
     ],
     "vim.visualModeKeyBindings": [
         // Indent
@@ -251,10 +262,4 @@
             "commands": ["editor.action.addSelectionToNextFindMatch"]
         },
     ],
-    "[typescriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[csharp]": {
-        "editor.defaultFormatter": "csharpier.csharpier-vscode"
-    },
 }

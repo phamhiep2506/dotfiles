@@ -13,8 +13,6 @@ bold = { family = "JetBrains Mono", style = "Bold" }
 italic = { family = "JetBrains Mono", style = "Italic" }
 bold_italic = { family = "JetBrains Mono", style = "Bold Italic" }
 size = 12
-offset.y = 4
-glyph_offset.y = 2
 
 [mouse]
 hide_when_typing = true
