@@ -18,7 +18,7 @@ size = 12
 hide_when_typing = true
 
 [colors.primary]
-background = "#1d2021"
+background = "#000000"
 foreground = "#ebdbb2"
 
 [colors.normal]
