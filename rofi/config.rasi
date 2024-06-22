@@ -73,7 +73,7 @@ window {
     enabled:                     true;
     margin:                      0px;
     padding:                     0px;
-    border:                      1px solid;
+    border:                      2px solid;
     border-radius:               15px;
     border-color:                @border-colour;
     cursor:                      "default";
