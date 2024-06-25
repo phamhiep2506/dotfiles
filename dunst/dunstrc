@@ -1,0 +1,23 @@
+[global]
+  frame_width = 2
+  font = JetBrainsMono Nerd Font 9
+  corner_radius = 10
+  gap_size = 5
+  icon_theme = Papirus
+  enable_recursive_icon_lookup = true
+  icon_path = /usr/share/icons/Papirus/16x16/status/:/usr/share/icons/Papirus/16x16/devices/
+
+[urgency_low]
+  background = "#000000"
+  foreground = "#dbebb2"
+  frame_color = "#d79921"
+
+[urgency_normal]
+  background = "#000000"
+  foreground = "#dbebb2"
+  frame_color = "#d79921"
+
+[urgency_critical]
+  background = "#000000"
+  foreground = "#dbebb2"
+  frame_color = "#cc241d"

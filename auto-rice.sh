@@ -2,7 +2,7 @@
 
 # install packages
 install_pkg() {
-	sudo pacman --noconfirm --needed -S $1
+  sudo pacman --noconfirm --needed -S $1
 }
 
 # remove config
@@ -62,6 +62,16 @@ install_pkg rofi
 rm_config $HOME/.config/rofi
 cp_config $PWD/rofi $HOME/.config
 
+# dunst
+install_pkg dunst
+rm_config $HOME/.config/dunst
+cp_config $PWD/dunst $HOME/.config
+
+# tmux
+install_pkg tmux
+rm_config $HOME/.tmux.conf
+cp_config $PWD/.tmux.conf $HOME
+
 # nitrogen
 install_pkg nitrogen
 
@@ -78,24 +88,41 @@ EOF
 # redshift
 install_pkg redshift
 
+# xclip
+install_pkg xclip
+
+# flameshot
+install_pkg flameshot
+
 # nm-applet
 install_pkg network-manager-applet
 
-# xbanish
-read -p "Do you want to install xbanish? (y/n) " yn
-case $yn in
-	y)
-    sudo rm -rf /opt/xbanish
-    sudo git clone https://github.com/jcs/xbanish /opt/xbanish
-    (cd /opt/xbanish; sudo make clean install)
-    ;;
-	n)
-    ;;
-esac
+# gtk/icon
+install_pkg lxappearance
+install_pkg materia-gtk-theme
+install_pkg breeze-gtk
+install_pkg papirus-icon-theme
+
+# thunar
+install_pkg thunar
+install_pkg thunar-archive-plugin
+install_pkg thunar-volman
+
+# ranger
+install_pkg ranger
 
 # volume
 install_pkg pamixer
 install_pkg pavucontrol
+
+# mpv
+install_pkg mpv
+
+# viewnior
+install_pkg viewnior
+
+# firefox
+install_pkg firefox
 
 # add user to a group
 usermod -a -G video $USER
@@ -118,40 +145,59 @@ WantedBy=sleep.target
 EOF
 sudo systemctl enable slock@$USER.service
 
+# xbanish
+read -p "Do you want to install xbanish? (y/n) " yn
+case $yn in
+  y)
+    sudo rm -rfv /opt/xbanish
+    sudo git clone https://github.com/jcs/xbanish /opt/xbanish
+    (cd /opt/xbanish; sudo make clean install)
+    ;;
+  n)
+    ;;
+esac
+
+# neovim
+read -p "Do you want to install neovim? (y/n) " yn
+case $yn in
+  y)
+    install_pkg neovim
+    rm_config $HOME/.config/nvim
+    git clone https://github.com/phamhiep2506/nvim $HOME/.config/nvim
+    ;;
+  n)
+    ;;
+esac
+
 # brave
 read -p "Do you want to install brave? (y/n) " yn
 case $yn in
-	y)
+  y)
     install_pkg curl
     install_pkg jq
     install_pkg unzip
     BRAVE_VERSION=$(curl --silent "https://api.github.com/repos/brave/brave-browser/releases/latest"  | jq -r .tag_name)
     sudo wget -O /opt/brave-browser-$(echo $BRAVE_VERSION | cut -c2-)-linux-amd64.zip https://github.com/brave/brave-browser/releases/download/$BRAVE_VERSION/brave-browser-$(echo $BRAVE_VERSION | cut -c2-)-linux-amd64.zip
-    sudo rm -rf /opt/brave-browser
+    sudo rm -rfv /opt/brave-browser
     sudo unzip /opt/brave-browser-$(echo $BRAVE_VERSION | cut -c2-)-linux-amd64.zip -d /opt/brave-browser
-    sudo rm -rf /opt/brave-browser-$(echo $BRAVE_VERSION | cut -c2-)-linux-amd64.zip
-    sudo rm -rf /usr/local/bin/brave
+    sudo rm -rfv /opt/brave-browser-$(echo $BRAVE_VERSION | cut -c2-)-linux-amd64.zip
+    sudo rm -rfv /usr/local/bin/brave
     sudo ln -s /opt/brave-browser/brave /usr/local/bin
     ;;
-	n)
+  n)
     ;;
 esac
 
-# gtk/icon
-install_pkg lxappearance
-install_pkg materia-gtk-theme
-install_pkg breeze-gtk
-install_pkg papirus-icon-theme
+# zsh
+install_pkg zsh
+install_pkg zsh-autosuggestions
+install_pkg zsh-syntax-highlighting
 
-# neovim
-install_pkg neovim
-rm_config $HOME/.config/nvim
-git clone https://github.com/phamhiep2506/nvim $HOME/.config/nvim
-
-# nautilus
-install_pkg thunar
-install_pkg thunar-archive-plugin
-install_pkg thunar-volman
-
-# ranger
-install_pkg ranger
+read -p "Do you want to install oh-my-zsh? (y/n) " yn
+case $yn in
+  y)
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    ;;
+  n)
+    ;;
+esac

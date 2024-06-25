@@ -61,6 +61,10 @@ super + f
 super + shift + f
 	bspc node --state fullscreen
 
+# set window sticky
+super + s
+	bspc node --flag sticky
+
 #
 # focus/swap window & desktop
 #
@@ -75,7 +79,7 @@ super + shift + {h,j,k,l}
 
 # focus last desktop
 super + Tab
-	bspc desktop --focus last
+	bspc node --focus last
 
 # focus desktop
 super + {1-9}
