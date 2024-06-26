@@ -78,8 +78,12 @@ super + shift + {h,j,k,l}
 	bspc node --swap {west,south,north,east}
 
 # focus last desktop
-super + Tab
+alt + Tab
 	bspc node --focus last
+
+# focus next desktop
+super + Tab
+	bspc desktop --focus next.occupied
 
 # focus desktop
 super + {1-9}
