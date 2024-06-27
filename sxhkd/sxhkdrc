@@ -10,6 +10,12 @@ super + shift + Return
 super + p
 	rofi -show drun
 
+super + shift + p
+	rofi -show run
+
+super + Tab
+	rofi -show window
+
 # reload sxhkd
 super + Escape
 	pkill -USR1 -x sxhkd
@@ -77,13 +83,13 @@ super + {h,j,k,l}
 super + shift + {h,j,k,l}
 	bspc node --swap {west,south,north,east}
 
-# focus last desktop
+# focus last node
 alt + Tab
 	bspc node --focus last
 
 # focus next desktop
-super + Tab
-	bspc desktop --focus next.occupied
+# super + Tab
+# 	bspc desktop --focus next.occupied
 
 # focus desktop
 super + {1-9}

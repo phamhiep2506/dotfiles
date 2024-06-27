@@ -25,9 +25,6 @@ mkdir -p $HOME/.config
 
 # xorg
 install_pkg xorg
-install_pkg xorg-xinit
-rm_config $HOME/.xinitrc
-cp_config $PWD/.xinitrc $HOME
 
 # font
 install_pkg ttf-jetbrains-mono
@@ -91,8 +88,8 @@ cp_config $PWD/dunst $HOME/.config
 
 # tmux
 install_pkg tmux
-rm_config $HOME/.tmux.conf
-cp_config $PWD/.tmux.conf $HOME
+rm_config $HOME/.config/tmux
+cp_config $PWD/tmux $HOME/.config
 
 # nitrogen
 install_pkg nitrogen
@@ -148,6 +145,10 @@ install_pkg firefox
 
 # add user to a group
 sudo usermod -a -G video $USER
+
+# ly
+install_pkg ly
+sudo systemctl enable ly.service
 
 # slock
 install_pkg slock
