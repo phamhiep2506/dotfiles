@@ -140,8 +140,8 @@ install_pkg mpv
 # viewnior
 install_pkg viewnior
 
-# firefox
-install_pkg firefox
+# chromium
+install_pkg chromium
 
 # add user to a group
 sudo usermod -a -G video $USER
@@ -187,25 +187,6 @@ case $yn in
     install_pkg neovim
     rm_config $HOME/.config/nvim
     git clone https://github.com/phamhiep2506/nvim $HOME/.config/nvim
-    ;;
-  n)
-    ;;
-esac
-
-# brave
-read -p "Do you want to install brave? (y/n) " yn
-case $yn in
-  y)
-    install_pkg curl
-    install_pkg jq
-    install_pkg unzip
-    BRAVE_VERSION=$(curl --silent "https://api.github.com/repos/brave/brave-browser/releases/latest"  | jq -r .tag_name)
-    sudo wget -O /opt/brave-browser-$(echo $BRAVE_VERSION | cut -c2-)-linux-amd64.zip https://github.com/brave/brave-browser/releases/download/$BRAVE_VERSION/brave-browser-$(echo $BRAVE_VERSION | cut -c2-)-linux-amd64.zip
-    sudo rm -rfv /opt/brave-browser
-    sudo unzip /opt/brave-browser-$(echo $BRAVE_VERSION | cut -c2-)-linux-amd64.zip -d /opt/brave-browser
-    sudo rm -rfv /opt/brave-browser-$(echo $BRAVE_VERSION | cut -c2-)-linux-amd64.zip
-    sudo rm -rfv /usr/local/bin/brave
-    sudo ln -s /opt/brave-browser/brave /usr/local/bin
     ;;
   n)
     ;;
