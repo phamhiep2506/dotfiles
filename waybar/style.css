@@ -35,6 +35,7 @@ button:hover {
 #cpu,
 #memory,
 #wireplumber,
+#clock,
 #tray {
   margin: 0 5px;
 }

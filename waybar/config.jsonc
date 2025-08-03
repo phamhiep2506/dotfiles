@@ -6,14 +6,12 @@
         "hyprland/window"
     ],
 
-    "modules-center": [
-    ],
-
     "modules-right": [
       "network",
       "cpu",
       "memory",
       "wireplumber",
+      "clock",
       "tray"
     ],
 
@@ -46,7 +44,12 @@
 
     "wireplumber": {
       "format": " {volume}%",
-      "format-muted": " "
+      "format-muted": " {volume}%"
+    },
+
+    "clock": {
+      "format": "󰥔 {:%H:%M}",
+      "tooltip": false
     },
 
     "tray": {
