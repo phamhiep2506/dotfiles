@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-sudo pacman -S hyprland hyprpaper hyprlock xdg-desktop-portal-hyprland waybar \
+sudo pacman -S hyprland hyprpaper hyprlock hyprsunset xdg-desktop-portal-hyprland waybar \
                pipewire pipewire-alsa pipewire-jack \
                wofi wl-clipboard kitty \
                firefox \
