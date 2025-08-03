@@ -1,0 +1,55 @@
+{
+    "height": 30,
+
+    "modules-left": [
+        "hyprland/workspaces",
+        "hyprland/window"
+    ],
+
+    "modules-center": [
+    ],
+
+    "modules-right": [
+      "network",
+      "cpu",
+      "memory",
+      "wireplumber",
+      "tray"
+    ],
+
+    "hyprland/workspaces": {
+      "format": "{icon}",
+      "format-icons": {
+        "active": "",
+        "default": ""
+      }
+    },
+
+    "hyprland/window": {
+      "format": "| {initialTitle}"
+    },
+
+    "network": {
+      "interval": 1,
+      "format-wifi": "   {bandwidthUpBytes}  {bandwidthDownBytes}"
+    },
+
+    "cpu": {
+      "interval": 1,
+      "format": " {usage}%"
+    },
+
+    "memory": {
+      "interval": 1,
+      "format": " {percentage}%"
+    },
+
+    "wireplumber": {
+      "format": " {volume}%",
+      "format-muted": " "
+    },
+
+    "tray": {
+      "spacing": 10,
+    }
+}

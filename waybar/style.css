@@ -1,0 +1,44 @@
+* {
+  font-family: JetBrainsMono Nerd Font;
+  font-size: 15px;
+  color: rgb(235, 219, 178);
+}
+
+window#waybar {
+  background-color: rgba(29, 32, 33, 0.9);
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+  border: none;
+}
+
+button:hover {
+  background: inherit;
+}
+
+#workspaces button {
+  margin: 0 1px;
+}
+
+#workspaces {
+  margin-left: 2px;
+}
+
+#window {
+  margin-left: 10px;
+}
+
+#network,
+#cpu,
+#memory,
+#wireplumber,
+#tray {
+  margin: 0 5px;
+}
+
+#tray menu {
+  background-color: rgba(29, 32, 33, 0.9);
+}
