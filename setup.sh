@@ -2,7 +2,7 @@
 
 sudo pacman -S hyprland hyprpaper hyprlock hyprsunset xdg-desktop-portal-hyprland waybar \
                pipewire pipewire-alsa pipewire-jack \
-               wofi wl-clipboard kitty \
+               rofi-wayland wl-clipboard kitty \
                firefox \
                noto-fonts-emoji noto-fonts-cjk \
                zsh lsd tmux git \
@@ -52,9 +52,9 @@ ln -s $PWD/nvim $HOME/.config
 rm -rf $HOME/.config/waybar
 ln -s $PWD/waybar $HOME/.config
 
-# wofi
-rm -rf $HOME/.config/wofi
-ln -s $PWD/wofi $HOME/.config
+# rofi
+rm -rf $HOME/.config/rofi
+ln -s $PWD/rofi $HOME/.config
 
 # tmux
 mkdir -p $HOME/.tmux/plugins
