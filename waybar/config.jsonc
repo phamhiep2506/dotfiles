@@ -8,10 +8,15 @@
 
     "modules-right": [
       "network",
+      "custom/separate",
       "cpu",
+      "custom/separate",
       "memory",
+      "custom/separate",
       "wireplumber",
+      "custom/separate",
       "clock",
+      "custom/separate",
       "tray"
     ],
 
@@ -27,28 +32,32 @@
       "format": "| {initialTitle}"
     },
 
+    "custom/separate" : {
+      "format": "|"
+    },
+
     "network": {
       "interval": 1,
-      "format-wifi": "   {bandwidthUpBytes}  {bandwidthDownBytes}"
+      "format-wifi": "NET  {bandwidthUpBytes}  {bandwidthDownBytes}"
     },
 
     "cpu": {
       "interval": 1,
-      "format": " {usage}%"
+      "format": "CPU {usage}%"
     },
 
     "memory": {
       "interval": 1,
-      "format": " {percentage}%"
+      "format": "RAM {percentage}%"
     },
 
     "wireplumber": {
-      "format": " {volume}%",
-      "format-muted": " {volume}%"
+      "format": "VOL {volume}%",
+      "format-muted": "VOL mute"
     },
 
     "clock": {
-      "format": "󰥔 {:%H:%M}",
+      "format": "{:%H:%M}",
       "tooltip": false
     },
 
