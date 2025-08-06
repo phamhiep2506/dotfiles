@@ -1,7 +1,6 @@
 * {
   font-family: JetBrainsMono Nerd Font;
   font-size: 15px;
-  color: rgb(235, 219, 178);
 }
 
 window#waybar {
@@ -20,7 +19,19 @@ button:hover {
 }
 
 #workspaces button {
-  margin: 0 1.5px;
+  color: rgb(235, 219, 178);
+  font-weight: 500;
+  margin: 0 3px;
+}
+
+#workspaces button.active {
+  font-weight: 800;
+  color: rgb(215, 153, 33);
+}
+
+#workspaces button.empty {
+  font-weight: 400;
+  color: rgb(102, 92, 84);
 }
 
 #workspaces {
@@ -28,6 +39,7 @@ button:hover {
 }
 
 #window {
+  color: rgb(235, 219, 178);
   margin-left: 10px;
 }
 
@@ -38,9 +50,11 @@ button:hover {
 #clock,
 #custom-separate,
 #tray {
+  color: rgb(235, 219, 178);
   margin: 0 5px;
 }
 
 #tray menu {
-  background-color: rgba(29, 32, 33, 0.9);
+  color: rgb(235, 219, 178);
+  background-color: rgb(29, 32, 33);
 }
