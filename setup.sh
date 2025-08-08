@@ -56,6 +56,12 @@ ln -s $PWD/waybar $HOME/.config
 rm -rf $HOME/.config/rofi
 ln -s $PWD/rofi $HOME/.config
 
+# cursor
+curl -LO https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Modern-Classic.tar.xz
+mkdir -p $HOME/.local/share/icons
+tar -xvf $PWD/Bibata-Modern-Classic.tar.xz -C $HOME/.local/share/icons
+rm -rf $PWD/Bibata-Modern-Classic.tar.xz
+
 # tmux
 mkdir -p $HOME/.tmux/plugins
 rm -rf $HOME/.config/tmux
