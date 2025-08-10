@@ -3,7 +3,6 @@
 sudo pacman -S hyprland hyprpaper hyprlock hypridle hyprsunset xdg-desktop-portal-hyprland waybar \
                pipewire pipewire-alsa pipewire-jack \
                rofi-wayland wl-clipboard kitty \
-               firefox \
                noto-fonts-emoji noto-fonts-cjk \
                zsh lsd tmux git \
                base-devel
@@ -35,6 +34,7 @@ if ! $(grep -q "XMODIFIERS=@im=fcitx" /etc/environment); then
 sudo tee -a /etc/environment << EOF
 XMODIFIERS=@im=fcitx
 EOF
+fi
 
 # hyprland
 rm -rf $HOME/.config/hypr
@@ -70,6 +70,11 @@ rm -rf $HOME/.tmux/plugins/tmux-yank
 git clone https://github.com/tmux-plugins/tmux-resurrect $HOME/.tmux/plugins/tmux-resurrect --depth 1
 git clone https://github.com/tmux-plugins/tmux-yank $HOME/.tmux/plugins/tmux-yank --depth 1
 ln -s $PWD/tmux $HOME/.config
+
+# browser
+git clone https://aur.archlinux.org/brave-bin.git $PWD/brave-bin
+(cd $PWD/brave-bin && makepkg -si)
+rm -rf $PWD/brave-bin
 
 # zsh shell
 mkdir -p $HOME/.zsh/plugins
