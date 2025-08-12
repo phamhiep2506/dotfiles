@@ -4,7 +4,9 @@ return {
     invert_selection = true,
     contrast = "hard",
     overrides = {
-      SignColumn = { bg = "NONE" }
+      SignColumn = { bg = "NONE" },
+      NormalFloat = { bg = "NONE" },
+      FloatBorder = { bg = "NONE" }
     }
   },
   config = function(_, opts)
