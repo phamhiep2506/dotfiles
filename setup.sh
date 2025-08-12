@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-sudo pacman -S hyprland hyprpaper hyprlock hypridle hyprsunset xdg-desktop-portal-hyprland waybar \
+sudo pacman -S hyprland hyprpaper hyprlock hypridle hyprsunset hyprpicker xdg-desktop-portal-hyprland waybar \
                pipewire pipewire-alsa pipewire-jack \
                rofi-wayland wl-clipboard kitty \
                noto-fonts-emoji noto-fonts-cjk \
