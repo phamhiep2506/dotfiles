@@ -4,6 +4,7 @@ sudo pacman -S hyprland hyprpaper hyprlock hypridle hyprsunset hyprpicker xdg-de
                pipewire pipewire-alsa pipewire-jack \
                rofi-wayland wl-clipboard kitty \
                noto-fonts-emoji noto-fonts-cjk \
+               firefox \
                zsh lsd tmux git \
                base-devel
 
