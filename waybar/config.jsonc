@@ -40,7 +40,7 @@
     },
 
     "hyprland/window": {
-      "format": "| {initialTitle}"
+      "format": "| {title}"
     },
 
     "custom/separate" : {

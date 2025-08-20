@@ -24,14 +24,14 @@ button:hover {
   margin: 0 3px;
 }
 
-#workspaces button.active {
-  font-weight: 800;
-  color: rgb(215, 153, 33);
-}
-
 #workspaces button.empty {
   font-weight: 400;
   color: rgb(102, 92, 84);
+}
+
+#workspaces button.visible {
+  font-weight: 800;
+  color: rgb(215, 153, 33);
 }
 
 #workspaces {
