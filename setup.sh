@@ -37,6 +37,8 @@ XMODIFIERS=@im=fcitx
 EOF
 fi
 
+mkdir -p $HOME/.config
+
 # hyprland
 rm -rf $HOME/.config/hypr
 ln -s $PWD/hypr $HOME/.config
