@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 sudo pacman -S hyprland hyprpaper hyprlock hypridle hyprsunset hyprpicker xdg-desktop-portal-hyprland waybar \
-               pipewire pipewire-alsa pipewire-jack \
+               pipewire pipewire-pulse pipewire-jack \
                rofi-wayland wl-clipboard kitty \
                noto-fonts-emoji noto-fonts-cjk \
                firefox \
