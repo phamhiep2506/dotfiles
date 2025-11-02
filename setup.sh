@@ -41,23 +41,23 @@ mkdir -p $HOME/.config
 
 # hyprland
 rm -rf $HOME/.config/hypr
-ln -s $PWD/hypr $HOME/.config
+cp -r $PWD/hypr $HOME/.config
 
 # kitty
 rm -rf $HOME/.config/kitty
-ln -s $PWD/kitty $HOME/.config
+cp -r $PWD/kitty $HOME/.config
 
 # neovim
 rm -rf $HOME/.config/nvim
-ln -s $PWD/nvim $HOME/.config
+cp -r $PWD/nvim $HOME/.config
 
 # waybar
 rm -rf $HOME/.config/waybar
-ln -s $PWD/waybar $HOME/.config
+cp -r $PWD/waybar $HOME/.config
 
 # rofi
 rm -rf $HOME/.config/rofi
-ln -s $PWD/rofi $HOME/.config
+cp -r $PWD/rofi $HOME/.config
 
 # cursor
 curl -LO https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Modern-Classic.tar.xz
@@ -72,7 +72,7 @@ rm -rf $HOME/.tmux/plugins/tmux-resurrect
 rm -rf $HOME/.tmux/plugins/tmux-yank
 git clone https://github.com/tmux-plugins/tmux-resurrect $HOME/.tmux/plugins/tmux-resurrect --depth 1
 git clone https://github.com/tmux-plugins/tmux-yank $HOME/.tmux/plugins/tmux-yank --depth 1
-ln -s $PWD/tmux $HOME/.config
+cp -r $PWD/tmux $HOME/.config
 
 # browser
 git clone https://aur.archlinux.org/brave-bin.git $PWD/brave-bin
@@ -87,5 +87,5 @@ rm -rf $HOME/.zsh/plugins/zsh-vi-mode
 git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.zsh/plugins/zsh-autosuggestions --depth 1
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.zsh/plugins/zsh-syntax-highlighting --depth 1
 git clone https://github.com/jeffreytse/zsh-vi-mode $HOME/.zsh/plugins/zsh-vi-mode --depth 1
-ln -s $PWD/zsh/zshrc $HOME/.zshrc
+cp $PWD/zsh/zshrc $HOME/.zshrc
 chsh -s /usr/bin/zsh
