@@ -15,22 +15,22 @@ button {
 }
 
 button:hover {
-  background: inherit;
+  background: none;
+  box-shadow: none;
+  text-shadow: none;
+  transition: none;
 }
 
 #workspaces button {
   color: rgb(235, 219, 178);
-  font-weight: 500;
-  margin: 0 3px;
+  margin: 0 1px;
 }
 
 #workspaces button.empty {
-  font-weight: 400;
   color: rgb(102, 92, 84);
 }
 
 #workspaces button.visible {
-  font-weight: 800;
   color: rgb(215, 153, 33);
 }
 
