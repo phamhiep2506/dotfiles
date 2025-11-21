@@ -34,3 +34,10 @@ o.undofile = true
 
 -- Map leader <Space>
 vim.g.mapleader = " "
+
+-- Neovide
+if vim.g.neovide then
+  vim.o.guifont = "JetBrainsMono Nerd Font:h12"
+  vim.g.neovide_cursor_vfx_mode = "pixiedust"
+  vim.g.neovide_cursor_animation_length = 0
+end
