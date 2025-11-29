@@ -52,9 +52,6 @@ winget install aria2.aria2
 Log-Info -msg "Install yt-dlp"
 winget install yt-dlp.yt-dlp
 
-Log-Info -msg "Install FFmpeg"
-winget install yt-dlp.FFmpeg
-
 Log-Info -msg "Install JetBrains Mono Nerd Font"
 winget install DEVCOM.JetBrainsMonoNerdFont
 
