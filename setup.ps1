@@ -5,55 +5,62 @@ function Log-Info {
   Write-Host "$msg" -ForegroundColor Green
 }
 
+function Install-Package {
+  param (
+    [string]$name
+  )
+  cmd.exe /c winget install $name
+}
+
 $PWD = Get-Location
 
 Log-Info -msg "Install Web Browser"
-winget install Brave.Brave
+Install-Package -name Brave.Brave
 
 Log-Info -msg "Install Windows Terminal"
-winget install Microsoft.WindowsTerminal
+Install-Package -name Microsoft.WindowsTerminal
 
 Log-Info -msg "Install Git"
-winget install Git.Git
+Install-Package -name Git.Git
 
 Log-Info -msg "Install Python"
-winget install Python.Python.3.14
+Install-Package -name Python.Python.3.14
 
 Log-Info -mgs "Install NodeJS"
-winget install OpenJS.NodeJS.LTS
+Install-Package -name OpenJS.NodeJS.LTS
 
 Log-Info -msg "Install Zig"
-winget install zig.zig
+Install-Package -name zig.zig
 
 Log-Info -msg "Install Clink"
-winget install chrisant996.Clink
+Install-Package -name chrisant996.Clink
 
 Log-Info -msg "Install Starship"
-winget install Starship.Starship
+Install-Package -name Starship.Starship
 
 Log-Info -msg "Install Neovim"
-winget install Neovim.Neovim
+Install-Package -name Neovim.Neovim
 
 Log-Info -msg "install Neovide"
-winget install neovide.neovide
+Install-Package -name neovide.neovide
 
 Log-Info -msg "install UniKey"
-winget install UniKey.UniKey
+Install-Package -name UniKey.UniKey
 
 Log-Info -msg "install Mpv"
-winget install mpv.net
+Install-Package -name mpv.net
 
 Log-Info -msg "install Google PlatformTools"
-winget install Google.PlatformTools
+Install-Package -name Google.PlatformTools
 
 Log-Info -msg "Install Aria2"
-winget install aria2.aria2
+Install-Package -name aria2.aria2
 
 Log-Info -msg "Install yt-dlp"
-winget install yt-dlp.yt-dlp
+Install-Package -name yt-dlp.yt-dlp
 
 Log-Info -msg "Install JetBrains Mono Nerd Font"
-winget install DEVCOM.JetBrainsMonoNerdFont
+Install-Package -name DEVCOM.JetBrainsMonoNerdFont
 
 Log-Info -msg "Reload The Path Environment Variable"
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
