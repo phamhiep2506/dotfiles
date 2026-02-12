@@ -74,11 +74,6 @@ git clone https://github.com/tmux-plugins/tmux-resurrect $HOME/.tmux/plugins/tmu
 git clone https://github.com/tmux-plugins/tmux-yank $HOME/.tmux/plugins/tmux-yank --depth 1
 cp -r $PWD/tmux $HOME/.config
 
-# browser
-git clone https://aur.archlinux.org/brave-bin.git $PWD/brave-bin
-(cd $PWD/brave-bin && makepkg -si)
-rm -rf $PWD/brave-bin
-
 # zsh shell
 mkdir -p $HOME/.zsh/plugins
 rm -rf $HOME/.zsh/plugins/zsh-autosuggestions
