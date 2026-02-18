@@ -10,7 +10,7 @@ sudo pacman -S hyprland hyprpaper hyprlock hypridle hyprsunset hyprpicker xdg-de
 
 # display manger
 sudo pacman -S ly
-sudo systemctl enable ly.service
+sudo systemctl enable ly@tty1.service
 
 # font
 curl --location https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz --output $PWD/JetBrainsMono.tar.xz
