@@ -3,7 +3,7 @@
 sudo pacman -S hyprland hyprpaper hyprlock hypridle hyprsunset hyprpicker xdg-desktop-portal-hyprland waybar \
                pipewire pipewire-pulse pipewire-jack \
                rofi-wayland wl-clipboard kitty \
-               noto-fonts-emoji noto-fonts-cjk \
+               ttf-dejavu noto-fonts noto-fonts-emoji noto-fonts-cjk \
                firefox \
                zsh lsd tmux git \
                base-devel
