@@ -16,23 +16,10 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
-export EDITOR="nvim"
-export ANDROID_HOME=/opt/sdk
-export JAVA_HOME=/opt/jdk
-export GRADLE_HOME=/opt/gradle
-export PATH=$HOME/.local/bin:$PATH
-export PATH=$JAVA_HOME/bin:$PATH
-export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
-export PATH=$GRADLE_HOME/bin:$PATH
-export PATH=/opt/node/bin:$PATH
-export PATH=/opt/nvim/bin:$PATH
-export PATH=/opt/node/bin:$PATH
-export PATH=/opt/docker:$PATH
-export PATH=$HOME/.dotnet/tools:$PATH
-export PATH=$HOME/.python/bin:$PATH
+export EDITOR="vim"
+export ANDROID_NDK_HOME="/opt/ndk"
 
-alias ls="lsd"
-alias vim="nvim"
+alias ls="ls --color"
 
 source $HOME/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 source $HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
