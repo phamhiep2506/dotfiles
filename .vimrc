@@ -1,0 +1,13 @@
+" Base
+set number
+set mouse=a
+set nowrap
+set background=dark
+set termguicolors
+" Search
+set hlsearch
+set ignorecase
+" Indent
+set autoindent
+set expandtab
+set shiftwidth=2
