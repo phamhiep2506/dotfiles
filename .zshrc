@@ -18,6 +18,7 @@ SAVEHIST=10000
 
 export EDITOR="vim"
 export ANDROID_NDK_HOME="/opt/ndk"
+export JAVA_HOME="/opt/jdk"
 
 alias ls="ls --color"
 
