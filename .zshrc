@@ -16,8 +16,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
-export EDITOR="vim"
-export ANDROID_NDK_HOME="/opt/ndk"
+export EDITOR="nvim"
 export JAVA_HOME="/opt/jdk"
 
 alias ls="ls --color"
