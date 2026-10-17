@@ -6,7 +6,7 @@ autoload -Uz vcs_info
 precmd() { vcs_info }
 zstyle ":vcs_info:git:*" check-for-changes true
 zstyle ":vcs_info:git:*" unstagedstr "*"
-zstyle ":vcs_info:git:*" formats "on %F{red} %b%u%f"
+zstyle ":vcs_info:git:*" formats "on %F{red}%b%u%f"
 
 setopt PROMPT_SUBST
 PROMPT='%B%F{green}%n%f in %F{blue}%1~%f ${vcs_info_msg_0_}
