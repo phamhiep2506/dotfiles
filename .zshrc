@@ -18,6 +18,8 @@ SAVEHIST=10000
 
 export JAVA_HOME="/opt/jdk"
 
+export EDITOR="vim"
+
 alias ls="ls --color"
 
 source $HOME/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
